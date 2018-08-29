@@ -107,7 +107,7 @@ class ScrapNoelficCommand extends Command
         $this->io->text('<info>'. $title .' - ' . ++$position . '</info>');
 
         return (new FictionChapter())
-            ->setTitle($title)
+            ->setTitle("$title - Chapitre $position")
             ->setPosition($position)
             ->setBody($body);
     }
