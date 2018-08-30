@@ -19,7 +19,10 @@ class ScrapNoelficCommand extends Command
 {
     use ScrapperTrait;
 
+    public const INDEX_CATEGORIES_ROW_SELECTOR = 'table tr a';
     public const PAGES_LINK_SELECTOR = 'p[style*="float:right;"].retour a:first-of-type';
+    public const CATEGORIES_NEXT_PAGE_LINK_SELECTOR = 'p#pagination span.pagelue + a';
+    public const CATEGORIES_FIRST_PAGE_LINK_SELECTOR = 'p#pagination a:first-of-type';
     public const FIC_ROW_SELECTOR = 'table#tablerecherche tbody tr';
     public const CHAPTER_BODY_SELECTOR = '#chapitres';
 
@@ -34,7 +37,8 @@ class ScrapNoelficCommand extends Command
     private $fictionRepository;
 
 
-    public function __construct(?string $name = null, EntityManagerInterface $manager, FictionRepository $fictionRepository)
+
+    public function __construct(EntityManagerInterface $manager, FictionRepository $fictionRepository, ?string $name = null)
     {
         $this->client = new Client();
         $this->manager = $manager;
@@ -55,23 +59,33 @@ class ScrapNoelficCommand extends Command
         $url = $input->getArgument('noelfic_url');
 
         $page = $this->client->request('GET', $url);
-        $categories = $page->filter('table tr a');
+        $categories = $page->filter(self::INDEX_CATEGORIES_ROW_SELECTOR);
         $categories->each(function (Crawler $node) {
             if (Str::contains($node->text(), 'Classement par genre')) {
                 $this->scrapByCategory($node);
             }
         });
 
-        $this->io->success('You have a new command! Now make it your own! Pass --help to see your options.');
+        $this->io->success('Done');
     }
 
-    protected function scrapByCategory(Crawler $node): void
+    protected function scrapByCategory(Crawler $categoryLink): void
     {
-        $categoryPage = $this->client->click($node->link());
-        $rows = $categoryPage->filter(self::FIC_ROW_SELECTOR);
-        $rows->each(function (Crawler $row) {
-            $this->scrapByFic($row);
-        });
+        $categoryPage = $this->client->click($categoryLink->link());
+        if ($firstPageCategoryLink = $this->getFirstPageCategoryLink($categoryPage)) {
+            $categoryPage = $this->client->click($firstPageCategoryLink->link());
+        }
+        do {
+            $rows = $categoryPage->filter(self::FIC_ROW_SELECTOR);
+            $rows->each(function (Crawler $row) {
+                $this->scrapByFic($row);
+            });
+            if ($nextPageLink = $this->getCategoryNextPageLink($categoryPage)) {
+                $categoryPage = $this->client->click(
+                    $nextPageLink->link()
+                );
+            }
+        } while ($this->hasCategoryNextPage($categoryPage));
     }
 
     protected function scrapByFic(Crawler $node): void
@@ -104,7 +118,7 @@ class ScrapNoelficCommand extends Command
     {
         $title = $this->getPageTitle($ficPage);
         $body = $ficPage->filter(self::CHAPTER_BODY_SELECTOR)->text();
-        $this->io->text('<info>'. $title .' - ' . ++$position . '</info>');
+        $this->io->text('<info>' . $title . ' - ' . ++$position . '</info>');
 
         return (new FictionChapter())
             ->setTitle("$title - Chapitre $position")
