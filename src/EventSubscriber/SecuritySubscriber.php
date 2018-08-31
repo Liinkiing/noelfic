@@ -22,7 +22,7 @@ class SecuritySubscriber implements EventSubscriberInterface
         /** @var User $user */
         $user = $event->getAuthenticationToken()->getUser();
         if (!$user->isConfirmed()) {
-            $this->flashBag->add('warning', 'flashes.user.email_not_confirmed');
+            $this->flashBag->add('warning', 'flash.user.email_not_confirmed');
         }
     }
 

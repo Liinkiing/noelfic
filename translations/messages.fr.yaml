@@ -9,8 +9,17 @@ form:
       first: Mot de passe
       second: Répetez le mot de passe
 
-flashes:
+flash:
   user:
     email_not_confirmed: Khey, pense à vérifier ton email
+    email_confirmed: Ton email a bien été confirmé
   registration:
     successful: Ton compte a correctement été créé
+
+email:
+  confirm:
+    subject: Khey {username}, bienvenu!
+    body: |
+      <h1>Bienvenue à toi mon khey {username}</h1>
+      <p>Pour confirmer ton compte, <a href="{confirmationUrl}" target="_blank">c'est par ici</a></p>
+      <center><small>Si tu n'as rien demandé, excuse moi de t'avoir dérangé khey</small></center>

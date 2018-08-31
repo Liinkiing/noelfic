@@ -80,6 +80,9 @@
             "ref": "70062abc2cd58794d2a90274502f81b55cd9951b"
         }
     },
+    "egulias/email-validator": {
+        "version": "2.1.5"
+    },
     "fabpot/goutte": {
         "version": "v3.2.3"
     },
@@ -161,6 +164,15 @@
             "ref": "f7895777cd673fcefbc321a9063077a24e5df646"
         }
     },
+    "sensio/framework-extra-bundle": {
+        "version": "5.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.2",
+            "ref": "fb7e19da7f013d0d422fa9bce16f5c510e27609b"
+        }
+    },
     "stof/doctrine-extensions-bundle": {
         "version": "1.2",
         "recipe": {
@@ -169,6 +181,9 @@
             "version": "1.2",
             "ref": "6c1ceb662f8997085f739cd089bfbef67f245983"
         }
+    },
+    "swiftmailer/swiftmailer": {
+        "version": "v6.1.2"
     },
     "symfony/browser-kit": {
         "version": "v4.1.4"
@@ -219,6 +234,9 @@
         "version": "v4.1.4"
     },
     "symfony/event-dispatcher": {
+        "version": "v4.1.4"
+    },
+    "symfony/expression-language": {
         "version": "v4.1.4"
     },
     "symfony/filesystem": {
@@ -328,6 +346,15 @@
     },
     "symfony/stopwatch": {
         "version": "v4.1.4"
+    },
+    "symfony/swiftmailer-bundle": {
+        "version": "2.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.5",
+            "ref": "3db029c03e452b4a23f7fc45cec7c922c2247eb8"
+        }
     },
     "symfony/translation": {
         "version": "3.3",

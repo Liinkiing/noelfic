@@ -4,9 +4,9 @@
 namespace App\Event;
 
 
+use App\Entity\User;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserRegisteredEvent extends Event
 {
@@ -15,13 +15,13 @@ class UserRegisteredEvent extends Event
 
     public const NAME = 'user.registered';
 
-    public function __construct(Request $request, UserInterface $user)
+    public function __construct(Request $request, User $user)
     {
         $this->user = $user;
         $this->request = $request;
     }
 
-    public function getUser(): UserInterface
+    public function getUser(): User
     {
         return $this->user;
     }

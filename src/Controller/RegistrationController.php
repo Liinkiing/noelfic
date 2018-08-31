@@ -11,13 +11,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
-use Symfony\Component\Security\Http\SecurityEvents;
 
 class RegistrationController extends AbstractController
 {
@@ -32,8 +27,12 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/register", name="user_registration")
      */
-    public function register(Request $request, EntityManagerInterface $entityManager)
+    public function register(Request $request, EntityManagerInterface $entityManager): Response
     {
+        if (\is_object($this->getUser())) {
+            return $this->redirectToRoute('homepage');
+        }
+
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
 
@@ -53,6 +52,25 @@ class RegistrationController extends AbstractController
                 'form' => $form->createView()
             ]
         );
+    }
+
+    /**
+     * @Route("/email/confirm/{confirmationToken}", name="email.confirm")
+     */
+    public function confirmEmail(User $user, EntityManagerInterface $em)
+    {
+        if (!$user) {
+            return $this->createAccessDeniedException();
+        }
+
+        $user
+            ->setConfirmationToken(null)
+            ->setConfirmedAt(new \DateTime());
+
+        $em->flush();
+        $this->addFlash('success', 'flash.user.email_confirmed');
+
+        return $this->redirectToRoute('homepage');
     }
 
 

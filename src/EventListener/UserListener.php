@@ -6,6 +6,7 @@ namespace App\EventListener;
 
 use App\Entity\User;
 use App\Entity\UserRole;
+use App\Utils\Str;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -33,6 +34,10 @@ class UserListener
                 ->getRepository(UserRole::class)->findOneBy(['role' => 'ROLE_USER']);
 
             $user->addRole($defaultRole);
+        }
+
+        if (!$user->isConfirmed() && !$user->getConfirmationToken()) {
+            $user->setConfirmationToken(Str::random());
         }
     }
 }
