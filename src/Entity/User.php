@@ -86,11 +86,17 @@ class User implements UserInterface, \Serializable
      */
     private $fictionRatings;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\FictionUserFavorite", mappedBy="user", orphanRemoval=true)
+     */
+    private $fictionFavorites;
+
     public function __construct()
     {
         $this->fictions = new ArrayCollection();
         $this->roles = new ArrayCollection();
         $this->fictionRatings = new ArrayCollection();
+        $this->fictionFavorites = new ArrayCollection();
     }
 
     public function getId(): ?string
@@ -321,6 +327,37 @@ class User implements UserInterface, \Serializable
             // set the owning side to null (unless already changed)
             if ($fictionRating->getUser() === $this) {
                 $fictionRating->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|FictionUserFavorite[]
+     */
+    public function getFictionFavorites(): Collection
+    {
+        return $this->fictionFavorites;
+    }
+
+    public function addFavorite(FictionUserFavorite $favorite): self
+    {
+        if (!$this->fictionFavorites->contains($favorite)) {
+            $this->fictionFavorites[] = $favorite;
+            $favorite->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavorite(FictionUserFavorite $favorite): self
+    {
+        if ($this->fictionFavorites->contains($favorite)) {
+            $this->fictionFavorites->removeElement($favorite);
+            // set the owning side to null (unless already changed)
+            if ($favorite->getUser() === $this) {
+                $favorite->setUser(null);
             }
         }
 

@@ -72,7 +72,7 @@ class FictionUserRating
         return $this;
     }
 
-    public function getRating(): ?int
+    public function getRating(): ?float
     {
         return $this->rating;
     }

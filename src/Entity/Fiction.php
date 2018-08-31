@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use function iter\reduce;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FictionRepository")
@@ -108,6 +109,15 @@ class Fiction
     public function getChapters(): Collection
     {
         return $this->chapters;
+    }
+
+    public function getAverageRating(): float
+    {
+        $total = reduce(function(float $acc, FictionUserRating $rating) {
+            return $acc + $rating->getRating();
+        }, $this->ratings, 0);
+
+        return round($total / $this->ratings->count(), 1);
     }
 
     public function addChapter(FictionChapter $chapter): self

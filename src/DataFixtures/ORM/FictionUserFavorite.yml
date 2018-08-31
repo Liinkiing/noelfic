@@ -1,0 +1,5 @@
+App\Entity\FictionUserFavorite:
+  fictionUserFavorite1:
+    __construct: ['@gangeFiction', '@userAdmin']
+  fictionUserFavorite2:
+    __construct: ['@gangeFiction', '@userBasic']

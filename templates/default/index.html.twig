@@ -11,10 +11,17 @@
 <div class="example-wrapper">
     <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'src/Controller/DefaultController.php'|file_link(0) }}">src/Controller/DefaultController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'templates/default/index.html.twig'|file_link(0) }}">templates/default/index.html.twig</a></code></li>
-    </ul>
+    {% if app.user %}
+        Favoris de {{ app.user.username }}
+        <ul>
+            {% for favorite in favorites %}
+                <li>
+                    {{ favorite.fiction.title }} (ajouté le {{ favorite.favoritedAt|date }})
+                    (moyenne des notes : {{ favorite.fiction.averageRating }})
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
 </div>
 {% endblock %}

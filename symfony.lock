@@ -128,6 +128,9 @@
             "ref": "5ef2976310e8f9621c1a722a73bfbe115c1559a3"
         }
     },
+    "nikic/iter": {
+        "version": "v1.6.0"
+    },
     "nikic/php-parser": {
         "version": "v4.0.3"
     },
