@@ -5,6 +5,7 @@ namespace App\Controller;
 
 
 use App\Entity\User;
+use App\Event\UserRegisteredEvent;
 use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,22 +17,16 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use Symfony\Component\Security\Http\SecurityEvents;
 
 class RegistrationController extends AbstractController
 {
 
-    private $tokenStorage;
     private $dispatcher;
-    private $session;
 
-    public function __construct(
-        TokenStorageInterface $tokenStorage,
-        EventDispatcherInterface $dispatcher,
-        SessionInterface $session
-    ) {
-        $this->tokenStorage = $tokenStorage;
+    public function __construct(EventDispatcherInterface $dispatcher)
+    {
         $this->dispatcher = $dispatcher;
-        $this->session = $session;
     }
 
     /**
@@ -48,8 +43,8 @@ class RegistrationController extends AbstractController
 
             $entityManager->persist($user);
             $entityManager->flush();
-            $this->authenticateUser($request, $user);
-            $this->addFlash('success', 'registration.successful');
+            $this->dispatcher->dispatch(UserRegisteredEvent::NAME, new UserRegisteredEvent($request, $user));
+
             return $this->redirectToRoute('homepage');
         }
 
@@ -58,14 +53,6 @@ class RegistrationController extends AbstractController
                 'form' => $form->createView()
             ]
         );
-    }
-
-    protected function authenticateUser(Request $request, UserInterface $user, string $provider = 'main'): void
-    {
-        $token = new UsernamePasswordToken($user, null, $provider, $user->getRoles());
-        $this->tokenStorage->setToken($token);
-        $this->session->set("_security_$provider", \serialize($token));
-        $this->dispatcher->dispatch('security.interactive_login', new InteractiveLoginEvent($request, $token));
     }
 
 

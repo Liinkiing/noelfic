@@ -9,5 +9,8 @@ form:
       first: Mot de passe
       second: Répetez le mot de passe
 
-registration:
-  successful: Bienvenue à toi khey!
+flashes:
+  user:
+    email_not_confirmed: Khey, pense à vérifier ton email
+  registration:
+    successful: Ton compte a correctement été créé
