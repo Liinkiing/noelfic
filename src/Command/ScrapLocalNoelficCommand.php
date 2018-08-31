@@ -5,6 +5,8 @@ namespace App\Command;
 use App\Entity\Fiction;
 use App\Entity\FictionChapter;
 use App\Repository\FictionRepository;
+use App\Repository\UserRepository;
+use App\Repository\UserRoleRepository;
 use App\Utils\Str;
 use Doctrine\ORM\EntityManagerInterface;
 use Goutte\Client;
@@ -35,14 +37,21 @@ class ScrapLocalNoelficCommand extends Command
     private $io;
     private $manager;
     private $fictionRepository;
+    private $defaultAuthor;
 
 
-
-    public function __construct(EntityManagerInterface $manager, FictionRepository $fictionRepository, ?string $name = null)
+    public function __construct(EntityManagerInterface $manager,
+                                FictionRepository $fictionRepository,
+                                UserRepository $userRepository,
+                                UserRoleRepository $userRoleRepository,
+                                ?string $name = null)
     {
         $this->client = new Client();
         $this->manager = $manager;
         $this->fictionRepository = $fictionRepository;
+        $this->defaultAuthor = $userRepository->findOneWithRole(
+            $userRoleRepository->findOneBy(['role' => 'ROLE_ADMIN'])
+        );
         parent::__construct($name);
     }
 
@@ -97,7 +106,9 @@ class ScrapLocalNoelficCommand extends Command
         } else {
             $this->io->section('Scrapping ' . $title);
             $fiction = (new Fiction())
-                ->setTitle($title);
+                ->setTitle($title)
+                ->addAuthor($this->defaultAuthor);
+
             $position = 0;
             do {
                 $chapter = $this->scrapFicChapter($page, $position);

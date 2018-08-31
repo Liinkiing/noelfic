@@ -28,10 +28,9 @@ class UserListener
                 ->setPassword($password);
         }
 
-        /** @var UserRole $defaultRole */
         if (\count($user->getRoles()) === 0) {
             $defaultRole = $event->getObjectManager()
-                ->getRepository(UserRole::class)->findOneBy(['role' => 'ROLE_USER']);
+                ->getRepository(UserRole::class)->getDefaultRole();
 
             $user->addRole($defaultRole);
         }

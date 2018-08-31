@@ -10,6 +10,7 @@ use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -57,14 +58,10 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/email/confirm/{confirmationToken}", name="email.confirm")
      */
-    public function confirmEmail(User $user, EntityManagerInterface $em)
+    public function confirmEmail(User $user, EntityManagerInterface $em): RedirectResponse
     {
-        if (!$user) {
-            return $this->createAccessDeniedException();
-        }
-
         $user
-            ->setConfirmationToken(null)
+            ->clearConfirmationToken()
             ->setConfirmedAt(new \DateTime());
 
         $em->flush();

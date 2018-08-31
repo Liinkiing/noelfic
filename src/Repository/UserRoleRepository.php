@@ -14,9 +14,20 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class UserRoleRepository extends ServiceEntityRepository
 {
+    public const DEFAULT_ROLE = 'ROLE_USER';
+
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, UserRole::class);
+    }
+
+    public function getDefaultRole(): UserRole
+    {
+        return $this->createQueryBuilder('ur')
+            ->where('ur.role = :role')
+            ->setParameter('role', self::DEFAULT_ROLE)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
 }

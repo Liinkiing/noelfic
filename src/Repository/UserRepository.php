@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\User;
+use App\Entity\UserRole;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -17,5 +18,21 @@ class UserRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, User::class);
+    }
+
+    public function findOneWithRole(UserRole $role): ?User
+    {
+        $qb = $this->createQueryBuilder('u');
+
+        return $qb
+            ->leftJoin('u.roles', 'roles')
+            ->andWhere(
+                $qb->expr()->in(
+                    'roles', ':roles'
+                )
+            )
+            ->setParameter('roles', [$role])
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 }

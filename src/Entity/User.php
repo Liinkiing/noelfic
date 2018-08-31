@@ -242,6 +242,13 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    public function clearConfirmationToken(): self
+    {
+        $this->confirmationToken = null;
+
+        return $this;
+    }
+
     public function getEmail(): ?string
     {
         return $this->email;
