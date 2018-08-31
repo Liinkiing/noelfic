@@ -1,0 +1,19 @@
+App\Entity\User:
+  userAdmin:
+    username: Linking
+    plainPassword: toto
+    email: omar.jbara2@gmail.com
+    confirmedAt: '<dateTimeBetween("-20 days", "now")>'
+    roles: ['@roleAdmin']
+  userWriter:
+    username: ElFamosoAuteur
+    plainPassword: jesuisunauteur
+    email: auteur@gmail.com
+    confirmedAt: '<dateTimeBetween("-20 days", "now")>'
+    roles: ['@roleWriter']
+  userBasic:
+    username: Risitas
+    plainPassword: issou
+    email: user@generation.issou
+    confirmedAt: '<dateTimeBetween("-20 days", "now")>'
+    roles: ['@roleUser']

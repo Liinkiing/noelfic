@@ -1,0 +1,13 @@
+global:
+  submit: Soumettre
+
+form:
+  registration:
+    username: Nom d'utilisateur
+    email: Adresse mail
+    password_repeat:
+      first: Mot de passe
+      second: Répetez le mot de passe
+
+registration:
+  successful: Bienvenue à toi khey!

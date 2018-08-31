@@ -43,10 +43,16 @@ class Fiction
      */
     private $chapters;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="fictions")
+     */
+    private $authors;
+
 
     public function __construct()
     {
         $this->chapters = new ArrayCollection();
+        $this->authors = new ArrayCollection();
     }
 
     public function getId()
@@ -116,6 +122,34 @@ class Fiction
             if ($chapter->getFiction() === $this) {
                 $chapter->setFiction(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getAuthors(): Collection
+    {
+        return $this->authors;
+    }
+
+    public function addAuthor(User $author): self
+    {
+        if (!$this->authors->contains($author)) {
+            $this->authors[] = $author;
+            $author->addFiction($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAuthor(User $author): self
+    {
+        if ($this->authors->contains($author)) {
+            $this->authors->removeElement($author);
+            $author->removeFiction($this);
         }
 
         return $this;

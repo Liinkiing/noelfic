@@ -26,6 +26,14 @@ trait ScrapperTrait
         return $result;
     }
 
+    protected function getNextChapterLink(Crawler $page, int $position): ?Crawler
+    {
+        $selector = str_replace('{position}', $position, self::FIC_CHAPTER_NEXT_PAGE_LINK_SELECTOR);
+        return $page->filter($selector)->count() > 0 ?
+            $page->filter($selector)->first() :
+            null;
+    }
+
     protected function getCategoryNextPageLink(Crawler $page): ?Crawler
     {
         return $page->filter(self::CATEGORIES_NEXT_PAGE_LINK_SELECTOR)->count() > 0 ?
@@ -43,9 +51,18 @@ trait ScrapperTrait
         return $this->getNextPageLink($page) !== null;
     }
 
+    protected function hasNextChapterPage(Crawler $page, int $position): bool
+    {
+        return $this->getNextChapterLink($page, $position) !== null;
+    }
+
     protected function getPageTitle(Crawler $page): string
     {
         return $page->filter('title')->text();
+    }
 
+    protected function getFictionTitle(Crawler $ficPage): string
+    {
+        return $ficPage->filter('.center-align h4:first-of-type')->text();
     }
 }

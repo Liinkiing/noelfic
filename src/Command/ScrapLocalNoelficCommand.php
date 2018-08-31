@@ -15,18 +15,18 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\DomCrawler\Crawler;
 
-class ScrapNoelficCommand extends Command
+class ScrapLocalNoelficCommand extends Command
 {
     use ScrapperTrait;
 
-    public const CATEGORIES_SELECTOR = '.center-align p:first-of-type a';
+    public const INDEX_CATEGORIES_ROW_SELECTOR = 'table tr a';
     public const PAGES_LINK_SELECTOR = 'p[style*="float:right;"].retour a:first-of-type';
-    public const CATEGORIES_NEXT_PAGE_LINK_SELECTOR = 'ul.pagination li.active + li.waves-effect a';
-    public const FIC_CHAPTER_NEXT_PAGE_LINK_SELECTOR = 'ul.collection a[title*="Chapitre {position}"] + a';
-    public const FIC_ROW_SELECTOR = 'table.bordered tbody tr';
-    public const CHAPTER_BODY_SELECTOR = '.card.grey.lighten-2 .card-content';
+    public const CATEGORIES_NEXT_PAGE_LINK_SELECTOR = 'p#pagination span.pagelue + a';
+    public const CATEGORIES_FIRST_PAGE_LINK_SELECTOR = 'p#pagination a:first-of-type';
+    public const FIC_ROW_SELECTOR = 'table#tablerecherche tbody tr';
+    public const CHAPTER_BODY_SELECTOR = '#chapitres';
 
-    protected static $defaultName = 'app:scrap-noelfic';
+    protected static $defaultName = 'app:scrap-local-noelfic';
 
     private $client;
     /**
@@ -35,6 +35,7 @@ class ScrapNoelficCommand extends Command
     private $io;
     private $manager;
     private $fictionRepository;
+
 
 
     public function __construct(EntityManagerInterface $manager, FictionRepository $fictionRepository, ?string $name = null)
@@ -58,9 +59,11 @@ class ScrapNoelficCommand extends Command
         $url = $input->getArgument('noelfic_url');
 
         $page = $this->client->request('GET', $url);
-        $categories = $page->filter(self::CATEGORIES_SELECTOR);
+        $categories = $page->filter(self::INDEX_CATEGORIES_ROW_SELECTOR);
         $categories->each(function (Crawler $node) {
-            $this->scrapByCategory($node);
+            if (Str::contains($node->text(), 'Classement par genre')) {
+                $this->scrapByCategory($node);
+            }
         });
 
         $this->io->success('Done');
@@ -69,7 +72,9 @@ class ScrapNoelficCommand extends Command
     protected function scrapByCategory(Crawler $categoryLink): void
     {
         $categoryPage = $this->client->click($categoryLink->link());
-
+        if ($firstPageCategoryLink = $this->getFirstPageCategoryLink($categoryPage)) {
+            $categoryPage = $this->client->click($firstPageCategoryLink->link());
+        }
         do {
             $rows = $categoryPage->filter(self::FIC_ROW_SELECTOR);
             $rows->each(function (Crawler $row) {
@@ -86,7 +91,7 @@ class ScrapNoelficCommand extends Command
     protected function scrapByFic(Crawler $node): void
     {
         $page = $this->client->click($node->filter('a:first-of-type')->link());
-        $title = $this->getFictionTitle($page);
+        $title = $this->getPageTitle($page);
         if ($found = $this->fictionRepository->findOneBy(compact('title'))) {
             $this->io->text("<comment>Fiction named '$title' (" . $found->getId() . ') already exist. Skipping it...</comment>');
         } else {
@@ -97,12 +102,12 @@ class ScrapNoelficCommand extends Command
             do {
                 $chapter = $this->scrapFicChapter($page, $position);
                 $fiction->addChapter($chapter);
-                if ($nextPageLink = $this->getNextChapterLink($page, $position)) {
+                if ($nextPageLink = $this->getNextPageLink($page)) {
                     $page = $this->client->click(
                         $nextPageLink->link()
                     );
                 }
-            } while ($this->hasNextChapterPage($page, $position));
+            } while ($this->hasNextPage($page));
             $this->manager->persist($fiction);
             $this->manager->flush();
             $this->io->success("Successfully persisted $title with " . $fiction->getChapters()->count() . ' chapter(s)');
@@ -111,13 +116,12 @@ class ScrapNoelficCommand extends Command
 
     protected function scrapFicChapter(Crawler $ficPage, int &$position): FictionChapter
     {
-        $title = $this->getFictionTitle($ficPage);
+        $title = $this->getPageTitle($ficPage);
         $body = $ficPage->filter(self::CHAPTER_BODY_SELECTOR)->text();
-        $chapterTitle = "$title - Chapitre " . ++$position;
-        $this->io->text("<info>$chapterTitle</info>");
+        $this->io->text('<info>' . $title . ' - ' . ++$position . '</info>');
 
         return (new FictionChapter())
-            ->setTitle($chapterTitle)
+            ->setTitle("$title - Chapitre $position")
             ->setPosition($position)
             ->setBody($body);
     }

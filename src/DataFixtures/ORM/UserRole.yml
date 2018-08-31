@@ -1,0 +1,10 @@
+App\Entity\UserRole:
+  roleUser:
+    role: ROLE_USER
+    name: Utilisateur classique
+  roleWriter:
+    role: ROLE_WRITER
+    name: Auteur
+  roleAdmin:
+    role: ROLE_ADMIN
+    name: Administrateur
