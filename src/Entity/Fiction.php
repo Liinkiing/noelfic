@@ -48,11 +48,17 @@ class Fiction
      */
     private $authors;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\FictionUserRating", mappedBy="fiction", orphanRemoval=true)
+     */
+    private $ratings;
+
 
     public function __construct()
     {
         $this->chapters = new ArrayCollection();
         $this->authors = new ArrayCollection();
+        $this->ratings = new ArrayCollection();
     }
 
     public function getId()
@@ -150,6 +156,37 @@ class Fiction
         if ($this->authors->contains($author)) {
             $this->authors->removeElement($author);
             $author->removeFiction($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|FictionUserRating[]
+     */
+    public function getRatings(): Collection
+    {
+        return $this->ratings;
+    }
+
+    public function addRating(FictionUserRating $rating): self
+    {
+        if (!$this->ratings->contains($rating)) {
+            $this->ratings[] = $rating;
+            $rating->setFiction($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRating(FictionUserRating $rating): self
+    {
+        if ($this->ratings->contains($rating)) {
+            $this->ratings->removeElement($rating);
+            // set the owning side to null (unless already changed)
+            if ($rating->getFiction() === $this) {
+                $rating->setFiction(null);
+            }
         }
 
         return $this;

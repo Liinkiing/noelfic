@@ -81,13 +81,19 @@ class User implements UserInterface, \Serializable
      */
     private $plainPassword;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\FictionUserRating", mappedBy="user", orphanRemoval=true)
+     */
+    private $fictionRatings;
+
     public function __construct()
     {
         $this->fictions = new ArrayCollection();
         $this->roles = new ArrayCollection();
+        $this->fictionRatings = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -286,6 +292,37 @@ class User implements UserInterface, \Serializable
     public function setPlainPassword(?string $plainPassword): self
     {
         $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|FictionUserRating[]
+     */
+    public function getFictionRatings(): Collection
+    {
+        return $this->fictionRatings;
+    }
+
+    public function addFictionRating(FictionUserRating $fictionRating): self
+    {
+        if (!$this->fictionRatings->contains($fictionRating)) {
+            $this->fictionRatings[] = $fictionRating;
+            $fictionRating->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFictionRating(FictionUserRating $fictionRating): self
+    {
+        if ($this->fictionRatings->contains($fictionRating)) {
+            $this->fictionRatings->removeElement($fictionRating);
+            // set the owning side to null (unless already changed)
+            if ($fictionRating->getUser() === $this) {
+                $fictionRating->setUser(null);
+            }
+        }
 
         return $this;
     }

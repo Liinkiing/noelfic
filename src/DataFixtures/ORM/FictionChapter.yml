@@ -1,0 +1,14 @@
+App\Entity\FictionChapter:
+  gangeFictionChapter1:
+    title: Il était une fois, le gange
+    position: 1
+    body: |
+      Salut l'élite, c'est El Pueblo, 18-25, 2 sucres.
+      Aujourd'hui on se retrouve pour une nouvelle purification par l'atome ayaaa
+  gangeFictionChapter2:
+    title: La purification par l'atome
+    position: 2
+    body: |
+      Donc dans ce chapitre on va purifier par l'ATOME.
+      C'est assez dangereux les clés, pour ça je veux 1 000 pouces bleus, et n'hésitez pas à vous abonner,
+      SMASH THAT LIKE BUTTON génération ISSOU !

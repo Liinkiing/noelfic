@@ -1,0 +1,7 @@
+App\Entity\FictionUserRating:
+  fictionUserRating1:
+    __construct: ['@gangeFiction', '@userAdmin', 8.4]
+  fictionUserRating2:
+    __construct: ['@gangeFiction', '@userWriter', 5]
+  fictionUserRating3:
+    __construct: ['@gangeFiction', '@userBasic', 2.2]
