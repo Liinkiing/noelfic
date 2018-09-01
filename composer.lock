@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8cd77f001ddf098dda23c48784ecf7de",
+    "content-hash": "ed2960c7ccbbbe1ec1b277caceb86db6",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2615,6 +2615,46 @@
                 "uuid"
             ],
             "time": "2018-08-11T21:01:22+00:00"
+        },
+        {
+            "name": "rappasoft/laravel-helpers",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rappasoft/laravel-helpers.git",
+                "reference": "f2454f75ea582cc7b25df06b6d8076657344a190"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rappasoft/laravel-helpers/zipball/f2454f75ea582cc7b25df06b6d8076657344a190",
+                "reference": "f2454f75ea582cc7b25df06b6d8076657344a190",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anthony Rappa",
+                    "email": "rappa819@gmail.com"
+                }
+            ],
+            "description": "Laravel Helpers for Non-Laravel Projects",
+            "keywords": [
+                "helpers",
+                "laravel"
+            ],
+            "time": "2018-01-27T20:45:31+00:00"
         },
         {
             "name": "sensio/framework-extra-bundle",
