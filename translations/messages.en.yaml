@@ -1,0 +1,38 @@
+of: of
+
+global:
+  about: About
+  submit: Submit
+  favorites: Favorites
+  comments: '{0} No comment|{1} 1 comment|]1,Inf[ %count% comments'
+  chapters: '{0} No chapter|{1} 1 chapter|]1,Inf[ %count% chapters'
+
+form:
+  registration:
+    username: Usernmail
+    email: Email
+    password_repeat:
+      first: Password
+      second: Repeat password
+
+fiction:
+  favorites:
+    added: Added to favorites the
+  ratings:
+    average: 'Rating average : <b>{averageRating}</b>'
+    empty: No ratings
+
+flash:
+  user:
+    email_not_confirmed: Khey, check your email to confirm your registration
+    email_confirmed: Your email has been confirmed
+  registration:
+    successful: Your account has been successfully created
+
+email:
+  confirm:
+    subject: Khey {username}, welcome!
+    body: |
+      <h1>Welcome {username}</h1>
+      <p>To confirm your email, <a href="{confirmationUrl}" target="_blank">go here</a></p>
+      <center><small>If you asked nothing, sorry to bother you khey</small></center>

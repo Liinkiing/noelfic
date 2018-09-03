@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: fr
+    app_locales: fr|en
     default_sender_address: no-reply@noelfic.issou
     default_sender_name: Noelfic
 

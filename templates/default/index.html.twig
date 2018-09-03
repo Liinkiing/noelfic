@@ -10,18 +10,20 @@
 
 <div class="example-wrapper">
     <h1>Hello {{ controller_name }}! ✅</h1>
-
+    <a href="{{ path('about') }}">{{ 'global.about'|trans }}</a>
     {% if app.user %}
-        Favoris de {{ app.user.username }}
+        {{ 'global.favorites'|trans }} {{ 'of'|trans  }} {{ app.user.username }}
         <ul>
             {% for favorite in favorites %}
                 <li>
                     {% set authors = favorite.fiction.authors %}
                     {% set fiction = favorite.fiction %}
-                    {{ fiction.title }} (moyenne des notes : {{ fiction.averageRating ?? 'fiction.rating.empty'|trans }})
+                    {{ fiction.title }} (<small>{{ fiction.averageRating ?
+                    'fiction.ratings.average'|trans({"{averageRating}": fiction.averageRating})|raw :
+                    'fiction.ratings.empty'|trans|raw }}</small>)
                     ({% for author in authors %}{{ author.username }}{{ not loop.last ? ', ' }}{% endfor %})<br/>
-                    <small>Ajouté aux favoris le {{ favorite.favoritedAt|localizeddate }}</small>
-                    <h3>Chapitres</h3>
+                    <small>{{ 'fiction.favorites.added'|trans }} {{ favorite.favoritedAt|localizeddate }}</small>
+                    <h3>{{ 'global.chapters'|transchoice(fiction.chapters.count) }}</h3>
                     <ul>
                         {% for chapter in fiction.chapters %}
                             <li>
@@ -30,7 +32,7 @@
                             </li>
                         {% endfor %}
                     </ul>
-                    <h3>Commentaires</h3>
+                    <h3>{{ 'global.comments'|transchoice(fiction.comments.count) }}</h3>
                     <ul>
                         {% for comment in fiction.comments %}
                             <li>
