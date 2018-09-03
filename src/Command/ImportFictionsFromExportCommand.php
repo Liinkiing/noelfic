@@ -24,7 +24,7 @@ class ImportFictionsFromExportCommand extends Command
      */
     private $io;
 
-    public const FICTION_BATCH_SIZE = 300;
+    public const FICTION_BATCH_SIZE = 500;
 
     private $fictionRepository;
     private $userRepository;
@@ -71,7 +71,9 @@ class ImportFictionsFromExportCommand extends Command
             if ($this->fictionRepository->findOneBy(['title' => $fiction->getTitle()])) {
                 $this->io->text('<comment>Fiction ' . $fiction->getTitle() . ' already exists. Skipping it...</comment>');
             } else {
-                $fiction->addAuthor($this->defaultAuthor);
+                foreach ($fiction->getChapters() as $chapter) {
+                    $chapter->addAuthor($this->defaultAuthor);
+                }
                 $this->entityManager->persist($fiction);
             }
             $this->io->progressAdvance();
@@ -85,6 +87,7 @@ class ImportFictionsFromExportCommand extends Command
 
         $this->entityManager->flush();
         $this->entityManager->clear();
+        $this->defaultAuthor = $this->getDefaultAuthor();
         $this->io->progressFinish();
 
         $this->io->success("Successfully persisted $count fictions!");
@@ -113,7 +116,7 @@ class ImportFictionsFromExportCommand extends Command
         $this->io->section('Getting ' . $fiction->getTitle() . ' and its ' . $fictionInformations['chapitres'] . ' chapter(s)');
         $this->printMemoryUsage();
         foreach ($fictionChapters as $index => $fictionChapter) {
-            $createdAt = \DateTimeImmutable::createFromFormat(
+            $createdAt = \DateTime::createFromFormat(
                 'd/m/Y H:i:s',
                 $fictionChapter['date'] . ' ' . $fictionChapter['heure']
             );

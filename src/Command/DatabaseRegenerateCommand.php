@@ -56,6 +56,6 @@ class DatabaseRegenerateCommand extends Command
             $this->launchCommand($commandName, $arguments, $output);
         }
 
-        $this->io->success('Successfully reintialized database!');
+        $this->io->success('Successfully reinitialized database!');
     }
 }

@@ -9,6 +9,10 @@ form:
       first: Mot de passe
       second: Répetez le mot de passe
 
+fiction:
+  rating:
+    empty: aucune notes
+
 flash:
   user:
     email_not_confirmed: Khey, pense à vérifier ton email

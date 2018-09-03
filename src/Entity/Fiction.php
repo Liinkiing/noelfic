@@ -36,18 +36,18 @@ class Fiction
     private $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity="FictionChapter", mappedBy="fiction", orphanRemoval=true, cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="FictionChapter", mappedBy="fiction", orphanRemoval=true, cascade={"persist"}, fetch="EAGER")
      * @ORM\OrderBy({"position": "ASC"})
      */
     private $chapters;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\FictionUserRating", mappedBy="fiction", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\FictionUserRating", mappedBy="fiction", orphanRemoval=true, fetch="EAGER")
      */
     private $ratings;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\FictionComment", mappedBy="fiction", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\FictionComment", mappedBy="fiction", orphanRemoval=true, fetch="EAGER")
      */
     private $comments;
 
@@ -127,8 +127,12 @@ class Fiction
         return $this->ratings;
     }
 
-    public function getAverageRating(int $precision = 1): float
+    public function getAverageRating(int $precision = 1): ?float
     {
+        if ($this->ratings->count() === 0) {
+            return null;
+        }
+
         $total = reduce(function (float $acc, FictionUserRating $rating) {
             return $acc + $rating->getRating();
         }, $this->ratings, 0);

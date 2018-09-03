@@ -18,16 +18,15 @@
                 <li>
                     {% set authors = favorite.fiction.authors %}
                     {% set fiction = favorite.fiction %}
-                    {{ fiction.title }} (moyenne des notes : {{ fiction.averageRating }})
+                    {{ fiction.title }} (moyenne des notes : {{ fiction.averageRating ?? 'fiction.rating.empty'|trans }})
                     ({% for author in authors %}{{ author.username }}{{ not loop.last ? ', ' }}{% endfor %})<br/>
                     <small>Ajouté aux favoris le {{ favorite.favoritedAt|localizeddate }}</small>
                     <h3>Chapitres</h3>
                     <ul>
                         {% for chapter in fiction.chapters %}
-                            {% set authors = chapter.authors %}
                             <li>
                                 {{ chapter.title }}
-                                ({% for author in authors %}{{ author.username }}{{ not loop.last ? ', ' }}{% endfor %})
+                                ({% for author in chapter.authors %}{{ author.username }}{{ not loop.last ? ', ' }}{% endfor %})
                             </li>
                         {% endfor %}
                     </ul>
