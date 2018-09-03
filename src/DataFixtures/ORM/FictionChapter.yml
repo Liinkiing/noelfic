@@ -1,12 +1,14 @@
 App\Entity\FictionChapter:
   gangeFictionChapter1:
     title: Il était une fois, le gange
+    authors: ['@userAdmin']
     position: 1
     body: |
       Salut l'élite, c'est El Pueblo, 18-25, 2 sucres.
       Aujourd'hui on se retrouve pour une nouvelle purification par l'atome ayaaa
   gangeFictionChapter2:
     title: La purification par l'atome
+    authors: ['@userAdmin', '@userBasic', '@userWriter']
     position: 2
     body: |
       Donc dans ce chapitre on va purifier par l'ATOME.

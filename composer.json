@@ -24,7 +24,8 @@
         "symfony/security-csrf": "*",
         "symfony/swiftmailer-bundle": "^3.2",
         "symfony/validator": "*",
-        "symfony/yaml": "*"
+        "symfony/yaml": "*",
+        "twig/extensions": "^1.5"
     },
     "require-dev": {
         "symfony/dotenv": "*",

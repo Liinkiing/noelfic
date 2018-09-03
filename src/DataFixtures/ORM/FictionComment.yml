@@ -1,0 +1,5 @@
+App\Entity\FictionComment:
+  fictionComment1:
+    author: '@userAdmin'
+    body: Salut l'élite, c'est El Pueblo, 18-25, 2S. Ce commentaire est certifié no-fake
+    fiction: '@gangeFiction'

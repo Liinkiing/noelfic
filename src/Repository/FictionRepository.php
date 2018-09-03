@@ -19,7 +19,7 @@ class FictionRepository extends ServiceEntityRepository
         parent::__construct($registry, Fiction::class);
     }
 
-    public function getAverageRating(Fiction $fiction): float
+    public function getAverageRating(Fiction $fiction, float $precision = 1): float
     {
         $qb = $this->createQueryBuilder('f');
 
@@ -36,7 +36,7 @@ class FictionRepository extends ServiceEntityRepository
                 ->groupBy('f')
                 ->getQuery()
                 ->getSingleScalarResult(),
-            1);
+            $precision);
     }
 
 }

@@ -2,8 +2,11 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 
 /**
@@ -11,6 +14,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class FictionChapter
 {
+    use TimestampableEntity;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="CUSTOM")
@@ -42,15 +47,19 @@ class FictionChapter
     private $fiction;
 
     /**
-     * @ORM\Column(type="datetime")
-     * @Gedmo\Timestampable(on="create")
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="fictionChapters")
      */
-    private $createdAt;
+    private $authors;
 
     /**
      * @ORM\Column(type="integer")
      */
     private $position = 1;
+
+    public function __construct()
+    {
+        $this->authors = new ArrayCollection();
+    }
 
     public function getId()
     {
@@ -105,18 +114,6 @@ class FictionChapter
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
     public function getPosition(): ?int
     {
         return $this->position;
@@ -125,6 +122,34 @@ class FictionChapter
     public function setPosition(int $position): self
     {
         $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getAuthors(): Collection
+    {
+        return $this->authors;
+    }
+
+    public function addAuthor(User $author): self
+    {
+        if (!$this->authors->contains($author)) {
+            $this->authors[] = $author;
+            $author->addFictionChapter($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAuthor(User $author): self
+    {
+        if ($this->authors->contains($author)) {
+            $this->authors->removeElement($author);
+            $author->removeFictionChapter($this);
+        }
 
         return $this;
     }

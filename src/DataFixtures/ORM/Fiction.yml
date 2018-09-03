@@ -1,7 +1,6 @@
 App\Entity\Fiction:
   gangeFiction:
     title: La fiction du gange
-    authors: ['@userAdmin']
     chapters:
       - '@gangeFictionChapter1'
       - '@gangeFictionChapter2'

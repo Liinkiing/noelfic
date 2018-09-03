@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use function iter\reduce;
 
 /**
@@ -13,6 +14,8 @@ use function iter\reduce;
  */
 class Fiction
 {
+    use TimestampableEntity;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="CUSTOM")
@@ -20,12 +23,6 @@ class Fiction
      * @ORM\Column(type="uuid")
      */
     private $id;
-
-    /**
-     * @ORM\Column(type="datetime")
-     * @Gedmo\Timestampable(on="create")
-     */
-    private $createdAt;
 
     /**
      * @ORM\Column(type="string", length=191)
@@ -45,38 +42,26 @@ class Fiction
     private $chapters;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="fictions")
-     */
-    private $authors;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\FictionUserRating", mappedBy="fiction", orphanRemoval=true)
      */
     private $ratings;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\FictionComment", mappedBy="fiction", orphanRemoval=true)
+     */
+    private $comments;
 
 
     public function __construct()
     {
         $this->chapters = new ArrayCollection();
-        $this->authors = new ArrayCollection();
         $this->ratings = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId()
     {
         return $this->id;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     public function getTitle(): ?string
@@ -111,15 +96,6 @@ class Fiction
         return $this->chapters;
     }
 
-    public function getAverageRating(): float
-    {
-        $total = reduce(function(float $acc, FictionUserRating $rating) {
-            return $acc + $rating->getRating();
-        }, $this->ratings, 0);
-
-        return round($total / $this->ratings->count(), 1);
-    }
-
     public function addChapter(FictionChapter $chapter): self
     {
         if (!$this->chapters->contains($chapter)) {
@@ -144,39 +120,20 @@ class Fiction
     }
 
     /**
-     * @return Collection|User[]
-     */
-    public function getAuthors(): Collection
-    {
-        return $this->authors;
-    }
-
-    public function addAuthor(User $author): self
-    {
-        if (!$this->authors->contains($author)) {
-            $this->authors[] = $author;
-            $author->addFiction($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAuthor(User $author): self
-    {
-        if ($this->authors->contains($author)) {
-            $this->authors->removeElement($author);
-            $author->removeFiction($this);
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection|FictionUserRating[]
      */
     public function getRatings(): Collection
     {
         return $this->ratings;
+    }
+
+    public function getAverageRating(int $precision = 1): float
+    {
+        $total = reduce(function (float $acc, FictionUserRating $rating) {
+            return $acc + $rating->getRating();
+        }, $this->ratings, 0);
+
+        return round($total / $this->ratings->count(), $precision);
     }
 
     public function addRating(FictionUserRating $rating): self
@@ -200,5 +157,51 @@ class Fiction
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|FictionComment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(FictionComment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setFiction($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(FictionComment $comment): self
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getFiction() === $this) {
+                $comment->setFiction(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getAuthors(): Collection
+    {
+        return reduce(function (ArrayCollection $acc, FictionChapter $chapter) {
+            foreach ($chapter->getAuthors() as $author) {
+                if (!$acc->contains($author)) {
+                    $acc->add($author);
+                }
+            }
+            return $acc;
+        }, $this->chapters, new ArrayCollection([]));
     }
 }

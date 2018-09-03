@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
+
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Ramsey\Uuid\Uuid;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -19,6 +20,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User implements UserInterface, \Serializable
 {
+    use TimestampableEntity;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="CUSTOM")
@@ -45,21 +48,9 @@ class User implements UserInterface, \Serializable
     private $email;
 
     /**
-     * @ORM\Column(type="datetime")
-     * @Gedmo\Timestampable(on="create")
+     * @ORM\ManyToMany(targetEntity="App\Entity\FictionChapter", inversedBy="authors")
      */
-    private $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     * @Gedmo\Timestampable(on="update")
-     */
-    private $updatedAt;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Fiction", inversedBy="authors")
-     */
-    private $fictions;
+    private $fictionChapters;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\UserRole", inversedBy="users")
@@ -91,12 +82,18 @@ class User implements UserInterface, \Serializable
      */
     private $fictionFavorites;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="author", orphanRemoval=true)
+     */
+    private $comments;
+
     public function __construct()
     {
-        $this->fictions = new ArrayCollection();
+        $this->fictionChapters = new ArrayCollection();
         $this->roles = new ArrayCollection();
         $this->fictionRatings = new ArrayCollection();
         $this->fictionFavorites = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?string
@@ -128,51 +125,27 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
     /**
-     * @return Collection|Fiction[]
+     * @return Collection|FictionChapter[]
      */
-    public function getFictions(): Collection
+    public function getFictionChapters(): Collection
     {
-        return $this->fictions;
+        return $this->fictionChapters;
     }
 
-    public function addFiction(Fiction $fiction): self
+    public function addFictionChapter(FictionChapter $fiction): self
     {
-        if (!$this->fictions->contains($fiction)) {
-            $this->fictions[] = $fiction;
+        if (!$this->fictionChapters->contains($fiction)) {
+            $this->fictionChapters[] = $fiction;
         }
 
         return $this;
     }
 
-    public function removeFiction(Fiction $fiction): self
+    public function removeFictionChapter(FictionChapter $fiction): self
     {
-        if ($this->fictions->contains($fiction)) {
-            $this->fictions->removeElement($fiction);
+        if ($this->fictionChapters->contains($fiction)) {
+            $this->fictionChapters->removeElement($fiction);
         }
 
         return $this;
@@ -363,4 +336,13 @@ class User implements UserInterface, \Serializable
 
         return $this;
     }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
 }
