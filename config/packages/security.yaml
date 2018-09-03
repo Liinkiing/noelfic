@@ -19,7 +19,7 @@ security:
       anonymous: ~
       logout:
         path:   logout
-        target: /
+        target: homepage
 
       # activate different ways to authenticate
 

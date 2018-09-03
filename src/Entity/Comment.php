@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
@@ -16,6 +18,11 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 abstract class Comment
 {
     use TimestampableEntity;
+
+    public function __construct()
+    {
+        $this->children = new ArrayCollection();
+    }
 
     /**
      * @ORM\Id()
@@ -35,6 +42,16 @@ abstract class Comment
      * @ORM\Column(type="text")
      */
     private $body;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\FictionComment", mappedBy="parent")
+     */
+    protected $children;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\FictionComment", inversedBy="children")
+     */
+    protected $parent;
 
     public function getId(): ?int
     {
@@ -70,6 +87,49 @@ abstract class Comment
     public function getKind(): string
     {
         return __CLASS__;
+    }
+
+    public function getParent(): ?self
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getChildren(): Collection
+    {
+        return $this->children;
+    }
+
+    public function addChild(Comment $child): self
+    {
+        if (!$this->children->contains($child)) {
+            $this->children[] = $child;
+            $child->setParent($this);
+        }
+
+        return $this;
+    }
+
+
+    public function removeChild(Comment $child): self
+    {
+        if ($this->children->contains($child)) {
+            $this->children->removeElement($child);
+            if ($child->getParent() === $this) {
+                $child->setParent(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function setParent(Comment $parent): self
+    {
+        $this->parent = $parent;
+
+        return $this;
     }
 
 }

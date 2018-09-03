@@ -8,6 +8,10 @@ global:
   chapters: '{0} Aucun chapitre|{1} 1 chapitre|]1,Inf[ %count% chapitres'
 
 form:
+  login:
+    username: Nom d'utilisateur
+    password: Mot de passe
+    button: Se connecter
   registration:
     username: Nom d'utilisateur
     email: Adresse mail

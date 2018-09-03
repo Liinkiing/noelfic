@@ -10,13 +10,15 @@
         <input type="hidden" name="_csrf_token"
                value="{{ csrf_token('authenticate') }}"
         >
-        <label for="username">Nom d'utilisateur:</label>
+        <label for="username">{{ 'form.login.username'|trans }}</label>
         <input type="text" id="username" name="_username" value="{{ last_username }}"/>
 
-        <label for="password">Mot de passe:</label>
+        <label for="password">{{ 'form.login.password'|trans }}</label>
         <input type="password" id="password" name="_password"/>
 
-        <button type="submit">login</button>
+        <input type="hidden" name="_target_path" value="{{ path('homepage') }}"/>
+
+        <button type="submit">{{ 'form.login.button'|trans }}</button>
     </form>
 
 {% endblock %}

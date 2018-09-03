@@ -34,10 +34,24 @@
                     </ul>
                     <h3>{{ 'global.comments'|transchoice(fiction.comments.count) }}</h3>
                     <ul>
-                        {% for comment in fiction.comments %}
+                        {% for comment in fiction.rootComments %}
                             <li>
                                 {{ comment.author.username }} : {{ comment.body }}<br/>
                                 <small>{{ comment.createdAt|localizeddate }}</small>
+                                {% for answer in comment.children %}
+                                    <ul>
+                                        <li>{{ answer.author.username }}  {{ answer.body }}<br/>
+                                            <small>{{ answer.createdAt|localizeddate }}</small>
+                                        </li>
+                                    </ul>
+                                    {% for childrenAnswer in answer.children  %}
+                                        <ul>
+                                            <li>{{ childrenAnswer.author.username }}  {{ childrenAnswer.body }}<br/>
+                                                <small>{{ childrenAnswer.createdAt|localizeddate }}</small>
+                                            </li>
+                                        </ul>
+                                    {% endfor %}
+                                {% endfor %}
                             </li>
                         {% endfor %}
                     </ul>

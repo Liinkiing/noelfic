@@ -171,6 +171,16 @@ class Fiction
         return $this->comments;
     }
 
+    /**
+     * @return Collection|FictionComment[]
+     */
+    public function getRootComments(): Collection
+    {
+        return $this->comments->filter(function(FictionComment $comment) {
+            return $comment->getParent() === null;
+        });
+    }
+
     public function addComment(FictionComment $comment): self
     {
         if (!$this->comments->contains($comment)) {

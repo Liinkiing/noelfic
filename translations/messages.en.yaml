@@ -8,6 +8,10 @@ global:
   chapters: '{0} No chapter|{1} 1 chapter|]1,Inf[ %count% chapters'
 
 form:
+  login:
+    username: Username
+    password: Password
+    button: Login
   registration:
     username: Usernmail
     email: Email

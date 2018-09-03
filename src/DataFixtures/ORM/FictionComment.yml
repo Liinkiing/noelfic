@@ -3,3 +3,18 @@ App\Entity\FictionComment:
     author: '@userAdmin'
     body: Salut l'élite, c'est El Pueblo, 18-25, 2S. Ce commentaire est certifié no-fake
     fiction: '@gangeFiction'
+  fictionComment2:
+    author: '@userBasic'
+    parent: '@fictionComment1'
+    body: Ayaaa El pueblo, le gange
+    fiction: '@gangeFiction'
+  fictionComment3:
+    author: '@userAdmin'
+    parent: '@fictionComment2'
+    body: Calmez vous les kheys
+    fiction: '@gangeFiction'
+  fictionComment4:
+    author: '@userWriter'
+    parent: '@fictionComment2'
+    body: Bande de summerfags
+    fiction: '@gangeFiction'
