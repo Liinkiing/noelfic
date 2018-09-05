@@ -23,7 +23,7 @@ fiction:
   favorites:
     added: Added to favorites the
   ratings:
-    average: 'Rating average : <b>{averageRating}</b>'
+    average: 'Average rating : <b>{averageRating}</b>'
     empty: No ratings
 
 flash:

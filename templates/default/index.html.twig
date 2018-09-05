@@ -3,62 +3,50 @@
 {% block title %}Hello {{ controller_name }}!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <style>
+        .example-wrapper {
+            margin: 1em auto;
+            max-width: 800px;
+            width: 95%;
+            font: 18px/1.5 sans-serif;
+        }
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-    <a href="{{ path('about') }}">{{ 'global.about'|trans }}</a>
-    {% if app.user %}
-        {{ 'global.favorites'|trans }} {{ 'of'|trans  }} {{ app.user.username }}
-        <ul>
-            {% for favorite in favorites %}
-                <li>
-                    {% set authors = favorite.fiction.authors %}
-                    {% set fiction = favorite.fiction %}
-                    {{ fiction.title }} (<small>{{ fiction.averageRating ?
-                    'fiction.ratings.average'|trans({"{averageRating}": fiction.averageRating})|raw :
-                    'fiction.ratings.empty'|trans|raw }}</small>)
-                    ({% for author in authors %}{{ author.username }}{{ not loop.last ? ', ' }}{% endfor %})<br/>
-                    <small>{{ 'fiction.favorites.added'|trans }} {{ favorite.favoritedAt|localizeddate }}</small>
-                    <h3>{{ 'global.chapters'|transchoice(fiction.chapters.count) }}</h3>
-                    <ul>
-                        {% for chapter in fiction.chapters %}
-                            <li>
-                                {{ chapter.title }}
-                                ({% for author in chapter.authors %}{{ author.username }}{{ not loop.last ? ', ' }}{% endfor %})
-                            </li>
-                        {% endfor %}
-                    </ul>
-                    <h3>{{ 'global.comments'|transchoice(fiction.comments.count) }}</h3>
-                    <ul>
-                        {% for comment in fiction.rootComments %}
-                            <li>
-                                {{ comment.author.username }} : {{ comment.body }}<br/>
-                                <small>{{ comment.createdAt|localizeddate }}</small>
-                                {% for answer in comment.children %}
-                                    <ul>
-                                        <li>{{ answer.author.username }}  {{ answer.body }}<br/>
-                                            <small>{{ answer.createdAt|localizeddate }}</small>
-                                        </li>
-                                    </ul>
-                                    {% for childrenAnswer in answer.children  %}
-                                        <ul>
-                                            <li>{{ childrenAnswer.author.username }}  {{ childrenAnswer.body }}<br/>
-                                                <small>{{ childrenAnswer.createdAt|localizeddate }}</small>
-                                            </li>
-                                        </ul>
-                                    {% endfor %}
-                                {% endfor %}
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+        .example-wrapper code {
+            background: #F5F5F5;
+            padding: 2px 6px;
+        }
+    </style>
 
-</div>
+    <div class="example-wrapper">
+        <h1>Hello {{ controller_name }}! ✅</h1>
+        <a href="{{ path('about') }}">{{ 'global.about'|trans }}</a>
+        {% if app.user %}
+            {{ 'global.favorites'|trans }} {{ 'of'|trans }} {{ app.user.username }}
+            <ul>
+                {% for favorite in favorites %}
+                    <li>
+                        {% set authors = favorite.fiction.authors %}
+                        {% set fiction = favorite.fiction %}
+                        {{ fiction.title }} (<small>{{ fiction.averageRating ?
+                            'fiction.ratings.average'|trans({"{averageRating}": fiction.averageRating})|raw :
+                            'fiction.ratings.empty'|trans|raw }}</small>)
+                        ({% for author in authors %}{{ author.username }}{{ not loop.last ? ', ' }}{% endfor %})<br/>
+                        <small>{{ 'fiction.favorites.added'|trans }} {{ favorite.favoritedAt|localizeddate }}</small>
+                        <h3>{{ 'global.chapters'|transchoice(fiction.chapters.count) }}</h3>
+                        <ul>
+                            {% for chapter in fiction.chapters %}
+                                <li>
+                                    {{ chapter.title }}
+                                    ({% for author in chapter.authors %}{{ author.username }}{{ not loop.last ? ', ' }}{% endfor %})
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        <h3>{{ 'global.comments'|transchoice(fiction.comments.count) }}</h3>
+                        {% embed 'partials/_comments.html.twig' with {'comments': fiction.rootComments} %}{% endembed %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+    </div>
 {% endblock %}

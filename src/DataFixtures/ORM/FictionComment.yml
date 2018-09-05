@@ -18,3 +18,12 @@ App\Entity\FictionComment:
     parent: '@fictionComment2'
     body: Bande de summerfags
     fiction: '@gangeFiction'
+  fictionComment5:
+    author: '@userAdmin'
+    parent: '@fictionComment4'
+    body: Tg l'oldfag
+    fiction: '@gangeFiction'
+  fictionComment6:
+    author: '@userAdmin'
+    body: Un autre commentaire racine issou
+    fiction: '@gangeFiction'

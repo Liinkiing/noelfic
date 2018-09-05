@@ -1,0 +1,8 @@
+<ul>
+    {% for comment in comments %}
+        {% embed 'partials/_comment.html.twig' with {'comment': comment} %}{% endembed %}
+        {% if comment.children.count > 0 %}
+            {% embed 'partials/_comments.html.twig' with {'comments': comment.children} %}{% endembed %}
+        {% endif %}
+    {% endfor %}
+</ul>
