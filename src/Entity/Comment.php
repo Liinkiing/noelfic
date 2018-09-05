@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\InheritanceType("SINGLE_TABLE")
@@ -26,6 +27,7 @@ abstract class Comment
 
     /**
      * @ORM\Id()
+     * @Groups({"props"})
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
      * @ORM\Column(type="uuid")
@@ -34,16 +36,19 @@ abstract class Comment
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comments")
+     * @Groups({"props"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $author;
 
     /**
+     * @Groups({"props"})
      * @ORM\Column(type="text")
      */
     private $body;
 
     /**
+     * @Groups({"props"})
      * @ORM\OneToMany(targetEntity="App\Entity\FictionComment", mappedBy="parent")
      */
     protected $children;
@@ -53,7 +58,7 @@ abstract class Comment
      */
     protected $parent;
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
     }

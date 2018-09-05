@@ -10,6 +10,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Ramsey\Uuid\Uuid;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -24,6 +25,7 @@ class User implements UserInterface, \Serializable
 
     /**
      * @ORM\Id()
+     * @Groups({"props"})
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
      * @ORM\Column(type="uuid")
@@ -31,6 +33,7 @@ class User implements UserInterface, \Serializable
     private $id;
 
     /**
+     * @Groups({"props"})
      * @Assert\Length(min="3", max="30")
      * @ORM\Column(type="string", length=30, unique=true)
      */

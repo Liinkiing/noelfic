@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FictionUserFavoriteRepository")
@@ -12,6 +13,7 @@ class FictionUserFavorite
 {
 
     /**
+     * @Groups({"props"})
      * @ORM\Id()
      * @ORM\ManyToOne(targetEntity="App\Entity\Fiction")
      * @ORM\JoinColumn(nullable=false)
@@ -19,6 +21,7 @@ class FictionUserFavorite
     private $fiction;
 
     /**
+     * @Groups({"props"})
      * @ORM\Id()
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="fictionFavorites")
      * @ORM\JoinColumn(nullable=false)
@@ -26,6 +29,7 @@ class FictionUserFavorite
     private $user;
 
     /**
+     * @Groups({"props"})
      * @ORM\Column(type="datetime")
      * @Gedmo\Timestampable(on="create")
      */

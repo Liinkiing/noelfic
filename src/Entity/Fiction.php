@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use function iter\reduce;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FictionRepository")
@@ -17,6 +18,7 @@ class Fiction
     use TimestampableEntity;
 
     /**
+     * @Groups({"props"})
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
@@ -25,28 +27,33 @@ class Fiction
     private $id;
 
     /**
+     * @Groups({"props"})
      * @ORM\Column(type="string", length=191)
      */
     private $title;
 
     /**
+     * @Groups({"props"})
      * @ORM\Column(type="string", length=191)
      * @Gedmo\Slug(fields={"title"})
      */
     private $slug;
 
     /**
+     * @Groups({"props"})
      * @ORM\OneToMany(targetEntity="FictionChapter", mappedBy="fiction", orphanRemoval=true, cascade={"persist"}, fetch="EAGER")
      * @ORM\OrderBy({"position": "ASC"})
      */
     private $chapters;
 
     /**
+     * @Groups({"props"})
      * @ORM\OneToMany(targetEntity="App\Entity\FictionUserRating", mappedBy="fiction", orphanRemoval=true, fetch="EAGER")
      */
     private $ratings;
 
     /**
+     * @Groups({"props"})
      * @ORM\OneToMany(targetEntity="App\Entity\FictionComment", mappedBy="fiction", orphanRemoval=true, fetch="EAGER")
      */
     private $comments;
@@ -176,7 +183,7 @@ class Fiction
      */
     public function getRootComments(): Collection
     {
-        return $this->comments->filter(function(FictionComment $comment) {
+        return $this->comments->filter(function (FictionComment $comment) {
             return $comment->getParent() === null;
         });
     }

@@ -20,10 +20,13 @@
         "symfony/form": "*",
         "symfony/framework-bundle": "*",
         "symfony/orm-pack": "^1.0",
+        "symfony/property-access": "*",
         "symfony/security-bundle": "*",
         "symfony/security-csrf": "*",
+        "symfony/serializer": "*",
         "symfony/swiftmailer-bundle": "^3.2",
         "symfony/validator": "*",
+        "symfony/webpack-encore-pack": "^1.0",
         "symfony/yaml": "*",
         "twig/extensions": "^1.5"
     },
