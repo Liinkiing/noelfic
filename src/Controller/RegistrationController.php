@@ -92,6 +92,7 @@ class RegistrationController extends AbstractController
             $this->addFlash('warning', 'flash.user.email_expired');
             $user->setConfirmationToken(Str::random());
             $userNotifier->onConfirmEmail($user);
+            $em->flush();
 
             return $this->redirectToRoute('homepage');
         }

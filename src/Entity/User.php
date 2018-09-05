@@ -236,6 +236,7 @@ class User implements UserInterface, \Serializable
     public function clearConfirmationToken(): self
     {
         $this->confirmationToken = null;
+        $this->confirmationExpiresAt = null;
 
         return $this;
     }
