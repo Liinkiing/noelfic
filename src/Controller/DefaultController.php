@@ -6,14 +6,16 @@ use App\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 
 class DefaultController extends AbstractController
 {
     /**
      * @Route("/", name="homepage")
      */
-    public function index(): Response
+    public function index(FlashBagInterface $bag, CsrfTokenManagerInterface $tokenManager): Response
     {
         $favorites = $this->getUser() instanceof User ? $this->getUser()->getFictionFavorites() : [];
 

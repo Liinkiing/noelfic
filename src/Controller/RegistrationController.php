@@ -7,13 +7,21 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Event\UserRegisteredEvent;
 use App\Form\UserType;
+use App\Mailer\MailerService;
+use App\Mailer\Message\User\UserConfirmEmailMessage;
+use App\Notifier\UserNotifier;
+use App\Resolver\UserResolver;
+use App\Utils\Str;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 
 class RegistrationController extends AbstractController
 {
@@ -30,7 +38,7 @@ class RegistrationController extends AbstractController
      */
     public function register(Request $request, EntityManagerInterface $entityManager): Response
     {
-        if (\is_object($this->getUser())) {
+        if ($this->getUser() instanceof User) {
             return $this->redirectToRoute('homepage');
         }
 
@@ -56,10 +64,38 @@ class RegistrationController extends AbstractController
     }
 
     /**
+     * @Route("/email/send_confirmation", name="email.send_confirmation")
+     * @Method({"POST"})
+     */
+    public function sendConfirmationEmail(Request $request, UserNotifier $userNotifier): RedirectResponse
+    {
+        $token = $request->get('token');
+        if(!$this->isCsrfTokenValid('token', $token)) {
+            throw new InvalidCsrfTokenException('Invalid token');
+        }
+
+        if (!$this->getUser() instanceof User) {
+            throw new NotFoundHttpException();
+        }
+
+        $userNotifier->onConfirmEmail($this->getUser());
+
+        return $this->redirectToRoute('homepage');
+    }
+
+    /**
      * @Route("/email/confirm/{confirmationToken}", name="email.confirm")
      */
-    public function confirmEmail(User $user, EntityManagerInterface $em): RedirectResponse
+    public function confirmEmail(User $user, EntityManagerInterface $em, UserNotifier $userNotifier): RedirectResponse
     {
+        if (!$user->canConfirm()) {
+            $this->addFlash('warning', 'flash.user.email_expired');
+            $user->setConfirmationToken(Str::random());
+            $userNotifier->onConfirmEmail($user);
+
+            return $this->redirectToRoute('homepage');
+        }
+
         $user
             ->clearConfirmationToken()
             ->setConfirmedAt(new \DateTime());

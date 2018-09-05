@@ -10,7 +10,11 @@
     <div class="alert alert-{{ label }}">
         <ul>
             {% for message in messages %}
-                <li>{{ message|trans }}</li>
+                {% if message is iterable %}
+                    {{ message.id|trans(message.parameters|default({}))|raw }}
+                {% else %}
+                    {{ message|trans|raw }}
+                {% endif %}
             {% endfor %}
         </ul>
     </div>

@@ -5,6 +5,7 @@ namespace App\EventSubscriber;
 use App\Event\UserRegisteredEvent;
 use App\Mailer\MailerService;
 use App\Mailer\Message\User\UserConfirmEmailMessage;
+use App\Notifier\UserNotifier;
 use App\Resolver\UserResolver;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -23,40 +24,34 @@ class RegistrationSubscriber implements EventSubscriberInterface
     private $tokenStorage;
     private $dispatcher;
     private $session;
-    private $mailer;
-    private $userResolver;
+    private $userNotifier;
 
     public function __construct(
-        UserResolver $userResolver,
         FlashBagInterface $flashBag,
         TokenStorageInterface $tokenStorage,
         EventDispatcherInterface $dispatcher,
         SessionInterface $session,
-        MailerService $mailer
-    ) {
+        UserNotifier $userNotifier
+    )
+    {
         $this->flashBag = $flashBag;
         $this->tokenStorage = $tokenStorage;
         $this->dispatcher = $dispatcher;
         $this->session = $session;
-        $this->mailer = $mailer;
-        $this->userResolver = $userResolver;
+        $this->userNotifier = $userNotifier;
     }
 
     public function onUserRegistered(UserRegisteredEvent $event): void
     {
         $this->flashBag->add('success', 'flash.registration.successful');
         $this->authenticateUser($event->getRequest(), $event->getUser());
-        $this->mailer->sendMessage(UserConfirmEmailMessage::create(
-            $event->getUser()->getEmail(),
-            $event->getUser()->getUsername(),
-            $this->userResolver->resolveConfirmationUrl($event->getUser())
-        ));
+        $this->userNotifier->onConfirmEmail($event->getUser());
     }
 
     public static function getSubscribedEvents(): array
     {
         return [
-           UserRegisteredEvent::NAME => 'onUserRegistered',
+            UserRegisteredEvent::NAME => 'onUserRegistered',
         ];
     }
 

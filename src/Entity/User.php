@@ -87,6 +87,11 @@ class User implements UserInterface, \Serializable
      */
     private $comments;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $confirmationExpiresAt;
+
     public function __construct()
     {
         $this->fictionChapters = new ArrayCollection();
@@ -223,6 +228,7 @@ class User implements UserInterface, \Serializable
     public function setConfirmationToken(?string $confirmationToken): self
     {
         $this->confirmationToken = $confirmationToken;
+        $this->confirmationExpiresAt = (new \DateTime())->add(new \DateInterval('P2D'));
 
         return $this;
     }
@@ -254,6 +260,11 @@ class User implements UserInterface, \Serializable
     public function isConfirmed(): bool
     {
         return $this->confirmedAt !== null;
+    }
+
+    public function canConfirm(): bool
+    {
+        return new \DateTime() < $this->confirmationExpiresAt;
     }
 
     public function setConfirmedAt(?\DateTimeInterface $confirmedAt): self
@@ -343,6 +354,18 @@ class User implements UserInterface, \Serializable
     public function getComments(): Collection
     {
         return $this->comments;
+    }
+
+    public function getConfirmationExpiresAt(): ?\DateTimeInterface
+    {
+        return $this->confirmationExpiresAt;
+    }
+
+    public function setConfirmationExpiresAt(?\DateTimeInterface $confirmationExpiresAt): self
+    {
+        $this->confirmationExpiresAt = $confirmationExpiresAt;
+
+        return $this;
     }
 
 }

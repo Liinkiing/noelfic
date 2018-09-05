@@ -28,7 +28,8 @@ fiction:
 
 flash:
   user:
-    email_not_confirmed: Khey, check your email to confirm your registration
+    email_expired: Khey, this activation link has expired. Sent you a new one now.
+    email_not_confirmed: Khey, check your email to confirm your registration. <form action="{confirmationUrl}" method="post"><input type="hidden" name="token" value="{token}"/><button>Resend confirmation email</button></form>
     email_confirmed: Your email has been confirmed
   registration:
     successful: Your account has been successfully created
