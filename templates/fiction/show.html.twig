@@ -4,13 +4,13 @@
 
 {% block body %}
     <h1>{{ fiction.title }}</h1>
-    <comments data-comments="{{ fiction.rootComments|props }}"></comments>
+    <comments :comments="{{ fiction.rootComments|props }}"></comments>
     <h2>{{ chapter.title }}</h2>
     <div class="body">
         {{ chapter.body|raw }}
     </div>
-    <comments data-comments="{{ chapter.rootComments|props }}"></comments>
+    <comments :comments="{{ chapter.rootComments|props }}"></comments>
     {% if chapters.haveToPaginate %}
-        {{ pagerfanta(chapters, 'twitter_bootstrap4_translated', {routeParams: app.request.query.all}) }}
+        {{ pagerfanta(chapters, 'noelfic_pagination', {routeParams: app.request.query.all}) }}
     {% endif %}
 {% endblock %}

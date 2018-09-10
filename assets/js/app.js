@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import {Comment, Comments, UserFavorites} from './components'
 
-import 'bootstrap/scss/bootstrap.scss'
 import '../scss/app.scss';
 
 Vue.config.productionTip = false;

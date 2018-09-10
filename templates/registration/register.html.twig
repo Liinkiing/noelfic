@@ -2,11 +2,36 @@
 
 {% block body %}
     {{ form_start(form) }}
-    {{ form_row(form.username) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.plainPassword.first) }}
-    {{ form_row(form.plainPassword.second) }}
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                {{ form_row(form.username) }}
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                {{ form_row(form.email) }}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                {{ form_row(form.plainPassword.first) }}
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group">
+                {{ form_row(form.plainPassword.second) }}
+            </div>
+        </div>
+    </div>
 
-    <button type="submit">{{ 'global.submit'|trans }}</button>
+    <div class="row justify-content-center">
+        <button type="submit" class="btn btn-icon btn-3 btn-primary">
+            <span class="btn-inner--icon"><i class="fa fa-check"></i></span>
+            <span class="btn-inner--text">{{ 'global.submit'|trans }}</span>
+        </button>
+    </div>
     {{ form_end(form) }}
 {% endblock %}

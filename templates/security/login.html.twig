@@ -10,15 +10,29 @@
         <input type="hidden" name="_csrf_token"
                value="{{ csrf_token('authenticate') }}"
         >
-        <label for="username">{{ 'form.login.username'|trans }}</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}"/>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="username">{{ 'form.login.username'|trans }}</label>
+                    <input type="text" id="username" name="_username" class="form-control form-control-alternative" placeholder="{{ 'form.login.username'|trans }}" value="{{ last_username }}"/>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
 
-        <label for="password">{{ 'form.login.password'|trans }}</label>
-        <input type="password" id="password" name="_password"/>
+                    <label for="password">{{ 'form.login.password'|trans }}</label>
+                    <input type="password" id="password" name="_password" class="form-control form-control-alternative" placeholder="{{ 'form.login.password'|trans }}"/>
+                </div>
+            </div>
+        </div>
 
         <input type="hidden" name="_target_path" value="{{ path('homepage') }}"/>
-
-        <button type="submit">{{ 'form.login.button'|trans }}</button>
+        <div class="row justify-content-center">
+            <button type="submit" class="btn btn-icon btn-3 btn-primary">
+                <span class="btn-inner--icon"><i class="fa fa-user"></i></span>
+                <span class="btn-inner--text">{{ 'form.login.button'|trans }}</span>
+            </button>
+        </div>
     </form>
 
 {% endblock %}

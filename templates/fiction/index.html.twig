@@ -8,6 +8,6 @@
         <div><a href="{{ path('fiction.show', {'slug': fiction.slug}) }}">{{ fiction.title }}</a></div>
     {% endfor %}
     {% if fictions.haveToPaginate %}
-        {{ pagerfanta(fictions, 'twitter_bootstrap4_translated', {routeParams: app.request.query.all}) }}
+        {{ pagerfanta(fictions, 'noelfic_pagination', {routeParams: app.request.query.all}) }}
     {% endif %}
 {% endblock %}

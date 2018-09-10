@@ -17,15 +17,35 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
-                'label' => 'form.registration.email'
+                'label' => 'form.registration.email',
+                'attr' => [
+                    'class' => 'form-control form-control-alternative',
+                    'placeholder' => 'form.registration.email',
+                ]
             ])
             ->add('username', TextType::class, [
-                'label' => 'form.registration.username'
+                'label' => 'form.registration.username',
+                'attr' => [
+                    'class' => 'form-control form-control-alternative',
+                    'placeholder' => 'form.registration.username',
+                ]
             ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'first_options' => ['label' => 'form.registration.password_repeat.first'],
-                'second_options' => ['label' => 'form.registration.password_repeat.second'],
+                'first_options' => [
+                    'label' => 'form.registration.password_repeat.first',
+                    'attr' => [
+                        'class' => 'form-control form-control-alternative',
+                        'placeholder' => 'form.registration.password_repeat.first',
+                    ]
+                ],
+                'second_options' => [
+                    'label' => 'form.registration.password_repeat.second',
+                    'attr' => [
+                        'class' => 'form-control form-control-alternative',
+                        'placeholder' => 'form.registration.password_repeat.second',
+                    ]
+                ],
             ]);
     }
 

@@ -4,7 +4,7 @@
             <keep-alive>
                 <comment :comment="comment"></comment>
             </keep-alive>
-            <comments ref="comments" v-if="comment.children.length > 0" :data-comments="JSON.stringify(comment.children)"></comments>
+            <comments v-if="comment.children.length > 0" :comments="comment.children"></comments>
         </template>
     </ul>
     
@@ -15,14 +15,8 @@
     export default {
         name: 'Comments',
         components: {Comment},
-        data () {
-            return {
-                comments: [],
-            }
-        },
-        mounted () {
-            this.comments = JSON.parse(this.$el.dataset.comments);
-            delete this.$el.dataset.comments;
+        props: {
+            comments: {type: Array, required: true, default: []}
         }
     }
 </script>

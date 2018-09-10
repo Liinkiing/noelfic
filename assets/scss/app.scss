@@ -3,3 +3,7 @@
 body {
   background: $backgroundColor;
 }
+
+main.container {
+  margin-top: $mainContainerMarginTop;
+}
