@@ -4,12 +4,12 @@
 
 {% block body %}
     <h1>{{ fiction.title }}</h1>
-    {% embed 'partials/_comments.html.twig' with {'comments': fiction.rootComments} %}{% endembed %}
+    <comments data-comments="{{ fiction.rootComments|props }}"></comments>
     <h2>{{ chapter.title }}</h2>
-    {% embed 'partials/_comments.html.twig' with {'comments': chapter.rootComments} %}{% endembed %}
     <div class="body">
         {{ chapter.body|raw }}
     </div>
+    <comments data-comments="{{ chapter.rootComments|props }}"></comments>
     {% if chapters.haveToPaginate %}
         {{ pagerfanta(chapters, 'twitter_bootstrap4_translated', {routeParams: app.request.query.all}) }}
     {% endif %}

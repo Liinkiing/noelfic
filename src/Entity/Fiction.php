@@ -192,13 +192,13 @@ class Fiction
     }
 
     /**
-     * @return Collection|FictionComment[]
+     * @return array|FictionComment[]
      */
-    public function getRootComments(): Collection
+    public function getRootComments(): array
     {
         return $this->comments->filter(function (FictionComment $comment) {
             return $comment->getParent() === null;
-        });
+        })->getValues();
     }
 
     public function addComment(FictionComment $comment): self
