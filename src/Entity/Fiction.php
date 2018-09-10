@@ -15,6 +15,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  */
 class Fiction
 {
+    public const NUM_ITEMS = 5;
+
     use TimestampableEntity;
 
     /**
@@ -41,20 +43,20 @@ class Fiction
 
     /**
      * @Groups({"props"})
-     * @ORM\OneToMany(targetEntity="FictionChapter", mappedBy="fiction", orphanRemoval=true, cascade={"persist"}, fetch="EAGER")
+     * @ORM\OneToMany(targetEntity="FictionChapter", mappedBy="fiction", orphanRemoval=true, cascade={"persist"}, fetch="LAZY")
      * @ORM\OrderBy({"position": "ASC"})
      */
     private $chapters;
 
     /**
      * @Groups({"props"})
-     * @ORM\OneToMany(targetEntity="App\Entity\FictionUserRating", mappedBy="fiction", orphanRemoval=true, fetch="EAGER")
+     * @ORM\OneToMany(targetEntity="App\Entity\FictionUserRating", mappedBy="fiction", orphanRemoval=true, fetch="LAZY")
      */
     private $ratings;
 
     /**
      * @Groups({"props"})
-     * @ORM\OneToMany(targetEntity="App\Entity\FictionComment", mappedBy="fiction", orphanRemoval=true, fetch="EAGER")
+     * @ORM\OneToMany(targetEntity="App\Entity\FictionComment", mappedBy="fiction", orphanRemoval=true, fetch="LAZY")
      */
     private $comments;
 
@@ -103,6 +105,14 @@ class Fiction
         return $this->chapters;
     }
 
+    public function getChapter(int $position): ?FictionChapter
+    {
+        $results = $this->chapters->filter(function (FictionChapter $chapter) use ($position) {
+            return $chapter->getPosition() === $position;
+        });
+        return $results->count() > 0 ? $results->first() : null;
+    }
+
     public function addChapter(FictionChapter $chapter): self
     {
         if (!$this->chapters->contains($chapter)) {
@@ -134,6 +144,9 @@ class Fiction
         return $this->ratings;
     }
 
+    /**
+     * @Groups({"props"})
+     */
     public function getAverageRating(int $precision = 1): ?float
     {
         if ($this->ratings->count() === 0) {
@@ -212,6 +225,7 @@ class Fiction
     }
 
     /**
+     * @Groups({"props"})
      * @return Collection|User[]
      */
     public function getAuthors(): Collection

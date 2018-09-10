@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - Liste des fictions{% endblock %}
+
+{% block body %}
+    <h1>Liste des fictions</h1>
+    {% for fiction in fictions %}
+        <div><a href="{{ path('fiction.show', {'slug': fiction.slug}) }}">{{ fiction.title }}</a></div>
+    {% endfor %}
+    {% if fictions.haveToPaginate %}
+        {{ pagerfanta(fictions, 'twitter_bootstrap4_translated', {routeName: 'fiction.index_paginated', routeParams: app.request.query.all}) }}
+    {% endif %}
+{% endblock %}

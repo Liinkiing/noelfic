@@ -1,6 +1,36 @@
 App\Entity\Fiction:
+  fiction1:
+    title: '<sentence()>'
+    chapters: '@fiction1Chapter{1..5}'
+  fiction2:
+    title: '<sentence()>'
+    chapters: '@fiction2Chapter{1..3}'
+  fiction3:
+    title: '<sentence()>'
+    chapters: '@fiction3Chapter{1..8}'
+  fiction4:
+    title: '<sentence()>'
+    chapters: '@fiction4Chapter{1..2}'
+  fiction5:
+    title: '<sentence()>'
+    chapters: '@fiction5Chapter{1..12}'
+  fiction6:
+    title: '<sentence()>'
+    chapters: '@fiction6Chapter{1..5}'
+  fiction7:
+    title: '<sentence()>'
+    chapters: '@fiction7Chapter{1..3}'
+  fiction8:
+    title: '<sentence()>'
+    chapters: '@fiction8Chapter{1..24}'
+  fiction9:
+    title: '<sentence()>'
+    chapters: '@fiction9Chapter{1..32}'
+  fiction10:
+    title: '<sentence()>'
+    chapters: '@fiction10Chapter{1..2}'
   gangeFiction:
     title: La fiction du gange
     chapters:
-      - '@gangeFictionChapter1'
-      - '@gangeFictionChapter2'
+    - '@gangeFictionChapter1'
+    - '@gangeFictionChapter2'

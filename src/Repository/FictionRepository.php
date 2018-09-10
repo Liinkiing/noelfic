@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Fiction;
+use App\Traits\PaginatedRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Pagerfanta\Pagerfanta;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -14,6 +16,8 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class FictionRepository extends ServiceEntityRepository
 {
+    use PaginatedRepository;
+
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Fiction::class);

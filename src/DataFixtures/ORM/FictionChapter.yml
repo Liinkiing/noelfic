@@ -14,3 +14,53 @@ App\Entity\FictionChapter:
       Donc dans ce chapitre on va purifier par l'ATOME.
       C'est assez dangereux les clés, pour ça je veux 1 000 pouces bleus, et n'hésitez pas à vous abonner,
       SMASH THAT LIKE BUTTON génération ISSOU !
+  fiction1Chapter{1..5}:
+    title: '<sentence()>'
+    authors: '<numberBetween(1, 3)>x @user*'
+    position: '<current()>'
+    body: '<text()>'
+  fiction2Chapter{1..3}:
+    title: '<sentence()>'
+    authors: '<numberBetween(1, 3)>x @user*'
+    position: '<current()>'
+    body: '<text()>'
+  fiction3Chapter{1..8}:
+    title: '<sentence()>'
+    authors: '<numberBetween(1, 3)>x @user*'
+    position: '<current()>'
+    body: '<text()>'
+  fiction4Chapter{1..2}:
+    title: '<sentence()>'
+    authors: '<numberBetween(1, 3)>x @user*'
+    position: '<current()>'
+    body: '<text()>'
+  fiction5Chapter{1..12}:
+    title: '<sentence()>'
+    authors: '<numberBetween(1, 3)>x @user*'
+    position: '<current()>'
+    body: '<text()>'
+  fiction6Chapter{1..5}:
+    title: '<sentence()>'
+    authors: '<numberBetween(1, 3)>x @user*'
+    position: '<current()>'
+    body: '<text()>'
+  fiction7Chapter{1..3}:
+    title: '<sentence()>'
+    authors: '<numberBetween(1, 3)>x @user*'
+    position: '<current()>'
+    body: '<text()>'
+  fiction8Chapter{1..24}:
+    title: '<sentence()>'
+    authors: '<numberBetween(1, 3)>x @user*'
+    position: '<current()>'
+    body: '<text()>'
+  fiction9Chapter{1..32}:
+    title: '<sentence()>'
+    authors: '<numberBetween(1, 3)>x @user*'
+    position: '<current()>'
+    body: '<text()>'
+  fiction10Chapter{1..2}:
+    title: '<sentence()>'
+    authors: '<numberBetween(1, 3)>x @user*'
+    position: '<current()>'
+    body: '<text()>'

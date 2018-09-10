@@ -14,8 +14,7 @@
         },
         mounted () {
             this.favorites = JSON.parse(this.$el.dataset.favorites)
-            delete this.$el.dataset.favorites;
-            console.log(this.$el.dataset)
+            delete this.$el.dataset.favorites
         }
     }
 </script>
