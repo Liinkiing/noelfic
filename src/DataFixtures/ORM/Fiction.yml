@@ -1,33 +1,33 @@
 App\Entity\Fiction:
   fiction1:
-    title: '<sentence()>'
+    title: La fiction avec 5 chapitres
     chapters: '@fiction1Chapter{1..5}'
   fiction2:
-    title: '<sentence()>'
+    title: La fiction avec 3 chapitres
     chapters: '@fiction2Chapter{1..3}'
   fiction3:
-    title: '<sentence()>'
+    title: La fiction avec 8 chapitres
     chapters: '@fiction3Chapter{1..8}'
   fiction4:
-    title: '<sentence()>'
+    title: La fiction avec 2 chapitres
     chapters: '@fiction4Chapter{1..2}'
   fiction5:
-    title: '<sentence()>'
+    title: La fiction avec 12 chapitres
     chapters: '@fiction5Chapter{1..12}'
   fiction6:
-    title: '<sentence()>'
+    title: La fiction avec 5 chapitres
     chapters: '@fiction6Chapter{1..5}'
   fiction7:
-    title: '<sentence()>'
+    title: La fiction avec 3 chapitres
     chapters: '@fiction7Chapter{1..3}'
   fiction8:
-    title: '<sentence()>'
+    title: La fiction avec 24 chapitres
     chapters: '@fiction8Chapter{1..24}'
   fiction9:
-    title: '<sentence()>'
+    title: La fiction avec 32 chapitres
     chapters: '@fiction9Chapter{1..32}'
   fiction10:
-    title: '<sentence()>'
+    title: La fiction avec 2 chapitres
     chapters: '@fiction10Chapter{1..2}'
   gangeFiction:
     title: La fiction du gange

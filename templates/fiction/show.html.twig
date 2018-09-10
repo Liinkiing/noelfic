@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }} - {{ fiction.title }} - {{ chapter.position }}{% endblock %}
+{% block title %}{{ parent() }} - {{ fiction.title }} - {{ chapter.title }}{% endblock %}
 
 {% block body %}
     <h1>{{ fiction.title }}</h1>
@@ -10,4 +10,7 @@
     <div class="body">
         {{ chapter.body|raw }}
     </div>
+    {% if chapters.haveToPaginate %}
+        {{ pagerfanta(chapters, 'twitter_bootstrap4_translated', {routeParams: app.request.query.all}) }}
+    {% endif %}
 {% endblock %}

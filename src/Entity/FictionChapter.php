@@ -14,6 +14,8 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
  */
 class FictionChapter
 {
+    public const NUM_ITEMS = 1;
+
     use TimestampableEntity;
 
     /**

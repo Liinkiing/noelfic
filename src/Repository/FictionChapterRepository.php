@@ -4,7 +4,9 @@ namespace App\Repository;
 
 use App\Entity\FictionChapter;
 use App\Entity\Fiction;
+use App\Traits\PaginatedRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Pagerfanta\Pagerfanta;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -15,6 +17,26 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class FictionChapterRepository extends ServiceEntityRepository
 {
+    use PaginatedRepository;
+
+    public function findLatestForFiction(Fiction $fiction, int $page = 1, string $order = 'DESC'): Pagerfanta
+    {
+        $qb = $this->createQueryBuilder('fc');
+
+        $qb
+            ->andWhere(
+                $qb->expr()->eq('fc.fiction', ':fiction')
+            )
+            ->setParameter('fiction', $fiction)
+            ->addOrderBy('fc.position', $order);
+
+        return $this->createPaginator(
+            $qb->getQuery(),
+            $page
+        );
+    }
+
+
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, FictionChapter::class);

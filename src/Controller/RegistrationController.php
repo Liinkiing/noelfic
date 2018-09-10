@@ -7,13 +7,9 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Event\UserRegisteredEvent;
 use App\Form\UserType;
-use App\Mailer\MailerService;
-use App\Mailer\Message\User\UserConfirmEmailMessage;
 use App\Notifier\UserNotifier;
-use App\Resolver\UserResolver;
 use App\Utils\Str;
 use Doctrine\ORM\EntityManagerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -64,8 +60,7 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/email/send_confirmation", name="email.send_confirmation")
-     * @Method({"POST"})
+     * @Route("/email/send_confirmation", name="email.send_confirmation", methods={"POST"})
      */
     public function sendConfirmationEmail(Request $request, UserNotifier $userNotifier): RedirectResponse
     {

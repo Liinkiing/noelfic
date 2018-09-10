@@ -106,8 +106,7 @@ class ScrapLocalNoelficCommand extends Command
         } else {
             $this->io->section('Scrapping ' . $title);
             $fiction = (new Fiction())
-                ->setTitle($title)
-                ->addAuthor($this->defaultAuthor);
+                ->setTitle($title);
 
             $position = 0;
             do {
@@ -128,11 +127,12 @@ class ScrapLocalNoelficCommand extends Command
     protected function scrapFicChapter(Crawler $ficPage, int &$position): FictionChapter
     {
         $title = $this->getPageTitle($ficPage);
-        $body = $ficPage->filter(self::CHAPTER_BODY_SELECTOR)->text();
+        $body = $ficPage->filter(self::CHAPTER_BODY_SELECTOR)->html();
         $this->io->text('<info>' . $title . ' - ' . ++$position . '</info>');
 
         return (new FictionChapter())
-            ->setTitle("$title - Chapitre $position")
+            ->addAuthor($this->defaultAuthor)
+            ->setTitle("Chapitre $position")
             ->setPosition($position)
             ->setBody($body);
     }
