@@ -12,7 +12,7 @@ class FictionComment extends Comment
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Fiction", inversedBy="comments")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $fiction;
 

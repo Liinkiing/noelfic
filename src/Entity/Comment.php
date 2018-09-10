@@ -12,7 +12,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="comment_type", type="string")
  * @ORM\DiscriminatorMap({
- *      "fiction" = "FictionComment"
+ *      "fiction" = "FictionComment",
+ *      "fictionChapter" = "FictionChapterComment"
  * })
  * @ORM\Entity(repositoryClass="App\Repository\CommentRepository")
  */
@@ -49,12 +50,13 @@ abstract class Comment
 
     /**
      * @Groups({"props"})
-     * @ORM\OneToMany(targetEntity="App\Entity\FictionComment", mappedBy="parent")
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="parent", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     protected $children;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\FictionComment", inversedBy="children")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Comment", inversedBy="children")
+     * @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
      */
     protected $parent;
 

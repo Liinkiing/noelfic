@@ -4,5 +4,10 @@
 
 {% block body %}
     <h1>{{ fiction.title }}</h1>
+    {% embed 'partials/_comments.html.twig' with {'comments': fiction.rootComments} %}{% endembed %}
     <h2>{{ chapter.title }}</h2>
+    {% embed 'partials/_comments.html.twig' with {'comments': chapter.rootComments} %}{% endembed %}
+    <div class="body">
+        {{ chapter.body|raw }}
+    </div>
 {% endblock %}

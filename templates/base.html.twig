@@ -22,7 +22,9 @@
 {% endfor %}
 
 <div id="app">
-    {% block body %}{% endblock %}
+    <main class="container">
+        {% block body %}{% endblock %}
+    </main>
 </div>
 {% block javascripts %}{% endblock %}
 <script src="{{ asset('build/app.js') }}"></script>

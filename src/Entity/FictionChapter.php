@@ -56,9 +56,15 @@ class FictionChapter
      */
     private $position = 1;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\FictionChapterComment", mappedBy="chapter", orphanRemoval=true)
+     */
+    private $comments;
+
     public function __construct()
     {
         $this->authors = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId()
@@ -149,6 +155,47 @@ class FictionChapter
         if ($this->authors->contains($author)) {
             $this->authors->removeElement($author);
             $author->removeFictionChapter($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|FictionChapterComment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @return Collection|FictionChapterComment[]
+     */
+    public function getRootComments(): Collection
+    {
+        return $this->comments->filter(function (FictionChapterComment $comment) {
+            return $comment->getParent() === null;
+        });
+    }
+
+    public function addComment(FictionChapterComment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setChapter($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(FictionChapterComment $comment): self
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getChapter() === $this) {
+                $comment->setChapter(null);
+            }
         }
 
         return $this;

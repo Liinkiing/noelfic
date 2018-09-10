@@ -1,0 +1,10 @@
+App\Entity\FictionChapterComment:
+  gangeFictionChapter1Comment1:
+    author: '@user*'
+    body: Je suis un commentaire racine dans un chapitre de fiction
+    chapter: '@gangeFictionChapter1'
+  gangeFictionChapter1Comment2:
+    author: '@user*'
+    body: Et moi une réponse ayaaa
+    chapter: '@gangeFictionChapter1'
+    parent: '@gangeFictionChapter1Comment1'
