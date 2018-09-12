@@ -1,4 +1,6 @@
 import Vue from 'vue'
+import Argon from 'vue-argon-design-system/src/plugins/argon-kit'
+import i18n from './i18n'
 import {Comment, Comments, UserFavorites} from './components'
 import '../scss/app.scss'
 
@@ -9,12 +11,10 @@ Vue.config.silent = process.env.NODE_ENV !== "development"
 
 const components = {Comment, Comments, UserFavorites}
 
-import('./i18n').then(module => {
-    const { i18n } = module
-    new Vue({
-        i18n,
-        el: '#app',
-        components
-    })
+Vue.use(Argon)
+new Vue({
+    i18n,
+    el: '#app',
+    components
 })
 

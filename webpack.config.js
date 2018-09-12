@@ -30,6 +30,7 @@ Encore
      * https://symfony.com/doc/current/frontend.html#adding-more-features
      */
     .configureBabel(babelConfig => {
+        babelConfig.presets.push('stage-3');
         babelConfig.plugins.push('syntax-dynamic-import');
     })
     .cleanupOutputBeforeBuild()
