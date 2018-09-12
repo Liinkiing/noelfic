@@ -6247,6 +6247,10 @@ vue-hot-reload-api@^2.2.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.0.tgz#97976142405d13d8efae154749e88c4e358cf926"
 
+vue-i18n@^8.1.0:
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.1.0.tgz#a2bce3879f595b6188b419f8d2c6a74d8aee5eb7"
+
 vue-loader@14:
   version "14.2.3"
   resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-14.2.3.tgz#3b39645c322d956e287d8d36eb77475f78c9b8e0"
@@ -6474,6 +6478,13 @@ yallist@^2.1.2:
 yallist@^3.0.0, yallist@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-3.0.2.tgz#8452b4bb7e83c7c188d8041c1a837c773d6d8bb9"
+
+yamljs@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/yamljs/-/yamljs-0.3.0.tgz#dc060bf267447b39f7304e9b2bfbe8b5a7ddb03b"
+  dependencies:
+    argparse "^1.0.7"
+    glob "^7.0.5"
 
 yargs-parser@^4.2.0:
   version "4.2.1"

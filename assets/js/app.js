@@ -1,7 +1,4 @@
 import Vue from 'vue'
-import vueMoment from "vue-moment"
-import moment from "moment"
-import "moment/locale/fr"
 import {Comment, Comments, UserFavorites} from './components'
 import '../scss/app.scss'
 
@@ -12,12 +9,12 @@ Vue.config.silent = process.env.NODE_ENV !== "development"
 
 const components = {Comment, Comments, UserFavorites}
 
-const locale = window.location.pathname.split('/').filter(Boolean).shift()
-moment.locale(locale)
-moment.defaultFormat = 'LLL'
-
-Vue.use(vueMoment, {moment});
-new Vue({
-    el: '#app',
-    components
+import('./i18n').then(module => {
+    const { i18n } = module
+    new Vue({
+        i18n,
+        el: '#app',
+        components
+    })
 })
+

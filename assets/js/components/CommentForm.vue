@@ -1,9 +1,9 @@
 <template>
     <form class="comment-form" @submit.prevent="comment">
-        <label>Message
+        <label>{{ $t('form.comment.message') }}
             <textarea name="body" v-model="body"></textarea>
         </label>
-        <button type="submit" @click="comment">Envoyer</button>
+        <button type="submit" @click="comment">{{ $t('global.submit') }}</button>
     </form>
 </template>
 

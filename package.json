@@ -16,7 +16,8 @@
         "dev": "encore dev",
         "serve": "encore dev-server --hot",
         "watch": "encore dev --watch",
-        "build": "encore production"
+        "build": "encore production",
+        "trad": "node --experimental-modules translations/converter.mjs"
     },
     "dependencies": {
         "argon-design-system": "https://github.com/creativetimofficial/argon-design-system",
@@ -24,6 +25,8 @@
         "font-awesome": "^4.7.0",
         "normalize.css": "^8.0.0",
         "vue-clickaway": "^2.2.2",
-        "vue-moment": "^4.0.0"
+        "vue-i18n": "^8.1.0",
+        "vue-moment": "^4.0.0",
+        "yamljs": "^0.3.0"
     }
 }
