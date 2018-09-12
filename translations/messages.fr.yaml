@@ -23,10 +23,15 @@ form:
       second: Répetez le mot de passe
 
 fiction:
+  table:
+    heading:
+      name: Nom
+      author: Auteurs
+      createdAt: Création
+  index: Fictions
   search:
     title: Fictions comprenant le terme « {query} »
     placeholder: Entrez un titre
-  index: Fictions
   favorites:
     added: Ajouté aux favoris le
   ratings:

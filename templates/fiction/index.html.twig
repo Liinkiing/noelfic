@@ -24,11 +24,35 @@
             </div>
         </div>
     </div>
-    {% for fiction in fictions %}
-        <div><a href="{{ path('fiction.show', {'slug': fiction.slug}) }}">{{ fiction.title }}</a></div>
-    {% endfor %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>{{ 'fiction.table.heading.name'|trans }}</th>
+                <th>{{ 'fiction.table.heading.author'|trans }}</th>
+                <th>{{ 'fiction.table.heading.createdAt'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fiction in fictions %}
+            <tr>
+                <td>
+                    <a href="{{ path('fiction.show', {'slug': fiction.slug}) }}">{{ fiction.title }}</a>
+                </td>
+                <td>
+                    {% for author in fiction.authors %}{{ author.username }}{{ not loop.last ? ', ' }}{% endfor %}<br/>
+                </td>
+                <td>
+                    {{ fiction.createdAt|localizeddate }}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
     {% if fictions.haveToPaginate %}
-        {{ pagerfanta(fictions, 'noelfic_pagination', {routeParams: app.request.query.all}) }}
+        <div class="row justify-content-center">
+            {{ pagerfanta(fictions, 'noelfic_pagination', {routeParams: app.request.query.all}) }}
+        </div>
     {% endif %}
 {% endblock %}
 

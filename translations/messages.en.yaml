@@ -23,6 +23,11 @@ form:
       second: Repeat password
 
 fiction:
+  table:
+    heading:
+      name: Name
+      author: Authors
+      createdAt: Created at
   index: Fictions
   search:
     title: Fictions containing "{query}"

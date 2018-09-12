@@ -10,7 +10,10 @@
         {{ chapter.body|raw }}
     </div>
     <comments :comments="{{ chapter.rootComments|props }}"></comments>
+
     {% if chapters.haveToPaginate %}
-        {{ pagerfanta(chapters, 'noelfic_pagination', {routeParams: app.request.query.all}) }}
+        <div class="row justify-content-center">
+            {{ pagerfanta(chapters, 'noelfic_pagination', {routeParams: app.request.query.all}) }}
+        </div>
     {% endif %}
 {% endblock %}
