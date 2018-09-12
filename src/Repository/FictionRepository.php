@@ -23,6 +23,28 @@ class FictionRepository extends ServiceEntityRepository
         parent::__construct($registry, Fiction::class);
     }
 
+    public function searchLatest(array $parameters, int $page = 1, $order = 'DESC'): Pagerfanta
+    {
+        $q = $parameters['q'] ?? null;
+
+        $qb = $this->createQueryBuilder('f');
+
+        if ($q) {
+            $qb
+                ->andWhere(
+                    $qb->expr()->like('f.title', ':query')
+                )
+                ->setParameter('query', "%$q%");
+        }
+
+        $qb->addOrderBy('f.createdAt', $order);
+
+        return $this->createPaginator(
+            $qb->getQuery(),
+            $page
+        );
+    }
+
     public function getAverageRating(Fiction $fiction, float $precision = 1): float
     {
         $qb = $this->createQueryBuilder('f');

@@ -1,6 +1,7 @@
 of: of
 
 global:
+  search: Search
   about: About
   submit: Submit
   favorites: Favorites
@@ -20,6 +21,10 @@ form:
       second: Repeat password
 
 fiction:
+  index: Fictions
+  search:
+    title: Fictions containing "{query}"
+    placeholder: Type a title
   favorites:
     added: Added to favorites the
   ratings:

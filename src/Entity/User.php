@@ -3,10 +3,10 @@
 namespace App\Entity;
 
 
+use App\Traits\Timestampable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Ramsey\Uuid\Uuid;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User implements UserInterface, \Serializable
 {
-    use TimestampableEntity;
+    use Timestampable;
 
     /**
      * @ORM\Id()
@@ -193,8 +193,8 @@ class User implements UserInterface, \Serializable
     public function getRoles(): array
     {
         return $this->roles->map(function (UserRole $role) {
-                return $role->getRole();
-            })->toArray();
+            return $role->getRole();
+        })->toArray();
     }
 
     /**

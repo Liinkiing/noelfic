@@ -5,7 +5,7 @@
     <title>{% block title %}Noelfic{% endblock %}</title>
     {% block stylesheets %}{% endblock %}
     <link rel="stylesheet" href="{{ asset('build/app.css') }}">
-    <script async src="{{ asset('build/app.js') }}"></script>
+    <script defer src="{{ asset('build/app.js') }}"></script>
 </head>
 <body>
 {% for label, messages in app.flashes %}

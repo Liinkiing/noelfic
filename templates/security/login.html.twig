@@ -28,10 +28,11 @@
 
         <input type="hidden" name="_target_path" value="{{ path('homepage') }}"/>
         <div class="row justify-content-center">
-            <button type="submit" class="btn btn-icon btn-3 btn-primary">
-                <span class="btn-inner--icon"><i class="fa fa-user"></i></span>
-                <span class="btn-inner--text">{{ 'form.login.button'|trans }}</span>
-            </button>
+            {% include 'components/_button.html.twig' with {
+                content: 'form.login.button'|trans,
+                style: 'success',
+                icon: 'user'
+            } %}
         </div>
     </form>
 

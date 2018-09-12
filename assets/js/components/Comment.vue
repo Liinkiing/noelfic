@@ -1,6 +1,6 @@
 <template>
     <li class="comment" v-on-click-away="deactivate" @click.prevent="activate" :class="{active}">{{ comment.author.username }} - {{ comment.body }}<br/>
-        <small>{{ comment.createdAt }}</small>
+        <small>{{ comment.createdAt|moment }}</small>
         <keep-alive>
             <comment-form v-if="active" :to="comment.id"></comment-form>
         </keep-alive>

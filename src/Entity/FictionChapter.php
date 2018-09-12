@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
+use App\Traits\Timestampable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 
 /**
@@ -16,7 +16,7 @@ class FictionChapter
 {
     public const NUM_ITEMS = 1;
 
-    use TimestampableEntity;
+    use Timestampable;
 
     /**
      * @ORM\Id()

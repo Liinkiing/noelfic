@@ -2,22 +2,22 @@
 
 namespace App\Entity;
 
+use App\Traits\Timestampable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Gedmo\Timestampable\Traits\TimestampableEntity;
-use function iter\reduce;
 use Symfony\Component\Serializer\Annotation\Groups;
+use function iter\reduce;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FictionRepository")
  */
 class Fiction
 {
-    public const NUM_ITEMS = 5;
+    public const NUM_ITEMS = 10;
 
-    use TimestampableEntity;
+    use Timestampable;
 
     /**
      * @Groups({"props"})

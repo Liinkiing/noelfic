@@ -1,0 +1,15 @@
+{% set style = style|default('primary') %}
+{% set classes = ['btn', 'btn-' ~ style]|merge(classes|default([])) %}
+{% set icon = icon|default(null) %}
+{% set content = content|default('') %}
+{% set type = type|default('submit') %}
+<button {{ id is defined ? 'id=' ~ id }} type="{{ type }}" class="{{ classes|join(' ') }}">
+    {% if icon %}
+        <span class="btn-inner--icon"><i class="fa fa-{{ icon }}"></i></span>
+        <span class="btn-inner--text">
+            {{ content }}
+        </span>
+    {% else %}
+        {{ content }}
+    {% endif %}
+</button>

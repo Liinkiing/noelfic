@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Twig;
+namespace App\Twig\Pagerfanta;
 
 
 use Pagerfanta\View\DefaultView;
