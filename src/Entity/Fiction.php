@@ -43,22 +43,28 @@ class Fiction
 
     /**
      * @Groups({"props"})
-     * @ORM\OneToMany(targetEntity="FictionChapter", mappedBy="fiction", orphanRemoval=true, cascade={"persist"}, fetch="LAZY")
+     * @ORM\OneToMany(targetEntity="FictionChapter", mappedBy="fiction", orphanRemoval=true, cascade={"persist"})
      * @ORM\OrderBy({"position": "ASC"})
      */
     private $chapters;
 
     /**
      * @Groups({"props"})
-     * @ORM\OneToMany(targetEntity="App\Entity\FictionUserRating", mappedBy="fiction", orphanRemoval=true, fetch="LAZY")
+     * @ORM\OneToMany(targetEntity="App\Entity\FictionUserRating", mappedBy="fiction", orphanRemoval=true)
      */
     private $ratings;
 
     /**
      * @Groups({"props"})
-     * @ORM\OneToMany(targetEntity="App\Entity\FictionComment", mappedBy="fiction", orphanRemoval=true, fetch="LAZY")
+     * @ORM\OneToMany(targetEntity="App\Entity\FictionComment", mappedBy="fiction", orphanRemoval=true)
      */
     private $comments;
+
+    /**
+     * @Groups({"props"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\FictionCategory", mappedBy="fictions")
+     */
+    private $categories;
 
 
     public function __construct()
@@ -66,6 +72,7 @@ class Fiction
         $this->chapters = new ArrayCollection();
         $this->ratings = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
     public function getId()
@@ -238,5 +245,33 @@ class Fiction
             }
             return $acc;
         }, $this->chapters, new ArrayCollection([]));
+    }
+
+    /**
+     * @return Collection|FictionCategory[]
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(FictionCategory $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+            $category->addFiction($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(FictionCategory $category): self
+    {
+        if ($this->categories->contains($category)) {
+            $this->categories->removeElement($category);
+            $category->removeFiction($this);
+        }
+
+        return $this;
     }
 }

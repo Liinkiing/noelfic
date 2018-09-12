@@ -25,9 +25,16 @@ class FictionRepository extends ServiceEntityRepository
 
     public function searchLatest(array $parameters, int $page = 1, $order = 'DESC'): Pagerfanta
     {
-        $q = $parameters['q'] ?? null;
+        [$q, $c] = [
+            $parameters['q'] ?? null,
+            $parameters['c'] ?? null
+        ];
 
-        $qb = $this->createQueryBuilder('f');
+        $qb = $this->createQueryBuilder('f')
+            ->select('f', 'fc', 'c', 'ca')
+            ->leftJoin('f.chapters', 'c')
+            ->leftJoin('c.authors', 'ca')
+            ->leftJoin('f.categories', 'fc');
 
         if ($q) {
             $qb
@@ -35,6 +42,13 @@ class FictionRepository extends ServiceEntityRepository
                     $qb->expr()->like('f.title', ':query')
                 )
                 ->setParameter('query', "%$q%");
+        }
+
+        if ($c) {
+            $qb
+                ->andWhere(
+                    $qb->expr()->in('fc.title', $c)
+                );
         }
 
         $qb->addOrderBy('f.createdAt', $order);

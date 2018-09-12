@@ -5,32 +5,49 @@
 {% block body %}
     {% set q = app.request.query.all.q|default(null) %}
     <h1>{{ q is defined and q != '' ? 'fiction.search.title'|trans({'{query}': q}) : 'fiction.index'|trans }}</h1>
-    <div class="row justify-content-center align-items-center">
-        <div class="col-lg-8 col-md-6">
-            <form action="{{ path('fiction.index') }}" method="get">
+    <form action="{{ path('fiction.index') }}" method="get" id="searchForm">
+        <div class="row justify-content-center align-items-center">
+            <div class="col-lg-8 col-md-6">
                 <div class="form-group">
-                    <input id="searchInput" type="text" class="form-control form-control-alternative" name="q" value="{{ q }}"
+                    <input id="searchInput" type="text" class="form-control form-control-alternative" name="q"
+                           value="{{ q }}"
                            placeholder="{{ 'fiction.search.placeholder'|trans }}">
                 </div>
-            </form>
-        </div>
-        <div class="col-lg-2 col-md-4">
-            <div class="form-group">
-                {% include 'components/_button.html.twig' with {
-                    content: 'global.search'|trans,
-                    id: 'searchButton',
-                    icon: 'search'
-                } %}
+                <div class="row justify-content-center">
+                    <div class="col">
+                        {% for category in categories %}
+                            {% include 'components/_checkbox.html.twig' with {
+                                id: category.slug,
+                                content: category.title,
+                                value: category.title,
+                                checked: category.title|url_encode in app.request.uri,
+                                name: 'c[]',
+                                classes: ['mb-3', 'custom-control-inline']
+                            } %}
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
+            <div class="col-lg-2 col-md-4">
+                <div class="form-group">
+                    {% include 'components/_button.html.twig' with {
+                        content: 'global.search'|trans,
+                        id: 'searchButton',
+                        icon: 'search'
+                    } %}
+                </div>
+            </div>
+
         </div>
-    </div>
+    </form>
     <table class="table">
         <thead>
-            <tr>
-                <th>{{ 'fiction.table.heading.name'|trans }}</th>
-                <th>{{ 'fiction.table.heading.author'|trans }}</th>
-                <th>{{ 'fiction.table.heading.createdAt'|trans }}</th>
-            </tr>
+        <tr>
+            <th>{{ 'fiction.table.heading.name'|trans }}</th>
+            <th>{{ 'fiction.table.heading.authors'|trans }}</th>
+            <th>{{ 'fiction.table.heading.categories'|trans }}</th>
+            <th>{{ 'fiction.table.heading.createdAt'|trans }}</th>
+        </tr>
         </thead>
         <tbody>
         {% for fiction in fictions %}
@@ -40,6 +57,10 @@
                 </td>
                 <td>
                     {% for author in fiction.authors %}{{ author.username }}{{ not loop.last ? ', ' }}{% endfor %}<br/>
+                </td>
+                <td>
+                    {% for category in fiction.categories %}{{ category.title }}{{ not loop.last ? ', ' }}{% endfor %}
+                    <br/>
                 </td>
                 <td>
                     {{ fiction.createdAt|localizeddate }}

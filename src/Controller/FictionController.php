@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Fiction;
+use App\Repository\FictionCategoryRepository;
 use App\Repository\FictionChapterRepository;
 use App\Repository\FictionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,12 +17,17 @@ class FictionController extends AbstractController
     /**
      * @Route("/fictions/{page<[1-9]\d*>}", name="fiction.index", defaults={"page": "1"}, methods={"GET"})
      */
-    public function index(Request $request, FictionRepository $fictionRepository, int $page): Response
+    public function index(Request $request,
+                          FictionRepository $fictionRepository,
+                          FictionCategoryRepository $fictionCategoryRepository,
+                          int $page): Response
     {
         $latest = $fictionRepository->searchLatest($request->query->all(), $page);
+        $categories = $fictionCategoryRepository->findAll();
 
         return $this->render('fiction/index.html.twig', [
-            'fictions' => $latest
+            'fictions' => $latest,
+            'categories' => $categories
         ]);
     }
 

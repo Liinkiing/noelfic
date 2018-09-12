@@ -1,0 +1,31 @@
+App\Entity\FictionCategory:
+  categoryAction:
+    title: Action
+  categoryBd:
+    title: BD
+  categoryConcours:
+    title: Concours
+  categoryFantastique:
+    title: Fantastique
+  categoryHorror:
+    title: Horreur
+  categoryLess15years:
+    title: Moins de 15 ans
+  categoryNawak:
+    title: Nawak
+  categoryNofake:
+    title: No-fake
+  categoryFake:
+    title: Fake
+  categoryPolar:
+    title: Polar
+  categoryRealist:
+    title: Réaliste
+  categorySayks:
+    title: Sayks
+  categoryScienceFiction:
+    title: Science-Fiction
+  categorySentimental:
+    title: Sentimentale
+  categoryOther:
+    title: Autre

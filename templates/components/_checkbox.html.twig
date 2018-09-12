@@ -1,0 +1,17 @@
+{% set classes = ['custom-control', 'custom-checkbox']|merge(classes|default([])) %}
+{% set content = content|default('') %}
+{% set id = id|default(null) %}
+{% set value = value|default(null) %}
+{% set checked = checked|default(null) %}
+{% set name = name|default(null) %}
+<div class="{{ classes|join(' ') }}">
+    <input class="custom-control-input"
+            id="{{ id }}"
+            name="{{ name }}"
+            value="{{ value }}"
+            {{ checked is defined and checked == true ? 'checked="checked"' }}
+           type="checkbox">
+    <label class="custom-control-label" {{ id is defined ? 'for=' ~ id}}>
+        <span>{{ content }}</span>
+    </label>
+</div>

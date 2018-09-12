@@ -3,8 +3,10 @@
 namespace App\Command;
 
 use App\Entity\Fiction;
+use App\Entity\FictionCategory;
 use App\Entity\FictionChapter;
 use App\Entity\User;
+use App\Repository\FictionCategoryRepository;
 use App\Repository\FictionRepository;
 use App\Repository\UserRepository;
 use App\Repository\UserRoleRepository;
@@ -30,12 +32,15 @@ class ImportFictionsFromExportCommand extends Command
     private $userRepository;
     private $userRoleRepository;
     private $defaultAuthor;
+    private $defaultCategory;
     private $entityManager;
+    private $fictionCategoryRepository;
 
     protected static $defaultName = 'app:import-fictions';
 
     public function __construct(
         UserRepository $userRepository,
+        FictionCategoryRepository $fictionCategoryRepository,
         FictionRepository $fictionRepository,
         UserRoleRepository $userRoleRepository,
         EntityManagerInterface $entityManager,
@@ -44,9 +49,11 @@ class ImportFictionsFromExportCommand extends Command
         parent::__construct($name);
         $this->userRepository = $userRepository;
         $this->userRoleRepository = $userRoleRepository;
-        $this->defaultAuthor = $this->getDefaultAuthor();
         $this->entityManager = $entityManager;
         $this->fictionRepository = $fictionRepository;
+        $this->fictionCategoryRepository = $fictionCategoryRepository;
+        $this->defaultAuthor = $this->getDefaultAuthor();
+        $this->defaultCategory = $this->getDefaultCategory();
     }
 
     protected function configure(): void
@@ -82,12 +89,14 @@ class ImportFictionsFromExportCommand extends Command
                 $this->entityManager->flush();
                 $this->entityManager->clear();
                 $this->defaultAuthor = $this->getDefaultAuthor();
+                $this->defaultCategory = $this->getDefaultCategory();
             }
         }
 
         $this->entityManager->flush();
         $this->entityManager->clear();
         $this->defaultAuthor = $this->getDefaultAuthor();
+        $this->defaultCategory = $this->getDefaultCategory();
         $this->io->progressFinish();
 
         $this->io->success("Successfully persisted $count fictions!");
@@ -112,6 +121,15 @@ class ImportFictionsFromExportCommand extends Command
         $fictionInformations = array_shift($fictionChapters);
         $fiction = (new Fiction())
             ->setTitle($fictionInformations['titre']);
+        $categories = explode(', ', $fictionInformations['genre']);
+        foreach ($categories as $title) {
+            if ($category = $this->fictionCategoryRepository->findOneBy(['title' => $title])) {
+                $fiction->addCategory($category);
+            } else {
+                $fiction->addCategory($this->defaultCategory);
+            }
+        }
+
 
         $this->io->section('Getting ' . $fiction->getTitle() . ' and its ' . $fictionInformations['chapitres'] . ' chapter(s)');
         $this->printMemoryUsage();
@@ -138,6 +156,11 @@ class ImportFictionsFromExportCommand extends Command
         return $this->userRepository->findOneWithRole(
             $this->userRoleRepository->findOneBy(['role' => 'ROLE_ADMIN'])
         );
+    }
+
+    protected function getDefaultCategory(): ?FictionCategory
+    {
+        return $this->fictionCategoryRepository->findOneBy(['title' => 'Autre']);
     }
 
 }

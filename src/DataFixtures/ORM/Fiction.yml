@@ -1,36 +1,47 @@
 App\Entity\Fiction:
   fiction1:
     title: La fiction avec 5 chapitres
+    categories: '<numberBetween(1, 3)>x @category*'
     chapters: '@fiction1Chapter{1..5}'
   fiction2:
     title: La fiction avec 3 chapitres
+    categories: '<numberBetween(1, 3)>x @category*'
     chapters: '@fiction2Chapter{1..3}'
   fiction3:
     title: La fiction avec 8 chapitres
+    categories: '<numberBetween(1, 3)>x @category*'
     chapters: '@fiction3Chapter{1..8}'
   fiction4:
     title: La fiction avec 2 chapitres
+    categories: '<numberBetween(1, 3)>x @category*'
     chapters: '@fiction4Chapter{1..2}'
   fiction5:
     title: La fiction avec 12 chapitres
+    categories: '<numberBetween(1, 3)>x @category*'
     chapters: '@fiction5Chapter{1..12}'
   fiction6:
     title: La fiction avec 5 chapitres
+    categories: '<numberBetween(1, 3)>x @category*'
     chapters: '@fiction6Chapter{1..5}'
   fiction7:
     title: La fiction avec 3 chapitres
+    categories: '<numberBetween(1, 3)>x @category*'
     chapters: '@fiction7Chapter{1..3}'
   fiction8:
     title: La fiction avec 24 chapitres
+    categories: '<numberBetween(1, 3)>x @category*'
     chapters: '@fiction8Chapter{1..24}'
   fiction9:
     title: La fiction avec 32 chapitres
+    categories: '<numberBetween(1, 3)>x @category*'
     chapters: '@fiction9Chapter{1..32}'
   fiction10:
     title: La fiction avec 2 chapitres
+    categories: '<numberBetween(1, 3)>x @category*'
     chapters: '@fiction10Chapter{1..2}'
   gangeFiction:
     title: La fiction du gange
+    categories: '<numberBetween(1, 3)>x @category*'
     chapters:
     - '@gangeFictionChapter1'
     - '@gangeFictionChapter2'

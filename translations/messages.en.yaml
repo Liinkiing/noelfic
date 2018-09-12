@@ -26,7 +26,8 @@ fiction:
   table:
     heading:
       name: Name
-      author: Authors
+      authors: Authors
+      categories: Categories
       createdAt: Created at
   index: Fictions
   search:
