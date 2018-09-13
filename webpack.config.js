@@ -1,4 +1,6 @@
 const Encore = require('@symfony/webpack-encore');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const webpack = require('webpack');
 
 Encore
     // directory where compiled assets will be stored
@@ -49,4 +51,12 @@ Encore
     //.autoProvidejQuery()
 ;
 
-module.exports = Encore.getWebpackConfig();
+const webpackConfig = Encore.getWebpackConfig();
+
+webpackConfig.plugins = webpackConfig.plugins.filter(
+    plugin => !(plugin instanceof webpack.optimize.UglifyJsPlugin)
+);
+
+webpackConfig.plugins.push(new UglifyJsPlugin());
+
+module.exports = webpackConfig
