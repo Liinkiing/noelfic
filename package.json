@@ -1,13 +1,5 @@
 {
     "devDependencies": {
-        "@symfony/webpack-encore": "^0.20.0",
-        "babel-plugin-syntax-dynamic-import": "^6.18.0",
-        "babel-preset-stage-3": "^6.24.1",
-        "node-sass": "^4.9.3",
-        "sass-loader": "^7.1.0",
-        "vue": "^2.5.17",
-        "vue-loader": "14",
-        "vue-template-compiler": "^2.5.17",
         "webpack-notifier": "^1.6.0"
     },
     "license": "UNLICENSED",
@@ -21,6 +13,14 @@
         "trad": "node --experimental-modules translations/converter.mjs"
     },
     "dependencies": {
+        "@symfony/webpack-encore": "^0.20.0",
+        "babel-plugin-syntax-dynamic-import": "^6.18.0",
+        "babel-preset-stage-3": "^6.24.1",
+        "node-sass": "^4.9.3",
+        "sass-loader": "^7.1.0",
+        "vue": "^2.5.17",
+        "vue-loader": "14",
+        "vue-template-compiler": "^2.5.17",
         "bootstrap": "^4.1.3",
         "normalize.css": "^8.0.0",
         "vue-argon-design-system": "https://github.com/creativetimofficial/vue-argon-design-system",
