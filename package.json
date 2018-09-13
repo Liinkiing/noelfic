@@ -6,6 +6,7 @@
     "scripts": {
         "dev-server": "encore dev-server",
         "heroku-postbuild": "yarn trad && yarn build",
+        "deploy": "git push heroku master",
         "dev": "encore dev",
         "serve": "encore dev-server --hot",
         "watch": "encore dev --watch",
