@@ -34,12 +34,14 @@ class User implements UserInterface, \Serializable
 
     /**
      * @Groups({"props"})
+     * @Assert\NotNull()
      * @Assert\Length(min="3", max="30")
      * @ORM\Column(type="string", length=30, unique=true)
      */
     private $username;
 
     /**
+     * @Assert\NotNull()
      * @ORM\Column(type="string", length=60)
      */
     private $password;
@@ -71,6 +73,7 @@ class User implements UserInterface, \Serializable
     private $confirmedAt;
 
     /**
+     * @Assert\Length(min="3")
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $plainPassword;
