@@ -5,6 +5,7 @@
     "private": true,
     "scripts": {
         "dev-server": "encore dev-server",
+        "heroku-postbuild": "yarn trad && yarn build",
         "dev": "encore dev",
         "serve": "encore dev-server --hot",
         "watch": "encore dev --watch",
