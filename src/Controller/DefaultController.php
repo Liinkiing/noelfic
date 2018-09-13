@@ -19,14 +19,12 @@ class DefaultController extends BaseController
     /**
      * @Route("/", name="homepage")
      */
-    public function index(SerializerInterface $serializer): Response
+    public function index(): Response
     {
         $favorites = $this->getUser() instanceof User ? $this->getUser()->getFictionFavorites() : [];
 
         return $this->render('default/index.html.twig', [
-            'controller_name' => 'DefaultController',
             'favorites' => $favorites,
-            'favoritesProps' => $serializer->serialize($favorites, 'json', ['groups' => ['props']])
         ]);
     }
 
