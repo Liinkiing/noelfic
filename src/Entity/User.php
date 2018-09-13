@@ -41,7 +41,6 @@ class User implements UserInterface, \Serializable
     private $username;
 
     /**
-     * @Assert\NotNull()
      * @ORM\Column(type="string", length=60)
      */
     private $password;
