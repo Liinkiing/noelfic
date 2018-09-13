@@ -1,7 +1,17 @@
 of: de
 
 global:
+  navigation:
+    fictions: Fictions
+    homepage: Accueil
+    login: Se connecter
+    logout: Se déconnecter
+    register: S'inscrire
+    profile: '{username}'
   search: Rechercher
+  filters:
+    show: Afficher les filtres
+    hide: Masquer les filtres
   about: A propos
   submit: Soumettre
   favorites: Favoris
@@ -30,6 +40,8 @@ fiction:
       categories: Catégories
       createdAt: Création
   index: Fictions
+  filters:
+    category: Catégories
   search:
     title: Fictions comprenant le terme « {query} »
     placeholder: Entrez un titre
@@ -41,9 +53,11 @@ fiction:
 
 flash:
   user:
-    email_expired: Khey, ce lien d'activation a expiré. Je t'en ai renvoyé un.
-    email_not_confirmed: Khey, check, penser à vérifier ton email. <form action="{confirmationUrl}" method="post"><input type="hidden" name="token" value="{token}"/><button>Renvoyer la confirmation par email</button></form>
-    email_confirmed: Ton email a bien été confirmé
+    email:
+      confirmation_sent: Un email de confirmation vient de vous être envoyé.
+      expired: Khey, ce lien d'activation a expiré. Je t'en ai renvoyé un par mail.
+      not_confirmed: <div class="mb-2">Khey, penser à vérifier ton email.</div><form action="{confirmationUrl}" method="post"><input type="hidden" name="token" value="{token}"/><button class="btn btn-neutral btn-sm">Renvoyer la confirmation par email</button></form>
+      confirmed: Ton email a bien été confirmé
   registration:
     successful: Ton compte a correctement été créé
 

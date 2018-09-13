@@ -2,27 +2,16 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Noelfic{% endblock %}</title>
+    <title>{% block title %}{{ sitename }}{% endblock %}</title>
     {% block stylesheets %}{% endblock %}
     <link rel="stylesheet" href="{{ asset('build/app.css') }}">
     <script defer src="{{ asset('build/app.js') }}"></script>
 </head>
 <body>
-{% for label, messages in app.flashes %}
-    <div class="alert alert-{{ label }}">
-        <ul>
-            {% for message in messages %}
-                {% if message is iterable %}
-                    {{ message.id|trans(message.parameters|default({}))|raw }}
-                {% else %}
-                    {{ message|trans|raw }}
-                {% endif %}
-            {% endfor %}
-        </ul>
-    </div>
-{% endfor %}
 <div id="app">
+    {% include 'partials/_navigation.html.twig' %}
     <main class="container">
+        {% include 'partials/_flashbags.html.twig' %}
         {% block body %}{% endblock %}
     </main>
 </div>

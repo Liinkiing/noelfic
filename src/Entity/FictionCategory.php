@@ -26,7 +26,6 @@ class FictionCategory
     private $id;
 
     /**
-     * @Groups({"props"})
      * @ORM\ManyToMany(targetEntity="App\Entity\Fiction", inversedBy="categories")
      */
     private $fictions;

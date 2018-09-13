@@ -32,7 +32,7 @@ class SecuritySubscriber implements EventSubscriberInterface
         $user = $event->getAuthenticationToken()->getUser();
         if (!$user->isConfirmed()) {
             $this->flashBag->add('warning', [
-                'id' => 'flash.user.email_not_confirmed',
+                'id' => 'flash.user.email.not_confirmed',
                 'parameters' => [
                     '{token}' => $this->tokenManager->getToken('token'),
                     '{confirmationUrl}' => $this->router->generate('email.send_confirmation')

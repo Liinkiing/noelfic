@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block title %} {{ parent() }} - {{ 'global.navigation.register'|trans }} {% endblock %}
+
 {% block body %}
     {{ form_start(form) }}
     <div class="row">

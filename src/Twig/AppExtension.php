@@ -19,12 +19,18 @@ class AppExtension extends AbstractExtension
     {
         return [
             new TwigFilter('props', [$this, 'convertToProps']),
+            new TwigFilter('regex_replace', [$this, 'regexReplace'])
         ];
     }
 
     public function getFunctions(): array
     {
         return [];
+    }
+
+    public function regexReplace($value, $pattern, $replacement): string
+    {
+        return preg_replace($pattern, $replacement, $value);
     }
 
     public function convertToProps($value): string

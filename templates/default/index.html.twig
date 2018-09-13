@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello {{ controller_name }}!{% endblock %}
+{% block title %} {{ parent() }} {% endblock %}
 
 {% block body %}
     <div class="example-wrapper">
-        <h1>Hello {{ controller_name }}! ✅</h1>
+        <h1>{{ 'global.navigation.homepage'|trans }}</h1>
         <a href="{{ path('about') }}">{{ 'global.about'|trans }}</a>
         {% if app.user %}
             {{ 'global.favorites'|trans }} {{ 'of'|trans }} {{ app.user.username }}

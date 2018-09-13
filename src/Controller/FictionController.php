@@ -6,13 +6,12 @@ use App\Entity\Fiction;
 use App\Repository\FictionCategoryRepository;
 use App\Repository\FictionChapterRepository;
 use App\Repository\FictionRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
-class FictionController extends AbstractController
+class FictionController extends BaseController
 {
     /**
      * @Route("/fictions/{page<[1-9]\d*>}", name="fiction.index", defaults={"page": "1"}, methods={"GET"})

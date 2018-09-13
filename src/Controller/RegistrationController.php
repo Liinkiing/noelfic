@@ -10,7 +10,6 @@ use App\Form\UserType;
 use App\Notifier\UserNotifier;
 use App\Utils\Str;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +18,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 
-class RegistrationController extends AbstractController
+class RegistrationController extends BaseController
 {
 
     private $dispatcher;
@@ -30,7 +29,7 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/register", name="user_registration")
+     * @Route("/register", name="registration")
      */
     public function register(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -65,7 +64,7 @@ class RegistrationController extends AbstractController
     public function sendConfirmationEmail(Request $request, UserNotifier $userNotifier): RedirectResponse
     {
         $token = $request->get('token');
-        if(!$this->isCsrfTokenValid('token', $token)) {
+        if (!$this->isCsrfTokenValid('token', $token)) {
             throw new InvalidCsrfTokenException('Invalid token');
         }
 
@@ -74,6 +73,10 @@ class RegistrationController extends AbstractController
         }
 
         $userNotifier->onConfirmEmail($this->getUser());
+        $this->addFlash('success', [
+            'id' => 'flash.user.email.confirmation_sent',
+            'icon' => 'fa fa-envelope'
+        ]);
 
         return $this->redirectToRoute('homepage');
     }
@@ -84,7 +87,7 @@ class RegistrationController extends AbstractController
     public function confirmEmail(User $user, EntityManagerInterface $em, UserNotifier $userNotifier): RedirectResponse
     {
         if (!$user->canConfirm()) {
-            $this->addFlash('warning', 'flash.user.email_expired');
+            $this->addFlash('warning', 'flash.user.email.expired');
             $user->setConfirmationToken(Str::random());
             $userNotifier->onConfirmEmail($user);
             $em->flush();
@@ -97,7 +100,7 @@ class RegistrationController extends AbstractController
             ->setConfirmedAt(new \DateTime());
 
         $em->flush();
-        $this->addFlash('success', 'flash.user.email_confirmed');
+        $this->addFlash('success', 'flash.user.email.confirmed');
 
         return $this->redirectToRoute('homepage');
     }

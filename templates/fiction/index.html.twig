@@ -1,45 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }} - Liste des fictions{% endblock %}
+{% block title %}{{ parent() }} - {{ 'fiction.index'|trans }}{% endblock %}
 
 {% block body %}
     {% set q = app.request.query.all.q|default(null) %}
     <h1>{{ q is defined and q != '' ? 'fiction.search.title'|trans({'{query}': q}) : 'fiction.index'|trans }}</h1>
-    <form action="{{ path('fiction.index') }}" method="get" id="searchForm">
-        <div class="row justify-content-center align-items-center">
-            <div class="col-lg-8 col-md-6">
-                <div class="form-group">
-                    <input id="searchInput" type="text" class="form-control form-control-alternative" name="q"
-                           value="{{ q }}"
-                           placeholder="{{ 'fiction.search.placeholder'|trans }}">
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col">
-                        {% for category in categories %}
-                            {% include 'components/_checkbox.html.twig' with {
-                                id: category.slug,
-                                content: category.title,
-                                value: category.title,
-                                checked: category.title|url_encode in app.request.uri,
-                                name: 'c[]',
-                                classes: ['mb-3', 'custom-control-inline']
-                            } %}
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-md-4">
-                <div class="form-group">
-                    {% include 'components/_button.html.twig' with {
-                        content: 'global.search'|trans,
-                        id: 'searchButton',
-                        icon: 'search'
-                    } %}
-                </div>
-            </div>
-
-        </div>
-    </form>
+    <fiction-search form-action="{{ path('fiction.index') }}" :categories="{{ categories|props }}"></fiction-search>
     <table class="table">
         <thead>
         <tr>
@@ -75,8 +41,4 @@
             {{ pagerfanta(fictions, 'noelfic_pagination', {routeParams: app.request.query.all}) }}
         </div>
     {% endif %}
-{% endblock %}
-
-{% block javascripts %}
-    <script defer src="{{ asset('build/fictionsIndex.js') }}"></script>
 {% endblock %}

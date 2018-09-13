@@ -1,9 +1,16 @@
 {% extends 'base.html.twig' %}
 
+{% block title %} {{ parent() }} - {{ 'global.navigation.login'|trans }} {% endblock %}
+
 {% block body %}
 
     {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        <base-alert type="danger" dismissible>
+            <span class="alert-inner--icon">
+                 <i class="fa fa-user"></i>
+            </span>
+            {{ error.messageKey|trans(error.messageData, 'security') }}
+        </base-alert>
     {% endif %}
 
     <form action="{{ path('login') }}" method="post">

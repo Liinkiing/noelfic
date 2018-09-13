@@ -1,7 +1,17 @@
 of: of
 
 global:
+  navigation:
+    fictions: Fictions
+    homepage: Homepage
+    login: Login
+    logout: Logout
+    register: Register
+    profile: '{username}'
   search: Search
+  filters:
+    show: Show filters
+    hide: Hide filters
   about: About
   submit: Submit
   favorites: Favorites
@@ -30,6 +40,8 @@ fiction:
       categories: Categories
       createdAt: Created at
   index: Fictions
+  filters:
+    category: Categories
   search:
     title: Fictions containing "{query}"
     placeholder: Type a title
@@ -41,9 +53,11 @@ fiction:
 
 flash:
   user:
-    email_expired: Khey, this activation link has expired. Sent you a new one now.
-    email_not_confirmed: Khey, check your email to confirm your registration. <form action="{confirmationUrl}" method="post"><input type="hidden" name="token" value="{token}"/><button>Resend confirmation email</button></form>
-    email_confirmed: Your email has been confirmed
+    email:
+      confirmation_sent: A confirmation mail has been successfully sent.
+      expired: Khey, this activation link has expired. Sent you a new one now.
+      not_confirmed: <div class="mb-2">Khey, do not forget to verify your email.</div><form action="{confirmationUrl}" method="post"><input type="hidden" name="token" value="{token}"/><button class="btn btn-neutral btn-sm">Resend confirmation mail</button></form>
+      confirmed: Your email has been confirmed
   registration:
     successful: Your account has been successfully created
 

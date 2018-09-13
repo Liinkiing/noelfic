@@ -1,0 +1,19 @@
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        {% if message is iterable %}
+            {% set icon = message.icon|default(null) %}
+            {% set translated = message.id|trans(message.parameters|default({}))|raw %}
+        {% else %}
+            {% set icon = null %}
+            {% set translated = message|trans|raw %}
+        {% endif %}
+        <base-alert type="{{ label }}" dismissible>
+            {% if icon %}
+                <span class="alert-inner--icon">
+                     <i class="{{ icon }}"></i>
+                </span>
+            {% endif %}
+            {{ translated|raw }}
+        </base-alert>
+    {% endfor %}
+{% endfor %}
