@@ -6,36 +6,23 @@
     {% set q = app.request.query.all.q|default(null) %}
     <h1>{{ q is defined and q != '' ? 'fiction.search.title'|trans({'{query}': q}) : 'fiction.index'|trans }}</h1>
     <fiction-search form-action="{{ path('fiction.index') }}" :categories="{{ categories|props }}"></fiction-search>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>{{ 'fiction.table.heading.name'|trans }}</th>
-            <th>{{ 'fiction.table.heading.authors'|trans }}</th>
-            <th>{{ 'fiction.table.heading.categories'|trans }}</th>
-            <th>{{ 'fiction.table.heading.createdAt'|trans }}</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for fiction in fictions %}
-            <tr>
-                <td>
-                    <a href="{{ path('fiction.show', {'slug': fiction.slug}) }}">{{ fiction.title }}</a>
-                </td>
-                <td>
-                    {% for author in fiction.authors %}{{ author.username }}{{ not loop.last ? ', ' }}{% endfor %}<br/>
-                </td>
-                <td>
-                    {% for category in fiction.categories %}{{ category.title }}{{ not loop.last ? ', ' }}{% endfor %}
-                    <br/>
-                </td>
-                <td>
-                    {{ fiction.createdAt|localizeddate }}
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
+    {% set columns = [
+        'fiction.table.heading.name',
+        'fiction.table.heading.authors',
+        'fiction.table.heading.categories',
+        'fiction.table.heading.createdAt'
+    ] %}
+    {% set rows = [] %}
+    {% for fiction in fictions %}
+        {% set rows = rows|merge([{
+            'fiction.table.heading.name':
+            '<a href="' ~ path('fiction.show', {'slug': fiction.slug}) ~ '">' ~ fiction.title ~ '</a>',
+            'fiction.table.heading.authors': fiction.authors|map(=> _.username)|join(', '),
+            'fiction.table.heading.categories': fiction.categories|map(=>_.title)|join(', '),
+            'fiction.table.heading.createdAt': fiction.createdAt|localizeddate
+        }]) %}
+    {% endfor %}
+    <sortable-table :columns="{{ columns|json_encode }}" :rows="{{ rows|json_encode }}"></sortable-table>
     {% if fictions.haveToPaginate %}
         <div class="row justify-content-center">
             {{ pagerfanta(fictions, 'noelfic_pagination', {routeParams: app.request.query.all}) }}

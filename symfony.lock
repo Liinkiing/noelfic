@@ -71,6 +71,12 @@
     "doctrine/reflection": {
         "version": "v1.0.0"
     },
+    "dpolac/dictionary": {
+        "version": "v1.0.0"
+    },
+    "dpolac/twig-lambda": {
+        "version": "v1.0.0"
+    },
     "easycorp/easy-log-handler": {
         "version": "1.0",
         "recipe": {

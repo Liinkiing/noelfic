@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6eed14a29180aaf5f723c00815c2cb14",
+    "content-hash": "7bbbf981a267bc21ec1a8506d0530d24",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1273,6 +1273,106 @@
                 "reflection"
             ],
             "time": "2018-06-14T14:45:07+00:00"
+        },
+        {
+            "name": "dpolac/dictionary",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dpolac/dictionary.git",
+                "reference": "7078d8bfe47cfcb11882140f5dbd7c106c1906e6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dpolac/dictionary/zipball/7078d8bfe47cfcb11882140f5dbd7c106c1906e6",
+                "reference": "7078d8bfe47cfcb11882140f5dbd7c106c1906e6",
+                "shasum": ""
+            },
+            "require": {
+                "ext-spl": "*",
+                "php": "^5.4 || ^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DPolac\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Damian Polac",
+                    "email": "damian.polac.111@gmail.com"
+                }
+            ],
+            "description": "Collection indexed with objects and scalars",
+            "keywords": [
+                "SplObjectStorage",
+                "array",
+                "dictionary",
+                "hash"
+            ],
+            "time": "2016-06-05T18:29:47+00:00"
+        },
+        {
+            "name": "dpolac/twig-lambda",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dpolac/twig-lambda.git",
+                "reference": "9138b853dd786e1646870c409cc26f379e2b0b8a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dpolac/twig-lambda/zipball/9138b853dd786e1646870c409cc26f379e2b0b8a",
+                "reference": "9138b853dd786e1646870c409cc26f379e2b0b8a",
+                "shasum": ""
+            },
+            "require": {
+                "dpolac/dictionary": "^1.0",
+                "php": "^5.6 || ^7.0",
+                "twig/twig": "^1.0 || ^2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DPolac\\TwigLambda\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Damian Polac",
+                    "email": "damian.polac.111@gmail.com"
+                }
+            ],
+            "description": "Lambda expressions for Twig and filters that make use of them",
+            "keywords": [
+                "filter",
+                "function",
+                "functional",
+                "group",
+                "lambda",
+                "map",
+                "sort",
+                "unique"
+            ],
+            "time": "2018-06-06T16:44:04+00:00"
         },
         {
             "name": "easycorp/easy-log-handler",
@@ -6727,8 +6827,8 @@
     "platform": {
         "php": "^7.1.3",
         "ext-ctype": "*",
-        "ext-intl": "*",
-        "ext-iconv": "*"
+        "ext-iconv": "*",
+        "ext-intl": "*"
     },
     "platform-dev": []
 }
