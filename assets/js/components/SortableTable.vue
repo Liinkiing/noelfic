@@ -84,5 +84,8 @@
             cursor: pointer;
             background: transparentize(black, 0.9);
         }
+        & .field-direction {
+            float: right;
+        }
     }
 </style>
