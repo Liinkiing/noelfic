@@ -47,7 +47,7 @@ class User implements UserInterface, \Serializable
 
     /**
      * @Assert\Email()
-     * @ORM\Column(type="string", length=255, unique=true)
+     * @ORM\Column(type="string", length=191, unique=true)
      */
     private $email;
 
@@ -73,7 +73,7 @@ class User implements UserInterface, \Serializable
 
     /**
      * @Assert\Length(min="3")
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=191, nullable=true)
      */
     private $plainPassword;
 

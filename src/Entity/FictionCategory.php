@@ -32,14 +32,14 @@ class FictionCategory
 
     /**
      * @Groups({"props"})
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=191)
      */
     private $title;
 
     /**
      * @Groups({"props"})
      * @Gedmo\Slug(fields={"title"})
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=191)
      */
     private $slug;
 
