@@ -57,6 +57,7 @@ class User implements UserInterface, \Serializable
     private $fictionChapters;
 
     /**
+     * @Groups({"props"})
      * @ORM\ManyToMany(targetEntity="App\Entity\UserRole", inversedBy="users")
      */
     private $roles;

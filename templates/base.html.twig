@@ -5,6 +5,9 @@
     <title>{% block title %}{{ sitename }}{% endblock %}</title>
     {% block stylesheets %}{% endblock %}
     <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+    <script id="user">
+        window.__USER = {{ app.user ? app.user|props|raw : 'null' }}
+    </script>
     <script defer src="{{ asset('build/app.js') }}"></script>
 </head>
 <body>
