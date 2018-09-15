@@ -74,10 +74,11 @@ class ImportFictionsFromExportCommand extends Command
         $count = 0;
         foreach ($finder as $file) {
             ++$count;
-            $fiction = $this->parseFic($file->getContents());
-            if ($this->fictionRepository->findOneBy(['title' => $fiction->getTitle()])) {
-                $this->io->text('<comment>Fiction ' . $fiction->getTitle() . ' already exists. Skipping it...</comment>');
+            $title = $this->getFicTitle($file->getContents());
+            if ($this->fictionRepository->findOneBy(['title' => $title])) {
+                $this->io->text("<comment>Fiction $title already exists. Skipping it...</comment>");
             } else {
+                $fiction = $this->parseFic($file->getContents());
                 foreach ($fiction->getChapters() as $chapter) {
                     $chapter->addAuthor($this->defaultAuthor);
                 }
@@ -113,6 +114,13 @@ class ImportFictionsFromExportCommand extends Command
         } else {
             $this->io->comment(round($mem_usage / 1048576, 2) . ' MB');
         }
+    }
+
+    protected function getFicTitle(string $fileContent): string
+    {
+        $fictionChapters = getFic($fileContent);
+
+        return array_shift($fictionChapters)['titre'];
     }
 
     protected function parseFic(string $fileContent): Fiction
