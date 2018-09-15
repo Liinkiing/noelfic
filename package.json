@@ -3,13 +3,13 @@
     "license": "UNLICENSED",
     "private": true,
     "scripts": {
-        "dev-server": "encore dev-server",
+        "dev-server": "cross-env NODE_ENV=development encore dev-server",
         "heroku-postbuild": "yarn trad && yarn build",
         "deploy": "git push heroku master",
-        "dev": "encore dev",
-        "serve": "encore dev-server --hot",
-        "watch": "encore dev --watch",
-        "build": "encore production",
+        "dev": "cross-env NODE_ENV=development encore dev",
+        "serve": "cross-env NODE_ENV=development encore dev-server --hot",
+        "watch": "cross-env NODE_ENV=development encore dev --watch",
+        "build": "cross-env NODE_ENV=production encore production",
         "trad": "node --experimental-modules translations/converter.mjs"
     },
     "dependencies": {
@@ -17,6 +17,7 @@
         "babel-plugin-syntax-dynamic-import": "^6.18.0",
         "babel-preset-stage-3": "^6.24.1",
         "bootstrap": "^4.1.3",
+        "cross-env": "^5.2.0",
         "lodash-es": "^4.17.11",
         "node-sass": "^4.9.3",
         "normalize.css": "^8.0.0",
