@@ -41,7 +41,7 @@ class AuthManager {
         if (this.isLoggedIn()) {
             return Promise.resolve(this.getToken())
         } else {
-            let request = await fetch(process.env.VUE_APP_GET_TOKEN_URL, {
+            let request = await fetch('/get_api_token', {
                 method: 'GET',
                 credentials: 'same-origin',
                 headers: {

@@ -15,7 +15,7 @@ export const AUTH_TOKEN = "jwt"
 const defaultOptions = {
     // You can use `https` for secure connection (recommended in production)
     httpEndpoint:
-        process.env.VUE_APP_GRAPHQL_HTTP || "http://localhost:4000/graphql",
+        '/graphql/',
     // You can use `wss` for secure connection (recommended in production)
     // Use `null` to disable subscriptions
     wsEndpoint: null,
