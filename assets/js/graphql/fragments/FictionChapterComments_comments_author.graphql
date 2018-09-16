@@ -1,0 +1,4 @@
+fragment FictionChapterComments_comments_author on User {
+    id
+    username
+}

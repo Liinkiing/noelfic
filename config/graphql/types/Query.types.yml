@@ -7,6 +7,11 @@ Query:
         builderConfig:
           nodeInterfaceType: Node
           idFetcher: '@=resolver("App\\GraphQL\\Resolver\\GlobalIdResolver", [value])'
+      viewer:
+        access: '@=isAuthenticated()'
+        type: User!
+        description: The currently authenticated user
+        resolve: '@=getUser()'
       fictions:
         description: Get all fictions.
         type: FictionConnection!

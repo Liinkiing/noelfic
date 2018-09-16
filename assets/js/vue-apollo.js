@@ -1,7 +1,8 @@
 import Vue from "vue"
 import VueApollo from "vue-apollo"
+import tokenLink from './token-link'
+import AuthManager from "./managers/AuthManager"
 import {createApolloClient, restartWebsockets} from "vue-cli-plugin-apollo/graphql-client"
-// import AuthManager from "./managers/AuthManager"
 
 
 // Install the vue plugin
@@ -29,7 +30,7 @@ const defaultOptions = {
     ssr: false,
 
     // Override default http link
-    // link: httpLink
+    link: tokenLink
 
     // Override default cache
     // cache: myCache
@@ -58,7 +59,7 @@ export function createProvider(options = {}) {
         defaultClient: apolloClient,
         defaultOptions: {
             $query: {
-                fetchPolicy: "cache-and-network"
+                fetchPolicy: "cache-first"
             }
         },
         errorHandler(error) {
@@ -76,7 +77,7 @@ export function createProvider(options = {}) {
 export function onLogin(apolloClient, token, refreshToken, referrer) {
     if (apolloClient.wsClient) restartWebsockets(apolloClient.wsClient)
     try {
-        // AuthManager.setToken(token)
+        AuthManager.login(token)
         if(referrer) {
             window.location.replace(referrer.fullPath)
         } else {
@@ -92,7 +93,7 @@ export function onLogin(apolloClient, token, refreshToken, referrer) {
 export function onLogout(apolloClient, referrer) {
     if (apolloClient.wsClient) restartWebsockets(apolloClient.wsClient)
     try {
-        // AuthManager.removeToken()
+        AuthManager.logout()
         if(referrer) {
             window.location.replace(referrer.fullPath)
         } else {

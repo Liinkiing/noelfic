@@ -25,8 +25,12 @@ class AuthManager {
         localStorage.removeItem(AUTH_TOKEN)
     }
 
-    setToken(token) {
+    login(token) {
         localStorage.setItem(AUTH_TOKEN, token)
+    }
+
+    clearToken() {
+        localStorage.removeItem(AUTH_TOKEN)
     }
 
     getToken() {
@@ -35,6 +39,8 @@ class AuthManager {
 
     async askNewToken() {
         if (this.isLoggedIn()) {
+            return Promise.resolve(this.getToken())
+        } else {
             let request = await fetch(process.env.VUE_APP_GET_TOKEN_URL, {
                 method: 'GET',
                 credentials: 'same-origin',
@@ -44,13 +50,15 @@ class AuthManager {
                 }
             })
             if (request.ok) {
-                return await request.json()
+                return (await request.json()).token
             }
 
-            return null
+            return Promise.reject()
         }
+    }
 
-        return null
+    logout() {
+        localStorage.removeItem(AUTH_TOKEN)
     }
 
     isLoggedIn() {

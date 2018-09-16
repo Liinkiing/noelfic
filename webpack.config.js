@@ -34,6 +34,7 @@ Encore
     .configureBabel(babelConfig => {
         babelConfig.presets.push('stage-3')
         babelConfig.plugins.push('syntax-dynamic-import')
+        babelConfig.plugins.push('transform-runtime')
     })
     .cleanupOutputBeforeBuild()
     .enableBuildNotifications()
@@ -44,6 +45,11 @@ Encore
     // enables Sass/SCSS support
     .enableSassLoader()
     .enableVueLoader()
+    .addLoader({
+        test: /\.(graphql|gql)$/,
+        exclude: /node_modules/,
+        loader: 'graphql-tag/loader'
+    })
 
 // uncomment if you use TypeScript
 //.enableTypeScriptLoader()

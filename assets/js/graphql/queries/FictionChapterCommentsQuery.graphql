@@ -1,0 +1,15 @@
+#import '../fragments/FictionChapterComments_comments.graphql'
+
+query FictionChapterCommentsQuery($chapterId: ID!) {
+    node(id: $chapterId) {
+        ... on FictionChapter {
+            rootComments {
+                edges {
+                    node {
+                        ...FictionChapterComments_comments
+                    }
+                }
+            }
+        }
+    }
+}

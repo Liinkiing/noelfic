@@ -51,7 +51,6 @@
         },
         methods: {
             changeDirection(column) {
-                console.log(this.directions)
                 switch (this.directions[column]) {
                     case 'none':
                         this.directions[column] = 'asc'

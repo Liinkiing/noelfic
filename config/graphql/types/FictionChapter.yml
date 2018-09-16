@@ -19,4 +19,20 @@ FictionChapter:
         description: The fiction chapter position
       comments:
         type: FictionChapterCommentConnection!
+        resolve: '@=resolver("App\\GraphQL\\Resolver\\Fiction\\Chapter\\FictionChapterCommentsResolver", [value, args])'
         argsBuilder: Relay::Connection
+        args:
+          first:
+            type: Int
+            defaultValue: 20
+          orderBy:
+            type: FictionCommentOrder
+            defaultValue: { field: createdAt, direction: DESC }
+      rootComments:
+        type: FictionChapterCommentConnection!
+        resolve: '@=resolver("App\\GraphQL\\Resolver\\Fiction\\Chapter\\FictionChapterRootCommentsResolver", [value, args])'
+        argsBuilder: Relay::Connection
+        args:
+          first:
+            type: Int
+            defaultValue: 20

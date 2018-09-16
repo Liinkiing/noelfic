@@ -1,0 +1,10 @@
+#import './FictionChapterComments_comments_author.graphql'
+
+fragment FictionChapterCommentFields on FictionChapterComment {
+    id
+    body
+    createdAt
+    author {
+        ...FictionChapterComments_comments_author
+    }
+}

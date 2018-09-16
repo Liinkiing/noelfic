@@ -2,7 +2,7 @@ FictionComment:
   type: object
   inherits: [Comment]
   config:
-    interfaces: [Comment]
+    interfaces: [Comment, Node]
     description: A comment in a fiction
     fields:
       fiction:

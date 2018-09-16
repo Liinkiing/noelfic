@@ -1,0 +1,11 @@
+AddFictionChapterCommentInput:
+  type: relay-mutation-input
+  config:
+    description: Input type of addFictionChapterComment
+    fields:
+      commentId:
+        description: The comment ID which is going to be answered
+        type: ID!
+      body:
+        description: The body of the comment
+        type: String!

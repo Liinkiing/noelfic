@@ -2,6 +2,7 @@ Comment:
   type: interface
   inherits: [Node, Timestampable]
   config:
+    resolveType: '@=resolver("App\\GraphQL\\Resolver\\Comment\\CommentTypeResolver", [value])'
     description: A base comment
     fields:
       body:
@@ -10,3 +11,9 @@ Comment:
       parent:
         type: Comment
         description: The comment parent
+      children:
+        type: '[Comment]'
+        description: The comment answers
+      author:
+        type: User!
+        description: The author of the comment

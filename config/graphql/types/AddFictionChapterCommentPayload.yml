@@ -1,0 +1,7 @@
+AddFictionChapterCommentPayload:
+  type: relay-mutation-payload
+  config:
+    fields:
+      fictionChapterComment:
+        type: FictionChapterComment!
+        description: The newly fiction chapter comment

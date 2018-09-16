@@ -4,12 +4,11 @@
 
 {% block body %}
     <h1>{{ fiction.title }}</h1>
-    <comments :comments="{{ fiction.rootComments|props }}"></comments>
     <h2>{{ chapter.title }}</h2>
     <div class="body">
         {{ chapter.body|raw }}
     </div>
-    <comments :comments="{{ chapter.rootComments|props }}"></comments>
+    <fiction-chapter-comments :chapter="{{ chapter|props }}"></fiction-chapter-comments>
 
     {% if chapters.haveToPaginate %}
         <div class="row justify-content-center">

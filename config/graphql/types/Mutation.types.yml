@@ -1,0 +1,11 @@
+Mutation:
+  type: object
+  config:
+    fields:
+      addFictionChapterComment:
+        access: '@=hasRole("ROLE_USER")'
+        builder: 'Relay::Mutation'
+        builderConfig:
+          inputType: AddFictionChapterCommentInput
+          payloadType: AddFictionChapterCommentPayload
+          mutateAndGetPayload: '@=mutation("App\\GraphQL\\Mutation\\Fiction\\Chapter\\AddFictionChapterCommentMutation", [value, getUser()])'

@@ -1,3 +1,7 @@
 index:
     path: /
     controller: App\Controller\DefaultController::redirectToHome
+
+get_api_token:
+    path: /get_api_token
+    controller: App\Controller\SecurityController::getApiToken

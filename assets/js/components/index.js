@@ -1,5 +1,6 @@
 export {default as Comment} from './Comment'
 export {default as Comments} from './Comments'
+export {default as FictionChapterComments} from './fiction/chapter/FictionChapterComments'
 export {default as FictionSearch} from './FictionSearch'
 export {default as UserFavorites} from './UserFavorites'
 export {default as SortableTable} from './SortableTable'

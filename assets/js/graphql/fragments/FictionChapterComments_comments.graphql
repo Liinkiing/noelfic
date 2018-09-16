@@ -1,0 +1,25 @@
+#import './FictionChapterComments_comments_author.graphql'
+#import './FictionChapterCommentFields.graphql'
+
+fragment FictionChapterComments_comments on FictionChapterComment {
+    ...FictionChapterCommentFields
+    children {
+        ...FictionChapterCommentFields
+        children {
+            ...FictionChapterCommentFields
+            children {
+                ...FictionChapterCommentFields
+                children {
+                    ...FictionChapterCommentFields
+                    children {
+                        ...FictionChapterCommentFields
+                        children {
+                            ...FictionChapterCommentFields
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
