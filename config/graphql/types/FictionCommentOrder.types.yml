@@ -1,0 +1,12 @@
+FictionCommentOrder:
+  type: input-object
+  config:
+    description: Ways in which fiction comments can be ordered
+    fields:
+      field:
+        type: FictionCommentOrderField!
+        description: The field in which to order the fiction comments by
+      direction:
+        type: OrderDirection!
+        defaultValue: ASC
+        description: The direction in which to order the fiction comments

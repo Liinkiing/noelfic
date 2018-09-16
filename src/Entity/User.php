@@ -200,6 +200,15 @@ class User implements UserInterface, \Serializable
         })->toArray();
     }
 
+    public function hasRole(string $role): bool
+    {
+        return $this->roles
+            ->map(function (UserRole $role) {
+                return $role->getRole();
+            })
+            ->contains($role);
+    }
+
     /**
      * @return Collection|UserRole[]
      */

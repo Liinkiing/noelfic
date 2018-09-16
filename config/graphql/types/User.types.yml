@@ -1,0 +1,46 @@
+User:
+  type: object
+  inherits: [Node, Timestampable]
+  config:
+    interfaces: [Node]
+    description: A user
+    fields:
+      roles:
+        description: The role(s) of the user
+        type: '[UserRole]'
+        access: '@=serv("App\\GraphQL\\Resolver\\User\\UserIsGrantedResolver").isGranted(getUser(), value)'
+      createdAt:
+        description: The signup date of the user
+        type: DateTime!
+        access: '@=serv("App\\GraphQL\\Resolver\\User\\UserIsGrantedResolver", [getUser(), value])'
+      updatedAt:
+        description: The modification date of the user
+        type: DateTime!
+        access: '@=serv("App\\GraphQL\\Resolver\\User\\UserIsGrantedResolver", [getUser(), value])'
+      username:
+        description: The username of the user
+        type: String!
+      email:
+        description: The email of the user
+        type: String!
+        access: '@=serv("App\\GraphQL\\Resolver\\User\\UserIsGrantedResolver").isGranted(getUser(), value)'
+      fictionRatings:
+        description: The ratings the user has given
+        type: FictionUserRatingConnection!
+        argsBuilder: Relay::Connection
+        resolve: '@=resolver("App\\GraphQL\\Resolver\\User\\UserFictionRatingsResolver", [value, args])'
+        args:
+          first:
+            type: Int
+            defaultValue: 20
+        access: '@=serv("App\\GraphQL\\Resolver\\User\\UserIsGrantedResolver").isGranted(getUser(), value)'
+      fictionFavorites:
+        description: The favorites the user have
+        type: FictionUserFavoriteConnection!
+        argsBuilder: Relay::Connection
+        resolve: '@=resolver("App\\GraphQL\\Resolver\\User\\UserFictionFavoritesResolver", [value, args])'
+        args:
+          first:
+            type: Int
+            defaultValue: 20
+        access: '@=serv("App\\GraphQL\\Resolver\\User\\UserIsGrantedResolver").isGranted(getUser(), value)'

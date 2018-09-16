@@ -1,0 +1,40 @@
+Fiction:
+  type: object
+  inherits: [Node, Timestampable]
+  config:
+    interfaces: [Node]
+    description: A fiction
+    fields:
+      authors:
+        type: '[User!]!'
+        description: The fiction authors
+      title:
+        type: String!
+        description: The fiction title
+      slug:
+        type: String!
+        description: The fiction slug
+      chapters:
+        description: The chapters of the fiction
+        type: FictionChapterConnection!
+        resolve: '@=resolver("App\\GraphQL\\Resolver\\Fiction\\FictionChaptersResolver", [value, args])'
+        argsBuilder: Relay::Connection
+        args:
+          first:
+            type: Int
+            defaultValue: 20
+          orderBy:
+            type: FictionChapterOrder
+            defaultValue: { field: position, direction: ASC }
+      comments:
+        description: The comments of the fiction
+        type: FictionCommentConnection!
+        resolve: '@=resolver("App\\GraphQL\\Resolver\\Fiction\\FictionCommentsResolver", [value, args])'
+        argsBuilder: Relay::Connection
+        args:
+          first:
+            type: Int
+            defaultValue: 20
+          orderBy:
+            type: FictionCommentOrder
+            defaultValue: { field: createdAt, direction: DESC }

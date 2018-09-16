@@ -1,0 +1,11 @@
+UserRole:
+  type: enum
+  config:
+    description: The different possible roles for a user
+    values:
+      ROLE_USER:
+        value: ROLE_USER
+      ROLE_WRITER:
+        value: ROLE_WRITER
+      ROLE_ADMIN:
+        value: ROLE_ADMIN

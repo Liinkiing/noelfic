@@ -1,0 +1,8 @@
+FictionCommentOrderField:
+  type: enum
+  config:
+    description: Properties by which fiction comments can be ordered
+    values:
+      CREATED_AT:
+        value: createdAt
+        description: Allows ordering a list of fiction comments by when they were created

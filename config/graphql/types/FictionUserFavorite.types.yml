@@ -1,0 +1,16 @@
+FictionUserFavorite:
+  type: object
+  config:
+    description: A fiction favorite for a user
+    fields:
+      id:
+        type: ID!
+      fiction:
+        type: Fiction!
+        description: The fiction the user favorited
+      user:
+        type: User!
+        description: The related user of the favorite
+      favoritedAt:
+        type: DateTime!
+        description: The date when the user favorited the fiction

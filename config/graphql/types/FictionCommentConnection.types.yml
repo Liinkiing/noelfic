@@ -1,0 +1,7 @@
+FictionCommentConnection:
+  type: relay-connection
+  config:
+    nodeType: FictionComment!
+    connectionFields:
+      totalCount:
+        type: Int!

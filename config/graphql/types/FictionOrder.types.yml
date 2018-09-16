@@ -1,0 +1,12 @@
+FictionOrder:
+  type: input-object
+  config:
+    description: Ways in which fictions can be ordered.
+    fields:
+      field:
+        type: FictionOrderField!
+        description: The field in which to order the fictions by
+      direction:
+        type: OrderDirection!
+        defaultValue: ASC
+        description: The direction in which to order the fictions

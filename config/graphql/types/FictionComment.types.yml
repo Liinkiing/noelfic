@@ -1,0 +1,10 @@
+FictionComment:
+  type: object
+  inherits: [Comment]
+  config:
+    interfaces: [Comment]
+    description: A comment in a fiction
+    fields:
+      fiction:
+        description: The related fiction associated to this comment
+        type: Fiction!

@@ -1,0 +1,17 @@
+overblog_graphql:
+    definitions:
+        schema:
+            query: Query
+            types:
+              - User
+              - Fiction
+              - FictionComment
+              - FictionChapter
+              - FictionChapterComment
+        mappings:
+            auto_discover: false
+            types:
+                -
+                    type: yaml
+                    dir: "%kernel.project_dir%/config/graphql/types"
+                    suffix: ~

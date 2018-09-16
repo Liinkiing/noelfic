@@ -48,6 +48,11 @@ class FictionUserRating
         $this->rating = Math::clamp($rating, self::MIN_RATING, self::MAX_RATING);
     }
 
+    public function getId(): string
+    {
+        return $this->fiction->getId() . '-' . $this->user->getId();
+    }
+
     public function getFiction(): ?Fiction
     {
         return $this->fiction;

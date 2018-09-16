@@ -1,0 +1,19 @@
+FictionUserRating:
+  type: object
+  config:
+    description: A rating of a user for a fiction
+    fields:
+      id:
+        type: ID!
+      fiction:
+        type: Fiction!
+        description: The related fiction of the rating
+      user:
+        type: User!
+        description: The related user of the rating
+      rating:
+        type: Float!
+        description: The rating the user gave to the fiction (between 1 and 10)
+      ratedAt:
+        type: DateTime!
+        description: The date when the user favorited the fiction

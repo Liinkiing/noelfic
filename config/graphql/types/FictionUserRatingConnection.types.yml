@@ -1,0 +1,7 @@
+FictionUserRatingConnection:
+  type: relay-connection
+  config:
+    nodeType: FictionUserRating!
+    connectionFields:
+      totalCount:
+        type: Int!

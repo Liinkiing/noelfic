@@ -1,0 +1,7 @@
+HTMLMarkdown:
+  type: custom-scalar
+  config:
+    description: Represent a value converted from Markdown into HTML
+    serialize: ["App\\GraphQL\\Type\\HTMLMarkdownType", 'serialize']
+    parseValue: ["App\\GraphQL\\Type\\HTMLMarkdownType", 'parseValue']
+    parseLiteral: ["App\\GraphQL\\Type\\HTMLMarkdownType", 'parseLiteral']

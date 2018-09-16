@@ -1,0 +1,22 @@
+FictionChapter:
+  type: object
+  inherits: [Node, Timestampable]
+  config:
+    interfaces: [Node]
+    description: A fiction chapter.
+    fields:
+      title:
+        type: String!
+        description: The fiction chapter title
+      slug:
+        type: String!
+        description: The fiction chapter slug
+      body:
+        type: String!
+        description: The fiction chapter body
+      position:
+        type: Int!
+        description: The fiction chapter position
+      comments:
+        type: FictionChapterCommentConnection!
+        argsBuilder: Relay::Connection

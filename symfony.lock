@@ -89,6 +89,9 @@
     "egulias/email-validator": {
         "version": "2.1.5"
     },
+    "erusev/parsedown": {
+        "version": "1.7.1"
+    },
     "fabpot/goutte": {
         "version": "v3.2.3"
     },
@@ -160,6 +163,27 @@
     },
     "ocramius/proxy-manager": {
         "version": "2.1.1"
+    },
+    "overblog/graphiql-bundle": {
+        "version": "0.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "0.1",
+            "ref": "fe8d172f2480efc598f5a8be0e732656d3594cec"
+        }
+    },
+    "overblog/graphql-bundle": {
+        "version": "0.11",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "0.11",
+            "ref": "80a27b90b4928728bc2afe3ff1198826e033285c"
+        }
+    },
+    "overblog/graphql-php-generator": {
+        "version": "v0.7.3"
     },
     "pagerfanta/pagerfanta": {
         "version": "v2.0.1"
@@ -487,6 +511,9 @@
     },
     "twig/twig": {
         "version": "v2.5.0"
+    },
+    "webonyx/graphql-php": {
+        "version": "v0.12.6"
     },
     "white-october/pagerfanta-bundle": {
         "version": "v1.2.1"

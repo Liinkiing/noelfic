@@ -1,0 +1,7 @@
+FictionChapterConnection:
+  type: relay-connection
+  config:
+    nodeType: FictionChapter!
+    connectionFields:
+      totalCount:
+        type: Int!

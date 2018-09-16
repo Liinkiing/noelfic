@@ -1,0 +1,12 @@
+Comment:
+  type: interface
+  inherits: [Node, Timestampable]
+  config:
+    description: A base comment
+    fields:
+      body:
+        type: String!
+        description: The comment body
+      parent:
+        type: Comment
+        description: The comment parent

@@ -28,6 +28,11 @@ class FictionUserFavorite
      */
     private $user;
 
+    public function getId(): string
+    {
+        return $this->fiction->getId() . '-' . $this->user->getId();
+    }
+
     /**
      * @Groups({"props"})
      * @ORM\Column(type="datetime")

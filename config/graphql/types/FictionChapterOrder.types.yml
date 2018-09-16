@@ -1,0 +1,12 @@
+FictionChapterOrder:
+  type: input-object
+  config:
+    description: Ways in which fiction chapters can be ordered
+    fields:
+      field:
+        type: FictionChapterOrderField!
+        description: The field in which to order the fiction chapters by
+      direction:
+        type: OrderDirection!
+        defaultValue: ASC
+        description: The direction in which to order the fiction chapters

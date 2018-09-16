@@ -1,0 +1,21 @@
+Query:
+  type: object
+  config:
+    fields:
+      node:
+        builder: "Relay::Node"
+        builderConfig:
+          nodeInterfaceType: Node
+          idFetcher: '@=resolver("App\\GraphQL\\Resolver\\GlobalIdResolver", [value])'
+      fictions:
+        description: Get all fictions.
+        type: FictionConnection!
+        argsBuilder: Relay::Connection
+        resolve: '@=resolver("App\\GraphQL\\Resolver\\Query\\FictionsResolver", [args])'
+        args:
+          first:
+            type: Int
+            defaultValue: 20
+          orderBy:
+            type: FictionOrder
+            defaultValue: { field: createdAt, direction: DESC }

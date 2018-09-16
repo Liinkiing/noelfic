@@ -1,0 +1,10 @@
+FictionChapterComment:
+  type: object
+  inherits: [Comment]
+  config:
+    interfaces: [Comment]
+    description: A comment in a fiction chapter
+    fields:
+      chapter:
+        description: The related chapter associated to this comment
+        type: FictionChapter!

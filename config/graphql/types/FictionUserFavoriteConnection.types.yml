@@ -1,0 +1,7 @@
+FictionUserFavoriteConnection:
+  type: relay-connection
+  config:
+    nodeType: FictionUserFavorite!
+    connectionFields:
+      totalCount:
+        type: Int!

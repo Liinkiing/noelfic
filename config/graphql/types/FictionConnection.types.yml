@@ -1,0 +1,7 @@
+FictionConnection:
+  type: relay-connection
+  config:
+    nodeType: Fiction!
+    connectionFields:
+      totalCount:
+        type: Int!

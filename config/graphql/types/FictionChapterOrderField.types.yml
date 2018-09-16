@@ -1,0 +1,11 @@
+FictionChapterOrderField:
+  type: enum
+  config:
+    description: Properties by which fiction chapters can be ordered
+    values:
+      CREATED_AT:
+        value: createdAt
+        description: Allows ordering a list of fiction chapters by when they were created
+      POSITION:
+        value: position
+        description: Allows ordering a list of fiction chapters by their position
