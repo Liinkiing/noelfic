@@ -9,7 +9,6 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\SecurityEvents;
-use Symfony\Component\Translation\TranslatorInterface;
 
 class SecuritySubscriber implements EventSubscriberInterface
 {

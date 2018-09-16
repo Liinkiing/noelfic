@@ -23,7 +23,7 @@ class FictionRepository extends ServiceEntityRepository
         parent::__construct($registry, Fiction::class);
     }
 
-    public function searchLatest(array $parameters, int $page = 1, $order = 'DESC'): Pagerfanta
+    public function searchLatest(array $parameters, int $page = 1, string $order = 'DESC'): Pagerfanta
     {
         [$q, $c] = [
             $parameters['q'] ?? null,

@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import Argon from 'vue-argon-design-system/src/plugins/argon-kit'
 import i18n from './i18n'
 import {Comment, Comments, UserFavorites, FictionSearch, BaseNav, SortableTable} from './components'
+import { createProvider } from "./vue-apollo";
 import store from './store'
 import '../scss/app.scss'
 
@@ -18,6 +19,7 @@ Vue.use(Vuex)
 
 new Vue({
     i18n,
+    provide: createProvider(),
     store,
     el: '#app',
     components

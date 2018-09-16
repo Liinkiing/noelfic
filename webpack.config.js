@@ -1,6 +1,7 @@
-const Encore = require('@symfony/webpack-encore');
+const Encore = require('@symfony/webpack-encore')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const webpack = require('webpack');
+const vueEnv = require('./vue_env')
+const webpack = require('webpack')
 
 Encore
 // directory where compiled assets will be stored
@@ -31,8 +32,8 @@ Encore
      * https://symfony.com/doc/current/frontend.html#adding-more-features
      */
     .configureBabel(babelConfig => {
-        babelConfig.presets.push('stage-3');
-        babelConfig.plugins.push('syntax-dynamic-import');
+        babelConfig.presets.push('stage-3')
+        babelConfig.plugins.push('syntax-dynamic-import')
     })
     .cleanupOutputBeforeBuild()
     .enableBuildNotifications()
@@ -49,15 +50,19 @@ Encore
 
 // uncomment if you're having problems with a jQuery plugin
 //.autoProvidejQuery()
-;
 
-const webpackConfig = Encore.getWebpackConfig();
 
-if (process.env.NODE_ENV !== 'development') {
+const webpackConfig = Encore.getWebpackConfig()
+
+webpackConfig.plugins.push(
+    new webpack.EnvironmentPlugin(vueEnv)
+)
+
+if (Encore.isProduction()) {
     webpackConfig.plugins = webpackConfig.plugins.filter(
         plugin => !(plugin instanceof webpack.optimize.UglifyJsPlugin)
-    );
-    webpackConfig.plugins.push(new UglifyJsPlugin());
+    )
+    webpackConfig.plugins.push(new UglifyJsPlugin())
 }
 
 module.exports = webpackConfig
