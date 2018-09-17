@@ -4,10 +4,14 @@
                     :refetch-queries="() => queriesToRefetch ? queriesToRefetch : []">
         <template slot-scope="{ mutate, loading, error }">
             <form class="comment-form" @submit.prevent="comment(mutate)">
-                <label>{{ $t('form.comment.message') }}
-                    <textarea :disabled="loading" name="body" v-model="body"></textarea>
-                </label>
-                <button :disabled="loading" type="submit" @click="comment(mutate)">{{ $t('global.submit') }}</button>
+                <div class="form-container">
+                    <textarea
+                            class="form-control form-control-alternative"
+                            :disabled="loading" name="body"
+                            :placeholder="$t('form.comment.message')" v-model="body"></textarea>
+                    <base-button :disabled="loading" native-type="submit" icon="fa fa-comment"
+                                 type="success" @click="comment(mutate)" icon-only></base-button>
+                </div>
             </form>
         </template>
     </ApolloMutation>
@@ -36,5 +40,19 @@
 </script>
 
 <style lang="scss" scoped>
-
+    .comment-form {
+        & .form-container {
+            position: relative;
+        }
+        & textarea {
+            width: 100%;
+            min-height: 58px;
+        }
+        & button {
+            position: absolute;
+            z-index: 1;
+            right: 10px;
+            bottom: 10px;
+        }
+    }
 </style>

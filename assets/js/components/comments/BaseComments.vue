@@ -5,24 +5,34 @@
                         :refetch-queries="() => queriesToRefetch ? queriesToRefetch : []">
             <template slot-scope="{ mutate, loading, error }">
                 <form class="comment-form" @submit.prevent="comment(mutate)">
-                    <label>{{ $t('form.comment.message') }}
-                        <textarea :disabled="loading" name="body" v-model="newComment"></textarea>
-                    </label>
-                    <button :disabled="loading" type="submit" @click="comment(mutate)">{{ $t('global.submit') }}</button>
+                    <textarea
+                            class="form-control form-control-alternative"
+                            :disabled="loading" name="body"
+                            :placeholder="$t('form.comment.message')" v-model="newComment"></textarea>
+                    <base-button :disabled="loading" native-type="submit" icon="fa fa-comment"
+                                 type="success" @click="comment(mutate)" icon-only></base-button>
                 </form>
             </template>
         </ApolloMutation>
         <div v-else class="login-informtations">
-            {{ $t('form.comment.needs_auth') }}
+            <base-alert icon="fa fa-user" type="primary">
+                <template slot="text">
+                    {{ $t('form.comment.needs_auth') }}
+                </template>
+            </base-alert>
         </div>
         <transition name="fade-up" appear>
-            <component v-if="type === 'fiction'"
+            <component class="root-comments"
+                       v-if="type === 'fiction'"
                        :key="type"
+                       :level="0"
                        :fiction="fiction"
                        :queries-to-refetch="queriesToRefetch"
                        is="FictionComments"></component>
-            <component v-else-if="type === 'fictionChapter'"
+            <component class="root-comments"
+                       v-else-if="type === 'fictionChapter'"
                        :key="type"
+                       :level="0"
                        :chapter="chapter"
                        :queries-to-refetch="queriesToRefetch"
                        is="FictionChapterComments"></component>
@@ -33,7 +43,8 @@
 <script>
     import FictionChapterComments from "../fiction/chapter/FictionChapterComments";
     import FictionComments from "../fiction/FictionComments";
-    import { mapState } from 'vuex'
+    import {mapState} from 'vuex'
+
     export default {
         name: 'BaseComments',
         components: {FictionComments, FictionChapterComments},
@@ -71,5 +82,21 @@
 </script>
 
 <style lang="scss" scoped>
-
+    .comment-form {
+        position: relative;
+        & textarea {
+            width: 100%;
+            min-height: 58px;
+        }
+        & button {
+            position: absolute;
+            z-index: 1;
+            right: 10px;
+            bottom: 10px;
+        }
+        margin-bottom: 1rem;
+    }
+    .root-comments {
+        padding: 0;
+    }
 </style>

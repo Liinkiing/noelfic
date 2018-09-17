@@ -20,8 +20,9 @@ global:
 
 form:
   comment:
-    message: Message
+    message: Type your comment
     needs_auth: You need to be authenticated to comment
+    answer_needs_auth: You need to be authenticated to answer
   login:
     username: Username
     password: Password

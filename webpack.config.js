@@ -52,6 +52,7 @@ Encore
                 options: {
                     sourceMap: !Encore.isProduction(),
                     data: `
+                    @import "assets/scss/modules/_palette.scss";
                     @import "assets/scss/modules/_variables.scss";
                     `
                 }

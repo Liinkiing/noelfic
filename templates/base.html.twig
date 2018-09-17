@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>{% block title %}{{ sitename }}{% endblock %}</title>
     {% block stylesheets %}{% endblock %}
+    <script src="http://localhost:35729/livereload.js"></script>
     <link rel="stylesheet" href="{{ asset('build/app.css') }}">
     <script id="user">
         window.__USER = {{ app.user ? app.user|props|raw : 'null' }}
