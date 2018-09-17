@@ -82,16 +82,13 @@
             z-index: 1;
         }
         &.active {
-            background: lighten($primary, 5%);
+            background: linear-gradient(to right, lighten($primary, 10%), $primary);
             box-shadow: $commentBoxShadowActive;
             color: whitesmoke;
             z-index: 2;
             &.authenticated:not(.max-level) {
                 max-height: 180px;
                 height: 180px;
-            }
-            &:hover {
-                background: lighten($primary, 10%);
             }
             & .comment-form {
                 margin-top: 1rem;

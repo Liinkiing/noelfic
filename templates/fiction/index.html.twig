@@ -24,7 +24,8 @@
     {% endfor %}
     <sortable-table :columns="{{ columns|json_encode }}" :rows="{{ rows|json_encode }}"></sortable-table>
     {% if fictions.haveToPaginate %}
-        <div class="row justify-content-center">
+        <hr>
+        <div class="row justify-content-center mb-4">
             {{ pagerfanta(fictions, 'noelfic_pagination', {routeParams: app.request.query.all}) }}
         </div>
     {% endif %}
