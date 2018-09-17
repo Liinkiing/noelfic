@@ -23,6 +23,7 @@ form:
     message: Type your comment
     needs_auth: You need to be authenticated to comment
     answer_needs_auth: You need to be authenticated to answer
+    too_deep: Maximum nesting reached
   login:
     username: Username
     password: Password

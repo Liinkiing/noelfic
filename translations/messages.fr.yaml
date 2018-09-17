@@ -23,6 +23,7 @@ form:
     message: Entrez votre commentaire
     needs_auth: Vous devez être connecté pour commenter
     answer_needs_auth: Vous devez être connecté pour répondre
+    too_deep: Profondeur maximale atteinte
   login:
     username: Nom d'utilisateur
     password: Mot de passe

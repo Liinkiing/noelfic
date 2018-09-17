@@ -1,14 +1,19 @@
 <template>
-    <li class="comment" v-on-click-away="deactivate" @click.prevent="activate" :class="{active, authenticated: user}">
+    <li class="comment" v-on-click-away="deactivate" @click.prevent="activate" :class="{active, authenticated: user, 'max-level': tooDeep}">
         <img class="profile-picture img-fluid rounded shadow" src="../../../images/default_avatar.png">
         <div class="comment-content">
             <div class="comment-data">
                 {{ comment.author.username }} - {{ comment.body }}<br/>
                 <small>{{ comment.createdAt|moment }}</small>
             </div>
-            <keep-alive v-if="user && level < 6">
-                <comment-form class="comment-form" :queries-to-refetch="queriesToRefetch" v-if="active"
+            <keep-alive v-if="user">
+                <comment-form class="comment-form" :queries-to-refetch="queriesToRefetch" v-if="active && !tooDeep"
                               :to="comment.id"></comment-form>
+                <transition name="fade-up">
+                    <badge v-if="active && tooDeep" class="answer-badge" type="warning">{{
+                        $t('form.comment.too_deep') }}
+                    </badge>
+                </transition>
             </keep-alive>
             <transition name="fade-up">
                 <badge v-if="active && !user" class="answer-badge" type="warning">{{
@@ -31,7 +36,11 @@
             onClickAway,
         },
         computed: {
-            ...mapState('app', ['user'])
+            ...mapState('app', ['user']),
+            tooDeep() {
+                return this.level >= 6
+            }
+
         },
         data() {
             return {
@@ -45,7 +54,6 @@
         },
         methods: {
             activate() {
-                if (this.level >= 6) return;
                 this.active = true
             },
             deactivate() {
@@ -75,10 +83,10 @@
         }
         &.active {
             background: lighten($primary, 5%);
-            box-shadow: $imageBoxShadowRaised;
+            box-shadow: $commentBoxShadowActive;
             color: whitesmoke;
             z-index: 2;
-            &.authenticated {
+            &.authenticated:not(.max-level) {
                 max-height: 180px;
                 height: 180px;
             }
