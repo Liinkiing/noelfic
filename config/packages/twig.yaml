@@ -4,3 +4,4 @@ twig:
   strict_variables: '%kernel.debug%'
   globals:
     sitename: '%sitename%'
+    app_locales: '%app_locales%'

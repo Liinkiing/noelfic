@@ -1,6 +1,7 @@
 <template>
-    <ul class="comments" v-if="rootComments && rootComments.edges">
-        <template v-for="comment in rootComments.edges.map(edge => edge.node)">
+    <ul class="comments" v-if="fiction && fiction.rootComments && fiction.rootComments.edges">
+        <h2>{{ $tc('global.comments', fiction.comments.totalCount ) }}</h2>
+        <template v-for="comment in fiction.rootComments.edges.map(edge => edge.node)">
             <keep-alive>
                 <transition name="fade-up" appear>
                     <comment :level="level" :queries-to-refetch="queriesToRefetch" :key="comment.id" :comment="comment"></comment>
@@ -22,17 +23,17 @@
         name: 'FictionComments',
         components: {Comment},
         props: {
-            fiction: {type: Object, required: true},
+            fictionId: {type: String, required: true},
             queriesToRefetch: {type: Array, required: false, default: null},
             level: {type: Number, required: true, default: 0},
         },
         apollo: {
-            rootComments: {
+            fiction: {
                 query: require('../../graphql/queries/FictionCommentsQuery.graphql'),
                 variables() {
-                    return {fictionId: this.fiction.id}
+                    return {fictionId: this.fictionId}
                 },
-                update: data => data.node.rootComments
+                update: data => data.node
             }
         }
     }

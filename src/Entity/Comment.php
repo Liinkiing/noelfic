@@ -50,6 +50,7 @@ abstract class Comment
 
     /**
      * @Groups({"props"})
+     * @ORM\OrderBy({"createdAt" = "ASC"})
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="parent", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     protected $children;

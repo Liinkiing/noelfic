@@ -1,16 +1,24 @@
 <template>
-    <ul class="comments" v-if="comments">
-        <template v-for="comment in comments">
-            <keep-alive>
-                <!--<transition-group name="fade-up" mode="out-in" appear>-->
-                    <comment :level="level + 1" :queries-to-refetch="queriesToRefetch" :key="comment.id" :comment="comment"></comment>
-                <!--</transition-group>-->
-            </keep-alive>
+    <!--<transition name="fade-up" appear>-->
+    <div class="comments-container">
+        <ul class="comments" v-if="comments" v-for="comment in comments" :key="comment.id">
+            <!--<transition name="fade-up" appear>-->
+            <!--<keep-alive>-->
             <transition name="fade-up" appear>
-                <comments v-if="comment.children.length > 0" :comments="comment.children" :queries-to-refetch="queriesToRefetch" :level="level + 1"></comments>
+                <comment :level="level + 1" :queries-to-refetch="queriesToRefetch" :key="comment.id"
+                         :comment="comment"></comment>
             </transition>
-        </template>
-    </ul>
+            <!--</keep-alive>-->
+            <!--</transition>-->
+            <!--<transition name="fade-up" appear>-->
+            <comments v-if="comment.children.length > 0" :comments="comment.children"
+                      :queries-to-refetch="queriesToRefetch" :level="level + 1"></comments>
+            <!--</transition>-->
+        </ul>
+    </div>
+
+
+    <!--</transition>-->
 </template>
 
 <script>
@@ -29,5 +37,4 @@
 </script>
 
 <style lang="scss" scoped>
-
 </style>

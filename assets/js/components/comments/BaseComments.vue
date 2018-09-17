@@ -26,14 +26,14 @@
                        v-if="type === 'fiction'"
                        :key="type"
                        :level="0"
-                       :fiction="fiction"
+                       :fiction-id="fictionId"
                        :queries-to-refetch="queriesToRefetch"
                        is="FictionComments"></component>
             <component class="root-comments"
                        v-else-if="type === 'fictionChapter'"
                        :key="type"
                        :level="0"
-                       :chapter="chapter"
+                       :chapter-id="chapterId"
                        :queries-to-refetch="queriesToRefetch"
                        is="FictionChapterComments"></component>
         </transition>
@@ -49,8 +49,8 @@
         name: 'BaseComments',
         components: {FictionComments, FictionChapterComments},
         props: {
-            fiction: {type: Object, required: false},
-            chapter: {type: Object, required: false},
+            fictionId: {type: String, required: false},
+            chapterId: {type: String, required: false},
             type: {type: String, required: true, validator: value => ['fiction', 'fictionChapter'].includes(value)},
             queriesToRefetch: {type: Array, required: false, default: null}
         },
@@ -71,9 +71,9 @@
             relatedId() {
                 switch (this.type) {
                     case 'fiction':
-                        return this.fiction.id
+                        return this.fictionId
                     case 'fictionChapter':
-                        return this.chapter.id
+                        return this.chapterId
                 }
                 return null
             }

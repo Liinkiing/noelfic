@@ -173,6 +173,14 @@ class FictionChapter
     }
 
     /**
+     * @Groups({"props"})
+     */
+    public function getCommentsCount(): int
+    {
+        return $this->comments->count();
+    }
+
+    /**
      * @return array|FictionChapterComment[]
      */
     public function getRootComments(): array

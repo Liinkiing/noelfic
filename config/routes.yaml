@@ -1,7 +1,10 @@
 index:
-    path: /
-    controller: App\Controller\DefaultController::redirectToHome
+  path: /
+  controller: App\Controller\DefaultController::redirectToHome
 
 get_api_token:
-    path: /get_api_token
-    controller: App\Controller\SecurityController::getApiToken
+  path: /get_api_token
+  controller: App\Controller\SecurityController::getApiToken
+
+_bazinga_jstranslation:
+  resource: "@BazingaJsTranslationBundle/Resources/config/routing/routing.yml"

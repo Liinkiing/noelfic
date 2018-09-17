@@ -27,10 +27,10 @@
                                 </li>
                             {% endfor %}
                         </ul>
-                        <h3>{{ 'global.comments'|transchoice(fiction.comments.count) }}</h3>
+                        <hr>
                         <base-comments
                                 type="fiction"
-                                :fiction="{{ fiction|props }}"
+                                fiction-id="{{ fiction.id }}"
                                 :queries-to-refetch="{{ ['FictionCommentsQuery']|json_encode }}"
                         ></base-comments>
                     </li>

@@ -46,3 +46,6 @@ Fiction:
           first:
             type: Int
             defaultValue: 20
+          orderBy:
+            type: FictionCommentOrder
+            defaultValue: { field: createdAt, direction: DESC }

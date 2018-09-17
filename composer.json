@@ -34,7 +34,8 @@
         "symfony/webpack-encore-pack": "^1.0",
         "symfony/yaml": "*",
         "twig/extensions": "^1.5",
-        "white-october/pagerfanta-bundle": "^1.2"
+        "white-october/pagerfanta-bundle": "^1.2",
+        "willdurand/js-translation-bundle": "^2.6"
     },
     "require-dev": {
         "overblog/graphiql-bundle": "^0.1.1",

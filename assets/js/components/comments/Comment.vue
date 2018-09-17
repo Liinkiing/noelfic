@@ -1,25 +1,26 @@
 <template>
-        <li class="comment" v-on-click-away="deactivate" @click.prevent="activate" :class="{active}">
-            <img class="profile-picture img-fluid rounded shadow" src="../../../images/default_avatar.png">
-            <div class="comment-content">
-                <div class="comment-data">
-                    {{ comment.author.username }} - {{ comment.body }}<br/>
-                    <small>{{ comment.createdAt|moment }}</small>
-                </div>
-                <keep-alive v-if="user && level < 6">
-                    <transition name="fade-up-absolute" appear>
-                        <comment-form class="comment-form" :queries-to-refetch="queriesToRefetch" v-if="active" :to="comment.id"></comment-form>
-                    </transition>
-                </keep-alive>
-                <transition name="fade-up">
-                    <badge v-if="active && !user" class="answer-badge" type="warning">{{ $t('form.comment.answer_needs_auth') }}</badge>
-                </transition>
+    <li class="comment" v-on-click-away="deactivate" @click.prevent="activate" :class="{active, authenticated: user}">
+        <img class="profile-picture img-fluid rounded shadow" src="../../../images/default_avatar.png">
+        <div class="comment-content">
+            <div class="comment-data">
+                {{ comment.author.username }} - {{ comment.body }}<br/>
+                <small>{{ comment.createdAt|moment }}</small>
             </div>
-        </li>
+            <keep-alive v-if="user && level < 6">
+                <comment-form class="comment-form" :queries-to-refetch="queriesToRefetch" v-if="active"
+                              :to="comment.id"></comment-form>
+            </keep-alive>
+            <transition name="fade-up">
+                <badge v-if="active && !user" class="answer-badge" type="warning">{{
+                    $t('form.comment.answer_needs_auth') }}
+                </badge>
+            </transition>
+        </div>
+    </li>
 </template>
 
 <script>
-    import { mapState} from 'vuex'
+    import {mapState} from 'vuex'
     import {directive as onClickAway} from 'vue-clickaway';
     import CommentAnswerForm from "./CommentAnswerForm";
 
@@ -32,7 +33,7 @@
         computed: {
             ...mapState('app', ['user'])
         },
-        data () {
+        data() {
             return {
                 active: false
             }
@@ -43,11 +44,11 @@
             queriesToRefetch: {type: Array, required: false, default: null},
         },
         methods: {
-            activate () {
+            activate() {
                 if (this.level >= 6) return;
                 this.active = true
             },
-            deactivate () {
+            deactivate() {
                 this.active = false
             }
         }
@@ -76,9 +77,11 @@
             background: lighten($primary, 5%);
             box-shadow: $imageBoxShadowRaised;
             color: whitesmoke;
-            max-height: 180px;
-            height: 180px;
             z-index: 2;
+            &.authenticated {
+                max-height: 180px;
+                height: 180px;
+            }
             &:hover {
                 background: lighten($primary, 10%);
             }
@@ -87,10 +90,12 @@
             }
         }
     }
+
     .profile-picture {
         width: 30px;
         height: 30px;
     }
+
     .comment-content {
         margin-left: 2rem;
         display: flex;
@@ -98,6 +103,7 @@
         justify-content: space-around;
         width: 100%;
     }
+
     .answer-badge {
         position: absolute;
         bottom: 20px;

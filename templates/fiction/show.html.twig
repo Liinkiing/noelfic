@@ -9,16 +9,15 @@
         {{ chapter.body|raw }}
     </div>
     <hr>
-    <h3>{{ 'global.comments'|transchoice(chapter.comments.count) }}</h3>
-    <base-comments
-            type="fictionChapter"
-            :chapter="{{ chapter|props }}"
-            :queries-to-refetch="{{ ['FictionChapterCommentsQuery']|json_encode }}"
-    ></base-comments>
-
     {% if chapters.haveToPaginate %}
         <div class="row justify-content-center">
             {{ pagerfanta(chapters, 'noelfic_pagination', {routeParams: app.request.query.all}) }}
         </div>
     {% endif %}
+    <hr>
+    <base-comments
+            type="fictionChapter"
+            chapter-id="{{ chapter.id }}"
+            :queries-to-refetch="{{ ['FictionChapterCommentsQuery']|json_encode }}"
+    ></base-comments>
 {% endblock %}

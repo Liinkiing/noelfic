@@ -3,6 +3,9 @@
 query FictionChapterCommentsQuery($chapterId: ID!) {
     node(id: $chapterId) {
         ... on FictionChapter {
+            comments {
+                totalCount
+            }
             rootComments {
                 edges {
                     node {
