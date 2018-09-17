@@ -9,7 +9,7 @@
         window.__USER = {{ app.user ? app.user|props|raw : 'null' }}
     </script>
     <script defer src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
-    <script defer src="{{ url('bazinga_jstranslation_js', {'locales': app_locales|split('|')|join(',')} ) }}"></script>
+    <script defer src="{{ path('bazinga_jstranslation_js', {'locales': app_locales|split('|')|join(',')} ) }}"></script>
     <script defer src="{{ asset('build/app.js') }}"></script>
 
 </head>
