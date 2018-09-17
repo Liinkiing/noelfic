@@ -44,7 +44,21 @@ Encore
 
     // enables Sass/SCSS support
     .enableSassLoader()
-    .enableVueLoader()
+    .enableVueLoader(options => {
+        options.loaders['scss'] = ['vue-style-loader',
+            {loader: 'css-loader', options: {sourceMap: !Encore.isProduction()}},
+            {
+                loader: 'sass-loader',
+                options: {
+                    sourceMap: !Encore.isProduction(),
+                    data: `
+                    @import "assets/scss/modules/_variables.scss";
+                    `
+                }
+            }
+        ];
+        options.loaders['sass'] = options.loaders['scss'];
+    })
     .addLoader({
         test: /\.(graphql|gql)$/,
         exclude: /node_modules/,
