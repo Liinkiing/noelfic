@@ -2,7 +2,18 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import Argon from 'vue-argon-design-system/src/plugins/argon-kit'
 import i18n from './i18n'
-import {Comment, Comments, UserFavorites, FictionSearch, BaseNav, SortableTable, FictionChapterComments} from './components'
+import {
+    Comment,
+    Comments,
+    UserFavorites,
+    FictionSearch,
+    BaseNav,
+    SortableTable,
+    FictionChapterComments,
+    BaseComments,
+    CommentForm,
+    FictionComments
+} from './components'
 import { createProvider } from "./vue-apollo";
 import store from './store'
 import '../scss/app.scss'
@@ -13,6 +24,7 @@ Vue.config.debug = process.env.NODE_ENV === "development"
 Vue.config.silent = process.env.NODE_ENV !== "development"
 
 Vue.component('Comments', Comments)
+Vue.component('CommentForm', CommentForm)
 
 const components = {
     Comment,
@@ -20,7 +32,9 @@ const components = {
     FictionSearch,
     BaseNav,
     SortableTable,
-    FictionChapterComments
+    FictionChapterComments,
+    BaseComments,
+    FictionComments
 }
 
 Vue.use(Argon)

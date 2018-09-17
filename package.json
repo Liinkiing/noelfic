@@ -28,6 +28,7 @@
         "graphql-tag": "^2.9.2",
         "jwt-decode": "^2.2.0",
         "lodash-es": "^4.17.11",
+        "node-fetch": "^2.2.0",
         "node-sass": "^4.9.3",
         "normalize.css": "^8.0.0",
         "sass-loader": "^7.1.0",

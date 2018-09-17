@@ -1,7 +1,7 @@
 <template>
-    <ApolloMutation :mutation="require('../graphql/mutations/AddFictionChapterCommentMutation.graphql')"
+    <ApolloMutation :mutation="require('../../graphql/mutations/AddAnswerCommentMutation.graphql')"
                     :variables="{ input: { commentId: to, body} }"
-                    :refetch-queries="() => ['FictionChapterCommentsQuery']">
+                    :refetch-queries="() => queriesToRefetch ? queriesToRefetch : []">
         <template slot-scope="{ mutate, loading, error }">
             <form class="comment-form" @submit.prevent="comment(mutate)">
                 <label>{{ $t('form.comment.message') }}
@@ -15,9 +15,10 @@
 
 <script>
     export default {
-        name: 'CommentForm',
+        name: 'CommentAnswerForm',
         props: {
-            to: {type: String, required: true}
+            to: {type: String, required: true},
+            queriesToRefetch: {type: Array, required: false, default: null},
         },
         data() {
             return {

@@ -1,0 +1,11 @@
+AddCommentInput:
+  type: relay-mutation-input
+  config:
+    description: Input type of addComment
+    fields:
+      relatedId:
+        description: The related commentable entity
+        type: ID!
+      body:
+        description: The body of the comment
+        type: String!

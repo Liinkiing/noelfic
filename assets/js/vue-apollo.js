@@ -1,8 +1,13 @@
 import Vue from "vue"
 import VueApollo from "vue-apollo"
+import {createApolloClient, restartWebsockets} from "vue-cli-plugin-apollo/graphql-client"
+import {InMemoryCache, IntrospectionFragmentMatcher} from 'apollo-cache-inmemory';
 import tokenLink from './token-link'
 import AuthManager from "./managers/AuthManager"
-import {createApolloClient, restartWebsockets} from "vue-cli-plugin-apollo/graphql-client"
+import introspectionQueryResultData from '../../fragmentTypes.json';
+const fragmentMatcher = new IntrospectionFragmentMatcher({
+    introspectionQueryResultData
+});
 
 
 // Install the vue plugin
@@ -30,10 +35,10 @@ const defaultOptions = {
     ssr: false,
 
     // Override default http link
-    link: tokenLink
+    link: tokenLink,
 
     // Override default cache
-    // cache: myCache
+    cache: new InMemoryCache({ fragmentMatcher }),
 
     // Override the way the Authorization header is set
     // getAuth: (tokenName) => ...

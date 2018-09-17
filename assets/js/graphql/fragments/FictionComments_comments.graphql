@@ -1,7 +1,7 @@
 #import './Comments_comments_author.graphql'
 #import './CommentFields.graphql'
 
-fragment FictionChapterComments_comments on FictionChapterComment {
+fragment FictionComments_comments on FictionComment {
     ...CommentFields
     children {
         ...CommentFields

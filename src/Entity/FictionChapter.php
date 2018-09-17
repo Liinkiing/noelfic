@@ -61,7 +61,7 @@ class FictionChapter
     private $position = 1;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\FictionChapterComment", mappedBy="chapter", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\FictionChapterComment", cascade={"persist", "remove"}, mappedBy="chapter", orphanRemoval=true)
      */
     private $comments;
 

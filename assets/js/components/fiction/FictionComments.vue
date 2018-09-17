@@ -15,20 +15,20 @@
 </template>
 
 <script>
-    import Comment from "../../comments/Comment";
+    import Comment from "../comments/Comment";
 
     export default {
-        name: 'FictionChapterComments',
+        name: 'FictionComments',
         components: {Comment},
         props: {
-            chapter: {type: Object, required: true},
+            fiction: {type: Object, required: true},
             queriesToRefetch: {type: Array, required: false, default: null}
         },
         apollo: {
             rootComments: {
-                query: require('../../../graphql/queries/FictionChapterCommentsQuery.graphql'),
+                query: require('../../graphql/queries/FictionCommentsQuery.graphql'),
                 variables() {
-                    return {chapterId: this.chapter.id}
+                    return {fictionId: this.fiction.id}
                 },
                 update: data => data.node.rootComments
             }

@@ -2,10 +2,17 @@ Mutation:
   type: object
   config:
     fields:
-      addFictionChapterComment:
+      addComment:
         access: '@=hasRole("ROLE_USER")'
         builder: 'Relay::Mutation'
         builderConfig:
-          inputType: AddFictionChapterCommentInput
-          payloadType: AddFictionChapterCommentPayload
-          mutateAndGetPayload: '@=mutation("App\\GraphQL\\Mutation\\Fiction\\Chapter\\AddFictionChapterCommentMutation", [value, getUser()])'
+          inputType: AddCommentInput
+          payloadType: AddCommentPayload
+          mutateAndGetPayload: '@=mutation("App\\GraphQL\\Mutation\\Comment\\AddCommentMutation", [value, getUser()])'
+      addAnswerComment:
+        access: '@=hasRole("ROLE_USER")'
+        builder: 'Relay::Mutation'
+        builderConfig:
+          inputType: AddAnswerCommentInput
+          payloadType: AddAnswerCommentPayload
+          mutateAndGetPayload: '@=mutation("App\\GraphQL\\Mutation\\Comment\\AddAnswerCommentMutation", [value, getUser()])'

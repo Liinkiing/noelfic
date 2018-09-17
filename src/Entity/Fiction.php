@@ -56,7 +56,7 @@ class Fiction
 
     /**
      * @Groups({"props"})
-     * @ORM\OneToMany(targetEntity="App\Entity\FictionComment", mappedBy="fiction", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\FictionComment", mappedBy="fiction", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $comments;
 

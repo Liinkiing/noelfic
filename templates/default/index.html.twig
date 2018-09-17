@@ -28,9 +28,11 @@
                             {% endfor %}
                         </ul>
                         <h3>{{ 'global.comments'|transchoice(fiction.comments.count) }}</h3>
-                        {#<user-favorites data-favorites="{{ favoritesProps|e('html_attr') }}"></user-favorites>#}
-                        {#{% embed 'partials/_comments.html.twig' with {'comments': fiction.rootComments} %}{% endembed %}#}
-                        <comments :comments="{{ fiction.rootComments|props }}"></comments>
+                        <base-comments
+                                type="fiction"
+                                :fiction="{{ fiction|props }}"
+                                :queries-to-refetch="{{ ['FictionCommentsQuery']|json_encode }}"
+                        ></base-comments>
                     </li>
                 {% endfor %}
             </ul>

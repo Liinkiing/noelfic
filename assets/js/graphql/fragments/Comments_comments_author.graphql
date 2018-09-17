@@ -1,0 +1,4 @@
+fragment Comments_comments_author on User {
+    id
+    username
+}

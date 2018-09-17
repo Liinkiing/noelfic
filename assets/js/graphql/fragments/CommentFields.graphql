@@ -1,0 +1,10 @@
+#import './Comments_comments_author.graphql'
+
+fragment CommentFields on Comment {
+    id
+    body
+    createdAt
+    author {
+        ...Comments_comments_author
+    }
+}

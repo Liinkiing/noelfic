@@ -38,3 +38,11 @@ Fiction:
           orderBy:
             type: FictionCommentOrder
             defaultValue: { field: createdAt, direction: DESC }
+      rootComments:
+        type: FictionCommentConnection!
+        resolve: '@=resolver("App\\GraphQL\\Resolver\\Fiction\\FictionRootCommentsResolver", [value, args])'
+        argsBuilder: Relay::Connection
+        args:
+          first:
+            type: Int
+            defaultValue: 20

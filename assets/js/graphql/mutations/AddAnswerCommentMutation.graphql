@@ -1,0 +1,9 @@
+#import '../fragments/CommentFields.graphql'
+
+mutation AddAnswerCommentMutation($input: AddAnswerCommentInput!) {
+    addAnswerComment(input: $input) {
+        comment {
+            ...CommentFields
+        }
+    }
+}

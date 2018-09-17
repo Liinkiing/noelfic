@@ -2,7 +2,7 @@
         <li class="comment" v-on-click-away="deactivate" @click.prevent="activate" :class="{active}">{{ comment.author.username }} - {{ comment.body }}<br/>
             <small>{{ comment.createdAt|moment }}</small>
             <keep-alive v-if="user">
-                <comment-form v-if="active" :to="comment.id"></comment-form>
+                <comment-form :queries-to-refetch="queriesToRefetch" v-if="active" :to="comment.id"></comment-form>
             </keep-alive>
             <div v-else-if="active && !user">
                 {{ $t('form.comment.needs_auth') }}
@@ -13,11 +13,11 @@
 <script>
     import { mapState} from 'vuex'
     import {directive as onClickAway} from 'vue-clickaway';
-    import CommentForm from "./CommentForm";
+    import CommentAnswerForm from "./CommentAnswerForm";
 
     export default {
         name: 'Comment',
-        components: {CommentForm},
+        components: {CommentAnswerForm},
         directives: {
             onClickAway,
         },
@@ -31,6 +31,7 @@
         },
         props: {
             comment: {type: Object, required: true},
+            queriesToRefetch: {type: Array, required: false, default: null},
         },
         methods: {
             activate () {

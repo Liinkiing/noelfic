@@ -3,10 +3,12 @@
         <template v-for="comment in comments">
             <keep-alive>
                 <transition-group name="fade-up" mode="out-in" appear>
-                    <comment :key="comment.id" :comment="comment"></comment>
+                    <comment :queries-to-refetch="queriesToRefetch" :key="comment.id" :comment="comment"></comment>
                 </transition-group>
             </keep-alive>
-            <comments v-if="comment.children.length > 0" :comments="comment.children"></comments>
+            <transition name="fade-up" appear>
+                <comments v-if="comment.children.length > 0" :comments="comment.children" :queries-to-refetch="queriesToRefetch"></comments>
+            </transition>
         </template>
     </ul>
 </template>
@@ -19,7 +21,8 @@
         name: 'Comments',
         components: {Comment, SlideYUpTransition},
         props: {
-            comments: {type: Array, required: true, default: []}
+            comments: {type: Array, required: true, default: []},
+            queriesToRefetch: {type: Array, required: false, default: null}
         }
     }
 </script>

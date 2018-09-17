@@ -1,9 +1,0 @@
-#import '../fragments/FictionChapterCommentFields.graphql'
-
-mutation AddFictionChapterCommentMutation($input: AddFictionChapterCommentInput!) {
-    addFictionChapterComment(input: $input) {
-        fictionChapterComment {
-            ...FictionChapterCommentFields
-        }
-    }
-}

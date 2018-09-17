@@ -8,7 +8,13 @@
     <div class="body">
         {{ chapter.body|raw }}
     </div>
-    <fiction-chapter-comments :chapter="{{ chapter|props }}"></fiction-chapter-comments>
+    <hr>
+    <h3>{{ 'global.comments'|transchoice(chapter.comments.count) }}</h3>
+    <base-comments
+            type="fictionChapter"
+            :chapter="{{ chapter|props }}"
+            :queries-to-refetch="{{ ['FictionChapterCommentsQuery']|json_encode }}"
+    ></base-comments>
 
     {% if chapters.haveToPaginate %}
         <div class="row justify-content-center">
