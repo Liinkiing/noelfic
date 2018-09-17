@@ -1,22 +1,28 @@
-<base-nav type="primary" class="main-navigation" expand>
-    <slot name="brand">
-        <a class="navbar-brand" href="{{ path('homepage') }}">
+<nav class="navbar main-navigation navbar-expand-lg navbar-dark bg-primary">
+    <div class="container"><a href="{{ path('homepage') }}" class="navbar-brand">
             {{ sitename }}
         </a>
-    </slot>
-    <ul class="navbar-nav ml-lg-auto">
-        <li class="nav-item"><a href="{{ path('fiction.index') }}" class="nav-link">{{ 'global.navigation.fictions'|trans }}</a></li>
-        {% if app.user %}
-            <li class="nav-item"><a href="#" class="nav-link">{{ 'global.navigation.profile'|trans({'{username}': app.user.username}) }}</a></li>
-            <li class="nav-item"><a href="{{ path('logout') }}" class="nav-link">{{ 'global.navigation.logout'|trans }}</a></li>
-        {% else %}
-            <li class="nav-item"><a href="{{ path('login') }}" class="nav-link">{{ 'global.navigation.login'|trans }}</a></li>
-            <li class="nav-item"><a href="{{ path('registration') }}" class="nav-link">{{ 'global.navigation.register'|trans }}</a></li>
-        {% endif %}
-        {% set route = app.request.attributes.get('_route') %}
-        {% set route_params = app.request.attributes.get('_route_params') %}
-        {% set params = route_params|merge(app.request.query.all) %}
-        <a href="{{ path(route, params|merge({_locale: 'fr'}))|regex_replace('/%5B\\d+/', '%5B') }}" class="badge {{ app.request.locale == 'fr' ? 'badge-secondary' : 'badge-primary' }} language-picker">fr</a>
-        <a href="{{ path(route, params|merge({_locale: 'en'}))|regex_replace('/%5B\\d+/', '%5B') }}" class="badge {{ app.request.locale == 'en' ? 'badge-secondary' : 'badge-primary' }} language-picker">en</a>
-    </ul>
-</base-nav>
+        <button type="button" data-toggle="collapse" data-target="menu" aria-controls="menu"
+                aria-label="Toggle navigation" class="navbar-toggler"><span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="menu" class="collapse navbar-collapse">
+            <div class="navbar-collapse-header"></div>
+            <ul class="navbar-nav ml-lg-auto">
+                <li class="nav-item"><a href="{{ path('fiction.index') }}"
+                                        class="nav-link">{{ 'global.navigation.fictions'|trans }}</a></li>
+                {% if app.user %}
+                    <li class="nav-item"><a href="#"
+                                            class="nav-link">{{ 'global.navigation.profile'|trans({'{username}': app.user.username}) }}</a>
+                    </li>
+                    <li class="nav-item"><a href="{{ path('logout') }}"
+                                            class="nav-link">{{ 'global.navigation.logout'|trans }}</a></li>
+                {% else %}
+                    <li class="nav-item"><a href="{{ path('login') }}"
+                                            class="nav-link">{{ 'global.navigation.login'|trans }}</a></li>
+                    <li class="nav-item"><a href="{{ path('registration') }}"
+                                            class="nav-link">{{ 'global.navigation.register'|trans }}</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>

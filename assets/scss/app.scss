@@ -4,8 +4,24 @@ body {
   background: $backgroundColor;
 }
 
+#app {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
 main.container {
   margin-top: $mainContainerMarginTop;
+  flex: 1;
+}
+
+nav.navbar.main-navigation {
+  background: $primaryGradient !important;
+  box-shadow: $commentBoxShadow;
+  position: fixed;
+  width: 100%;
+  height: $navbarHeight;
+  z-index: 1000;
 }
 
 .main-navigation .language-picker {
@@ -18,4 +34,34 @@ main.container {
 
 ul.pagination {
   margin: 0;
+}
+
+footer {
+  position: relative;
+  margin-top: 200px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 200px;
+  justify-content: center;
+  align-items: center;
+  color: whitesmoke;
+  background: $primaryGradient;
+  & .language-selector {
+    margin-top: .75rem;
+  }
+  &:after {
+    position: absolute;
+    transform: skewY(-3deg);
+    content: '';
+    width: 100%;
+    height: 60px;
+    top: -30px;
+    background: $primaryGradient;
+    @include breakpoint(tablet) {
+      top: -65px;
+      height: 130px;
+    }
+  }
+
 }

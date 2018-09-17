@@ -1,6 +1,7 @@
 <template>
     <ApolloMutation :mutation="require('../../graphql/mutations/AddAnswerCommentMutation.graphql')"
                     :variables="{ input: { commentId: to, body} }"
+                    @done="done"
                     :refetch-queries="() => queriesToRefetch ? queriesToRefetch : []">
         <template slot-scope="{ mutate, loading, error }">
             <form class="comment-form" @submit.prevent="comment(mutate)">
@@ -30,10 +31,13 @@
             }
         },
         methods: {
-            async comment(mutate) {
+            comment(mutate) {
                 if (this.body === '') return;
-                await mutate()
+                mutate()
+            },
+            done() {
                 this.body = '';
+                this.$emit('commented')
             }
         }
     }

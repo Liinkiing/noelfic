@@ -45,7 +45,7 @@ class SecurityController extends BaseController
      */
     public function getApiToken(AuthorizationCheckerInterface $checker, JWTTokenManagerInterface $manager): JsonResponse
     {
-        if(!$checker->isGranted('ROLE_USER')) {
+        if (!$checker->isGranted('ROLE_USER')) {
             return $this->json(['message' => 'You must be authenticated to get a valid token.']);
         }
 

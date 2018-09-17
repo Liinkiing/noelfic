@@ -62,9 +62,9 @@
             }
         },
         methods: {
-            async comment(mutate) {
+            comment(mutate) {
                 if (this.newComment === '') return;
-                await mutate()
+                mutate()
                 this.newComment = '';
             }
         },

@@ -7,7 +7,7 @@
                 <small>{{ comment.createdAt|moment }}</small>
             </div>
             <keep-alive v-if="user">
-                <comment-form class="comment-form" :queries-to-refetch="queriesToRefetch" v-if="active && !tooDeep"
+                <comment-form @commented="deactivate" class="comment-form" :queries-to-refetch="queriesToRefetch" v-if="active && !tooDeep"
                               :to="comment.id"></comment-form>
                 <transition name="fade-up">
                     <badge v-if="active && tooDeep" class="answer-badge" type="warning">{{
@@ -82,7 +82,7 @@
             z-index: 1;
         }
         &.active {
-            background: linear-gradient(to right, lighten($primary, 10%), $primary);
+            background: $primaryGradient;
             box-shadow: $commentBoxShadowActive;
             color: whitesmoke;
             z-index: 2;
