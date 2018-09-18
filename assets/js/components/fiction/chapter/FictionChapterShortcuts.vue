@@ -1,28 +1,30 @@
 <template>
     <div>
-        <modal modal-classes="modal-info" :show="showModal" gradient="primary" @close="closeTutorialModal">
-            <template slot="header">
-                {{ $t('modal.fiction.chapter.shortcut.title') }}
-            </template>
-            <div class="text-center">
-                <icon-base class="keyboard-icon" height="260" width="260" view-box="-7 42 160 18">
-                    <icon-keyboard/>
-                </icon-base>
-            </div>
-            <p class="text-center">
-                <key-code class="mr-4" code="37"/>
-                {{ $t('or') }}
-                <key-code class="ml-4" code="39"/>
-                <span class="ml-4">
+        <transition name="fade-up">
+            <modal modal-classes="modal-info" v-if="showModal" :show="showModal" gradient="primary" @close="closeTutorialModal">
+                <template slot="header">
+                    {{ $t('modal.fiction.chapter.shortcut.title') }}
+                </template>
+                <div class="text-center">
+                    <icon-base class="keyboard-icon" height="260" width="260" view-box="-7 42 160 18">
+                        <icon-keyboard/>
+                    </icon-base>
+                </div>
+                <p class="text-center">
+                    <key-code class="mr-4" code="37"/>
+                    {{ $t('or') }}
+                    <key-code class="ml-4" code="39"/>
+                    <span class="ml-4">
                     {{ $t('modal.fiction.chapter.shortcut.change_chapter') }}
                 </span>
-            </p>
-            <template slot="footer">
-                <base-button type="secondary" @click="closeTutorialModal">
-                    {{ $t('modal.fiction.chapter.shortcut.undersood') }}
-                </base-button>
-            </template>
-        </modal>
+                </p>
+                <template slot="footer">
+                    <base-button type="secondary" @click="closeTutorialModal">
+                        {{ $t('modal.fiction.chapter.shortcut.undersood') }}
+                    </base-button>
+                </template>
+            </modal>
+        </transition>
         <span class="help-icon">
             <i class="fa fa-question-circle-o" @click="showTutorialModal"></i>
         </span>
