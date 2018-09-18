@@ -40,7 +40,7 @@
         components: {IconKeyboard, KeyCode, Modal},
         data() {
             return {
-                showModal: true,
+                showModal: false,
             }
         },
         methods: {
@@ -60,17 +60,17 @@
             },
             next() {
                 if (this._$next.classList.contains('disabled')) return
+                this.closeTutorialModal()
                 this._$next.querySelector('a').click()
             },
             prev() {
                 if (this._$prev.classList.contains('disabled')) return
+                this.closeTutorialModal()
                 this._$prev.querySelector('a').click()
             }
         },
-        created() {
-            this.showModal = localStorage.getItem(LS_TUTORIAL_SHORTCUT) !== 'read'
-        },
         mounted() {
+            this.showModal = localStorage.getItem(LS_TUTORIAL_SHORTCUT) !== 'read'
             this._$pagination = document.querySelector('ul.pagination')
             this._$prev = this._$pagination.querySelector('li.page-item.prev')
             this._$next = this._$pagination.querySelector('li.page-item.next')
