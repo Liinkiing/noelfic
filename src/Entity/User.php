@@ -191,6 +191,14 @@ class User implements UserInterface, \Serializable
     }
 
     /**
+     * @Groups({"props"})
+     */
+    public function isAdmin(): bool
+    {
+        return $this->hasRole('ROLE_ADMIN');
+    }
+
+    /**
      * @return array
      */
     public function getRoles(): array

@@ -14,9 +14,17 @@ global:
     hide: Hide filters
   about: About
   submit: Submit
+  delete: Delete
+  close: Close
   favorites: Favorites
   comments: '{0} No comment|{1} 1 comment|]1,Inf[ %count% comments'
   chapters: '{0} No chapter|{1} 1 chapter|]1,Inf[ %count% chapters'
+
+modal:
+  comment:
+    delete:
+      header: Do you really want to delete your comment?
+      body: This can't be undone. If your comment had answers, they will also be deleted.
 
 form:
   comment:

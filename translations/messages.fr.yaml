@@ -14,9 +14,17 @@ global:
     hide: Masquer les filtres
   about: A propos
   submit: Soumettre
+  delete: Supprimer
+  close: Fermer
   favorites: Favoris
   comments: '{0} Aucun commentaire|{1} 1 commentaire|]1,Inf[ %count% commentaires'
   chapters: '{0} Aucun chapitre|{1} 1 chapitre|]1,Inf[ %count% chapitres'
+
+modal:
+  comment:
+    delete:
+      header: Êtes vous sûr de vouloir supprimer votre commentaire ?
+      body: Cette action est irréversible. Si votre commentaire avait des réponses, elles seront également supprimées.
 
 form:
   comment:

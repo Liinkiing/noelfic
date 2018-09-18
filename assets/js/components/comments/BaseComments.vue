@@ -92,13 +92,14 @@
         }
         & button {
             position: absolute;
-            z-index: 1;
             right: 10px;
             bottom: 10px;
         }
         margin-bottom: 1rem;
     }
     .root-comments {
+        position: relative;
         padding: 0;
+        min-height: 200px;
     }
 </style>

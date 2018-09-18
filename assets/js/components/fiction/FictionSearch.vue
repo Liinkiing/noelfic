@@ -88,7 +88,6 @@
                 position: absolute;
                 right: 4px;
                 top: 4px;
-                z-index: 100;
             }
         }
         & .filters {

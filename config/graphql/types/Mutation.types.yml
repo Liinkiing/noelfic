@@ -16,3 +16,10 @@ Mutation:
           inputType: AddAnswerCommentInput
           payloadType: AddAnswerCommentPayload
           mutateAndGetPayload: '@=mutation("App\\GraphQL\\Mutation\\Comment\\AddAnswerCommentMutation", [value, getUser()])'
+      deleteComment:
+        access: '@=hasRole("ROLE_USER")'
+        builder: 'Relay::Mutation'
+        builderConfig:
+          inputType: DeleteCommentInput
+          payloadType: DeleteCommentPayload
+          mutateAndGetPayload: '@=mutation("App\\GraphQL\\Mutation\\Comment\\DeleteCommentMutation", [value])'

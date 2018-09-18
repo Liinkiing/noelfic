@@ -12,11 +12,11 @@ User:
       createdAt:
         description: The signup date of the user
         type: DateTime!
-        access: '@=serv("App\\GraphQL\\Resolver\\User\\UserIsGrantedResolver", [getUser(), value])'
+        access: '@=serv("App\\GraphQL\\Resolver\\User\\UserIsGrantedResolver").isGranted(getUser(), value)'
       updatedAt:
         description: The modification date of the user
         type: DateTime!
-        access: '@=serv("App\\GraphQL\\Resolver\\User\\UserIsGrantedResolver", [getUser(), value])'
+        access: '@=serv("App\\GraphQL\\Resolver\\User\\UserIsGrantedResolver").isGranted(getUser(), value)'
       username:
         description: The username of the user
         type: String!

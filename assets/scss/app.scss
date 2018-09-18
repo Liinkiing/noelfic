@@ -21,7 +21,20 @@ nav.navbar.main-navigation {
   position: fixed;
   width: 100%;
   height: $navbarHeight;
-  z-index: 1000;
+  z-index: 1;
+}
+
+.modal {
+  z-index: 100;
+}
+
+.modal-dialog {
+  position: relative;
+  z-index: 101 !important;
+}
+
+.page-item.active .page-link {
+  z-index: 0;
 }
 
 .main-navigation .language-picker {

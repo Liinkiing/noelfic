@@ -5,12 +5,13 @@
                     :refetch-queries="() => queriesToRefetch ? queriesToRefetch : []">
         <template slot-scope="{ mutate, loading, error }">
             <form class="comment-form" @submit.prevent="comment(mutate)">
+                <Loader v-if="disabled || loading" absolute size="large" with-background/>
                 <div class="form-container">
                     <textarea
                             class="form-control form-control-alternative"
-                            :disabled="loading" name="body"
+                            :disabled="disabled || loading" name="body"
                             :placeholder="$t('form.comment.message')" v-model="body"></textarea>
-                    <base-button :disabled="loading" native-type="submit" icon="fa fa-comment"
+                    <base-button :disabled="!canComment || disabled || loading" native-type="submit" icon="fa fa-comment"
                                  type="success" @click="comment(mutate)" icon-only></base-button>
                 </div>
             </form>
@@ -19,10 +20,13 @@
 </template>
 
 <script>
+    import Loader from "../ui/Loader";
     export default {
-        name: 'CommentAnswerForm',
+        name: 'CommentForm',
+        components: {Loader},
         props: {
             to: {type: String, required: true},
+            disabled: {type: Boolean, required: false, default: false},
             queriesToRefetch: {type: Array, required: false, default: null},
         },
         data() {
@@ -30,9 +34,14 @@
                 body: ''
             }
         },
+        computed: {
+            canComment() {
+                return this.body.length > 2
+            }
+        },
         methods: {
             comment(mutate) {
-                if (this.body === '') return;
+                if (!this.canComment) return;
                 mutate()
             },
             done() {
@@ -50,11 +59,12 @@
         }
         & textarea {
             width: 100%;
+            resize: none;
             min-height: 58px;
+            overflow-y: hidden;
         }
         & button {
             position: absolute;
-            z-index: 1;
             right: 10px;
             bottom: 10px;
         }

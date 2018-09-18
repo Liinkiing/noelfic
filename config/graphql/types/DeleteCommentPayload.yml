@@ -1,0 +1,7 @@
+DeleteCommentPayload:
+  type: relay-mutation-payload
+  config:
+    fields:
+      deletedCommentId:
+        type: ID!
+        description: The deleted comment ID
