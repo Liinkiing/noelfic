@@ -1,3 +1,4 @@
+export {default as AppHeader} from './ui/AppHeader'
 export {default as Comment} from './comments/Comment'
 export {default as CommentForm} from './comments/CommentForm'
 export {default as Comments} from './comments/Comments'

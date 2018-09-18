@@ -29,6 +29,23 @@ class AuthManager {
         localStorage.setItem(AUTH_TOKEN, token)
     }
 
+    async loginForm(data, locale = 'en') {
+        const res = (await fetch(`/${locale}/login`, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+        }))
+        const json = await res.json()
+        if (json.success) {
+            window.location.reload()
+            return true
+        }
+        return json
+    }
+
     clearToken() {
         localStorage.removeItem(AUTH_TOKEN)
     }

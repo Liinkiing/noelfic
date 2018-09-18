@@ -1,28 +1,34 @@
-<nav class="navbar main-navigation navbar-expand-lg navbar-dark bg-primary">
+{% set links = [
+    { name: 'global.navigation.fictions', href: path('fiction.index'), params: {} }
+] %}
+{% if app.user %}
+    {% set links = links|merge([
+        { name: 'global.navigation.profile', href: '#', params: {'username': app.user.username}},
+        { name: 'global.navigation.logout', href: path('logout'), params: {}}
+    ]) %}
+{% else %}
+    {% set links = links|merge([
+        { name: 'global.navigation.login', id: 'login', href: '#', params: {}},
+        { name: 'global.navigation.register', href: path('registration'), params: {}}
+    ]) %}
+{% endif %}
+<nav id="renderedNav" class="navbar main-navigation navbar-expand-lg navbar-dark bg-primary"
+     style="box-shadow: 0 15px 35px rgba(50, 50, 93, 0.01), 0 5px 15px rgba(0, 0, 0, 0.05);">
     <div class="container"><a href="{{ path('homepage') }}" class="navbar-brand">
             {{ sitename }}
         </a>
-        <button type="button" data-toggle="collapse" data-target="menu" aria-controls="menu"
-                aria-label="Toggle navigation" class="navbar-toggler"><span class="navbar-toggler-icon"></span>
-        </button>
-        <div id="menu" class="collapse navbar-collapse">
+        <div class="collapse navbar-collapse">
             <div class="navbar-collapse-header"></div>
             <ul class="navbar-nav ml-lg-auto">
-                <li class="nav-item"><a href="{{ path('fiction.index') }}"
-                                        class="nav-link">{{ 'global.navigation.fictions'|trans }}</a></li>
-                {% if app.user %}
-                    <li class="nav-item"><a href="#"
-                                            class="nav-link">{{ 'global.navigation.profile'|trans({'{username}': app.user.username}) }}</a>
+                {% for link in links %}
+                    <li class="nav-item">
+                        <a href="{{ link.href }}" class="nav-link">
+                            {{ link.name|trans(link.params)|regex_replace('({|})', '') }}
+                        </a>
                     </li>
-                    <li class="nav-item"><a href="{{ path('logout') }}"
-                                            class="nav-link">{{ 'global.navigation.logout'|trans }}</a></li>
-                {% else %}
-                    <li class="nav-item"><a href="{{ path('login') }}"
-                                            class="nav-link">{{ 'global.navigation.login'|trans }}</a></li>
-                    <li class="nav-item"><a href="{{ path('registration') }}"
-                                            class="nav-link">{{ 'global.navigation.register'|trans }}</a></li>
-                {% endif %}
+                {% endfor %}
             </ul>
         </div>
     </div>
 </nav>
+<app-header csrf-token="{{ csrf_token('authenticate') }}" sitename="{{ sitename }}" homepage="{{ path('homepage') }}" :links="{{ links|json_encode }}"></app-header>

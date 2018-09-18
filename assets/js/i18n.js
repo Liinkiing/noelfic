@@ -2,8 +2,9 @@ import Vue from "vue"
 import moment from "moment"
 import vueMoment from "vue-moment"
 import VueI18n from "vue-i18n"
-
-const locale = window.location.pathname.split('/').filter(Boolean).shift()
+Translator.placeHolderPrefix = '{'
+Translator.placeHolderSuffix = '}'
+export const locale = window.location.pathname.split('/').filter(Boolean).shift()
 moment.locale(locale)
 moment.defaultFormat = 'LLL'
 

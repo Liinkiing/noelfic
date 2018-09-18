@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import Argon from 'vue-argon-design-system/src/plugins/argon-kit'
 import i18n from './i18n'
 import {
+    AppHeader,
     Comment,
     Comments,
     UserFavorites,
@@ -27,6 +28,7 @@ Vue.component('Comments', Comments)
 Vue.component('CommentForm', CommentForm)
 
 const components = {
+    AppHeader,
     Comment,
     UserFavorites,
     FictionSearch,
