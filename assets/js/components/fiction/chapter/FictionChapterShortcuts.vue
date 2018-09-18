@@ -1,30 +1,11 @@
 <template>
     <div>
-        <transition name="fade-up">
-            <modal modal-classes="modal-info" v-if="showModal" :show="showModal" gradient="primary" @close="closeTutorialModal">
-                <template slot="header">
-                    {{ $t('modal.fiction.chapter.shortcut.title') }}
-                </template>
-                <div class="text-center">
-                    <icon-base class="keyboard-icon" height="260" width="260" view-box="-7 42 160 18">
-                        <icon-keyboard/>
-                    </icon-base>
-                </div>
-                <p class="text-center">
-                    <key-code :disabled="!canGoPrev" @click="prev" class="mr-4" code="37"/>
-                    {{ $t('or') }}
-                    <key-code :disabled="!canGoNext" @click="next" class="ml-4" code="39"/>
-                    <span class="ml-4">
-                    {{ $t('modal.fiction.chapter.shortcut.change_chapter') }}
-                </span>
-                </p>
-                <template slot="footer">
-                    <base-button type="secondary" @click="closeTutorialModal">
-                        {{ $t('modal.fiction.chapter.shortcut.undersood') }}
-                    </base-button>
-                </template>
-            </modal>
-        </transition>
+        <FictionChapterShortcutsModal :can-go-next="canGoNext"
+                                      :can-go-prev="canGoPrev"
+                                      :show="showModal"
+                                      @next="next"
+                                      @prev="prev"
+                                      @close="closeTutorialModal"/>
         <span class="help-icon">
             <i class="fa fa-question-circle-o" @click="showTutorialModal"></i>
         </span>
@@ -32,28 +13,25 @@
 </template>
 
 <script>
-    import Modal from "vue-argon-design-system/src/components/Modal";
-    import KeyCode from "../../ui/KeyCode";
-    import IconKeyboard from "../../ui/icon/icons/IconKeyboard";
     import {LS_TUTORIAL_SHORTCUT} from "../../../constants";
+    import FictionChapterShortcutsModal from "../../ui/modals/FictionChapterShortcutsModal";
 
     export default {
         name: 'FictionChapterShortcuts',
-        components: {IconKeyboard, KeyCode, Modal},
+        components: {FictionChapterShortcutsModal},
         data() {
             return {
                 showModal: false,
-            }
-        },
-        computed: {
-            canGoNext() {
-                return !this._$next.classList.contains('disabled')
-            },
-            canGoPrev() {
-                return !this._$prev.classList.contains('disabled')
+                canGoPrev: false,
+                canGoNext: true,
             }
         },
         methods: {
+            initElements() {
+                this._$pagination = document.querySelector('ul.pagination')
+                this._$prev = this._$pagination.querySelector('li.page-item.prev')
+                this._$next = this._$pagination.querySelector('li.page-item.next')
+            },
             handleKey(e) {
                 if (e.keyCode === 37) {
                     this.prev()
@@ -80,10 +58,10 @@
             }
         },
         mounted() {
+            this.initElements()
             this.showModal = localStorage.getItem(LS_TUTORIAL_SHORTCUT) !== 'read'
-            this._$pagination = document.querySelector('ul.pagination')
-            this._$prev = this._$pagination.querySelector('li.page-item.prev')
-            this._$next = this._$pagination.querySelector('li.page-item.next')
+            this.canGoPrev = !this._$prev.classList.contains('disabled')
+            this.canGoNext = !this._$next.classList.contains('disabled')
             this.handleKey = this.handleKey.bind(this)
             window.addEventListener('keyup', this.handleKey)
         },

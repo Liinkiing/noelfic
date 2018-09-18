@@ -12,17 +12,19 @@
                             :mutation="require('../../graphql/mutations/DeleteCommentMutation.graphql')"
                             :variables="{ input: { commentId: comment.id } }">
                 <template slot-scope="{ mutate, loading, gqlError }">
-                    <modal v-if="user" gradient="danger" :show="deleteForm" modal-classes="modal-danger" @close="closeDeleteForm" type="notice">
-                        <div class="text-center">
-                            <i class="fa fa-trash-o fa-3x"></i>
-                            <h4 class="heading mt-4 mb-4">{{ $t('modal.comment.delete.header') }}</h4>
-                            <p>{{ $t('modal.comment.delete.body') }}</p>
-                        </div>
-                        <template slot="footer">
-                            <button type="button" class="btn btn-white" @click="() => { mutate(); disabled = true; closeDeleteForm(); }">{{ $t('global.delete') }}</button>
-                            <button type="button" class="btn btn-link text-white ml-auto" @click="closeDeleteForm">{{ $t('global.close') }}</button>
-                        </template>
-                    </modal>
+                    <transition name="fade-up" v-if="user">
+                        <modal v-if="deleteForm" gradient="danger" :show="deleteForm" modal-classes="modal-danger" @close="closeDeleteForm" type="notice">
+                            <div class="text-center">
+                                <i class="fa fa-trash-o fa-3x"></i>
+                                <h4 class="heading mt-4 mb-4">{{ $t('modal.comment.delete.header') }}</h4>
+                                <p>{{ $t('modal.comment.delete.body') }}</p>
+                            </div>
+                            <template slot="footer">
+                                <button type="button" class="btn btn-white" @click="() => { mutate(); disabled = true; closeDeleteForm(); }">{{ $t('global.delete') }}</button>
+                                <button type="button" class="btn btn-link text-white ml-auto" @click="closeDeleteForm">{{ $t('global.close') }}</button>
+                            </template>
+                        </modal>
+                    </transition>
                     <base-button class="btn-delete-comment" type="danger"
                                  icon-only icon="fa fa-trash" @click="showDeleteForm" :disabled="loading"></base-button>
                 </template>

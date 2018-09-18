@@ -18,6 +18,10 @@ h3 {
   font-weight: 500;
 }
 
+.modal.show {
+  cursor: default;
+}
+
 #app {
   display: flex;
   min-height: 100vh;
