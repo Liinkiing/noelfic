@@ -1,7 +1,7 @@
 <template>
     <transition name="fade-up" appear>
         <div class="comments-container">
-            <ApolloMutation v-if="user" :mutation="require('../../graphql/mutations/AddCommentMutation.graphql')"
+            <ApolloMutation v-if="canComment" :mutation="require('../../graphql/mutations/AddCommentMutation.graphql')"
                             @done="onDone"
                             :variables="{ input: { relatedId, body: newComment } }"
                             :refetch-queries="() => queriesToRefetch ? queriesToRefetch : []">
@@ -13,11 +13,16 @@
                                 class="form-control form-control-alternative"
                                 :disabled="loading" name="body"
                                 :placeholder="$t('form.comment.message')" v-model="newComment"></textarea>
-                        <base-button :disabled="loading || !canComment" native-type="submit" icon="fa fa-comment"
+                        <base-button :disabled="loading || !canPostComment" native-type="submit" icon="fa fa-comment"
                                      type="success" icon-only></base-button>
                     </form>
                 </template>
             </ApolloMutation>
+            <base-alert v-else-if="user && !user.confirmed" icon="fa fa-user" type="warning">
+                <template slot="text">
+                    {{ $t('errors.comment.post_forbidden') }}
+                </template>
+            </base-alert>
             <div v-else class="login-informtations">
                 <base-alert icon="fa fa-user" type="primary">
                     <template slot="text">
@@ -78,6 +83,9 @@
         computed: {
             ...mapState('app', ['user']),
             canComment() {
+                return this.user && this.user.confirmed
+            },
+            canPostComment() {
                 return this.newComment.length > COMMENT_BODY_MIN_LENGTH
             },
             relatedId() {

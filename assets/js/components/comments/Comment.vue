@@ -33,12 +33,12 @@
                               :to="comment.id"></comment-form>
             </keep-alive>
             <transition name="fade-up" appear>
-                <badge v-if="!canPostAnswer && active" class="answer-badge" type="warning">{{
+                <badge v-if="user && !user.confirmed && active" class="answer-badge" type="warning">{{
                     $t('errors.comment.answer_forbidden') }}
                 </badge>
             </transition>
             <transition name="fade-up">
-                <badge v-if="user && active && tooDeep" class="answer-badge" type="warning">{{
+                <badge v-if="user && active && tooDeep && user.confirmed" class="answer-badge" type="warning">{{
                     $t('form.comment.too_deep') }}
                 </badge>
             </transition>

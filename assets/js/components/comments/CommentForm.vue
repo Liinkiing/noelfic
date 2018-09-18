@@ -11,7 +11,7 @@
                             class="form-control form-control-alternative"
                             :disabled="disabled || loading" name="body"
                             :placeholder="$t('form.comment.message')" v-model="body"></textarea>
-                    <base-button :disabled="!canComment || disabled || loading" native-type="submit" icon="fa fa-comment"
+                    <base-button :disabled="!canPostComment || disabled || loading" native-type="submit" icon="fa fa-comment"
                                  type="success" @click="comment(mutate)" icon-only></base-button>
                 </div>
             </form>
@@ -36,13 +36,13 @@
             }
         },
         computed: {
-            canComment() {
+            canPostComment() {
                 return this.body.length > COMMENT_BODY_MIN_LENGTH
             }
         },
         methods: {
             comment(mutate) {
-                if (!this.canComment) return;
+                if (!this.canPostComment) return;
                 mutate()
             },
             done() {
