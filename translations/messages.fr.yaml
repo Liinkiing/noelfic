@@ -2,6 +2,12 @@ of: de
 
 Invalid credentials.: Identifiants invalide.
 
+errors:
+  comment:
+    post_forbidden: Vous devez avoir confirmé votre compte pour poster un commentaire
+    answer_forbidden: Vous devez avoir confirmé votre compte pour poster une réponse à un commentaire
+    delete_forbidden: Vous ne pouvez pas supprimer le commentaire de quelqu'un d'autre
+
 global:
   navigation:
     fictions: Fictions
@@ -19,7 +25,7 @@ global:
   delete: Supprimer
   close: Fermer
   favorites: Favoris
-  comments: '{0} Aucun commentaire|{1} 1 commentaire|]1,Inf[ %count% commentaires'
+  comments: '{0} Aucun commentaire|{1} 1 commentaire|]1,Inf[ {count} commentaires'
   chapters: '{0} Aucun chapitre|{1} 1 chapitre|]1,Inf[ %count% chapitres'
 
 modal:

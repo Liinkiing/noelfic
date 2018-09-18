@@ -1,6 +1,6 @@
 <template>
     <li class="comment" v-on-click-away="deactivate" @click.prevent="activate"
-        :class="{active, authenticated: user, 'max-level': tooDeep}">
+        :class="{active, authenticated: user, 'max-level': tooDeep, 'cant-reply': !canPostAnswer}">
         <img class="profile-picture img-fluid rounded shadow" src="../../../images/default_avatar.png">
         <div class="comment-content">
             <div class="comment-data">
@@ -27,11 +27,16 @@
                                  icon-only icon="fa fa-trash" @click="showDeleteForm" :disabled="loading"></base-button>
                 </template>
             </ApolloMutation>
-            <keep-alive v-if="user">
+            <keep-alive v-if="canPostAnswer">
                 <comment-form :disabled="disabled" @commented="deactivate" class="comment-form" :queries-to-refetch="queriesToRefetch"
                               v-if="active && !tooDeep"
                               :to="comment.id"></comment-form>
             </keep-alive>
+            <transition name="fade-up" appear>
+                <badge v-if="!canPostAnswer && active" class="answer-badge" type="warning">{{
+                    $t('errors.comment.answer_forbidden') }}
+                </badge>
+            </transition>
             <transition name="fade-up">
                 <badge v-if="user && active && tooDeep" class="answer-badge" type="warning">{{
                     $t('form.comment.too_deep') }}
@@ -66,7 +71,10 @@
             },
             canDeleteComment() {
                 return this.user && (this.user.admin || this.user.username === this.comment.author.username)
-            }
+            },
+            canPostAnswer() {
+                return this.user && this.user.confirmed
+            },
         },
         data() {
             return {
@@ -124,7 +132,7 @@
             background: $primaryGradient;
             box-shadow: $commentBoxShadowActive;
             color: whitesmoke;
-            &.authenticated:not(.max-level) {
+            &.authenticated:not(.max-level):not(.cant-reply) {
                 max-height: 180px;
                 height: 180px;
             }

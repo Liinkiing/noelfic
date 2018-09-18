@@ -3,7 +3,7 @@
                     :variables="{ input: { commentId: to, body} }"
                     @done="done"
                     :refetch-queries="() => queriesToRefetch ? queriesToRefetch : []">
-        <template slot-scope="{ mutate, loading, error }">
+        <template slot-scope="{ mutate, loading, gqlError }">
             <form class="comment-form" @submit.prevent="comment(mutate)">
                 <Loader v-if="disabled || loading" absolute size="large" with-background/>
                 <div class="form-container">
@@ -21,6 +21,7 @@
 
 <script>
     import Loader from "../ui/Loader";
+    import {COMMENT_BODY_MIN_LENGTH} from "../../constants";
     export default {
         name: 'CommentForm',
         components: {Loader},
@@ -36,7 +37,7 @@
         },
         computed: {
             canComment() {
-                return this.body.length > 2
+                return this.body.length > COMMENT_BODY_MIN_LENGTH
             }
         },
         methods: {

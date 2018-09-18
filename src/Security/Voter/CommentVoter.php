@@ -12,10 +12,11 @@ class CommentVoter extends Voter
 {
 
     public const DELETE = 'delete';
+    public const POST = 'post';
 
     protected function supports($attribute, $subject): bool
     {
-        return \in_array($attribute, [self::DELETE])
+        return \in_array($attribute, [self::DELETE, self::POST], true)
             && $subject instanceof Comment;
     }
 
@@ -38,6 +39,9 @@ class CommentVoter extends Voter
             case self::DELETE:
                 return $this->canDelete($subject, $user);
                 break;
+            case self::POST:
+                return $this->canPost($user);
+                break;
         }
 
         return false;
@@ -47,5 +51,10 @@ class CommentVoter extends Voter
     {
         return $user->hasRole('ROLE_ADMIN') ||
             $user->getUsername() === $comment->getAuthor()->getUsername();
+    }
+
+    private function canPost(User $user): bool
+    {
+        return $user->isConfirmed();
     }
 }

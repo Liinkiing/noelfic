@@ -2,6 +2,12 @@ of: of
 
 Invalid credentials.: Invalid credentials.
 
+errors:
+  comment:
+    post_forbidden: Your account needs to be confirmed to post a comment
+    answer_forbidden: Your account needs to be confirmed to answer to another comment
+    delete_forbidden: You cant delete another comment
+
 global:
   navigation:
     fictions: Fictions
@@ -19,7 +25,7 @@ global:
   delete: Delete
   close: Close
   favorites: Favorites
-  comments: '{0} No comment|{1} 1 comment|]1,Inf[ %count% comments'
+  comments: '{0} No comment|{1} 1 comment|]1,Inf[ {count} comments'
   chapters: '{0} No chapter|{1} 1 chapter|]1,Inf[ %count% chapters'
 
 modal:

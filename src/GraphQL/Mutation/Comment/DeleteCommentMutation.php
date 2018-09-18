@@ -17,16 +17,16 @@ class DeleteCommentMutation implements MutationInterface
 
     private $repository;
     private $entityManager;
-    private $voter;
+    private $checker;
 
     public function __construct(
         CommentRepository $repository,
         EntityManagerInterface $entityManager,
-        AuthorizationCheckerInterface $voter)
+        AuthorizationCheckerInterface $checker)
     {
         $this->repository = $repository;
         $this->entityManager = $entityManager;
-        $this->voter = $voter;
+        $this->checker = $checker;
     }
 
     public function __invoke(Argument $args)
@@ -37,7 +37,7 @@ class DeleteCommentMutation implements MutationInterface
             throw new \RuntimeException('Comment not found');
         }
 
-        if ($this->voter->isGranted([CommentVoter::DELETE], $comment)) {
+        if ($this->checker->isGranted([CommentVoter::DELETE], $comment)) {
             $deletedCommentId = $comment->getId();
             $this->entityManager->remove($comment);
             $this->entityManager->flush();
@@ -45,6 +45,6 @@ class DeleteCommentMutation implements MutationInterface
             return compact('deletedCommentId');
         }
 
-        throw new UserError('You cant delete another comment');
+        throw new UserError('errors.comment.delete_forbidden');
     }
 }

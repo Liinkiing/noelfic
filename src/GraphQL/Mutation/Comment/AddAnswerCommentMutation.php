@@ -8,21 +8,25 @@ use App\Entity\FictionChapterComment;
 use App\Entity\FictionComment;
 use App\Entity\User;
 use App\Repository\CommentRepository;
+use App\Security\Voter\CommentVoter;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class AddAnswerCommentMutation implements MutationInterface
 {
 
     private $repository;
     private $entityManager;
+    private $checker;
 
-    public function __construct(CommentRepository $repository, EntityManagerInterface $entityManager)
+    public function __construct(CommentRepository $repository, EntityManagerInterface $entityManager, AuthorizationCheckerInterface $checker)
     {
         $this->repository = $repository;
         $this->entityManager = $entityManager;
+        $this->checker = $checker;
     }
 
     public function __invoke(Argument $args, User $viewer)
@@ -37,6 +41,11 @@ class AddAnswerCommentMutation implements MutationInterface
             } else {
                 throw new \RuntimeException('Invalid comment type');
             }
+
+            if(!$this->checker->isGranted([CommentVoter::POST], $answer)) {
+                throw new UserError('errors.comment.answer_forbidden');
+            }
+
             $answer
                 ->setBody($body)
                 ->setAuthor($viewer);

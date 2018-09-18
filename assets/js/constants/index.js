@@ -1,0 +1,1 @@
+export const COMMENT_BODY_MIN_LENGTH = 2;

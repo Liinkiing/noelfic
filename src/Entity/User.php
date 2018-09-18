@@ -281,6 +281,9 @@ class User implements UserInterface, \Serializable
         return $this->confirmedAt;
     }
 
+    /**
+     * @Groups({"props"})
+     */
     public function isConfirmed(): bool
     {
         return $this->confirmedAt !== null;

@@ -11,10 +11,12 @@ use App\Entity\FictionComment;
 use App\Entity\User;
 use App\Repository\FictionChapterRepository;
 use App\Repository\FictionRepository;
+use App\Security\Voter\CommentVoter;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class AddCommentMutation implements MutationInterface
 {
@@ -22,16 +24,19 @@ class AddCommentMutation implements MutationInterface
     private $entityManager;
     private $fictionRepository;
     private $fictionChapterRepository;
+    private $checker;
 
     public function __construct(
         FictionRepository $fictionRepository,
         FictionChapterRepository $fictionChapterRepository,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        AuthorizationCheckerInterface $checker
     )
     {
         $this->entityManager = $entityManager;
         $this->fictionRepository = $fictionRepository;
         $this->fictionChapterRepository = $fictionChapterRepository;
+        $this->checker = $checker;
     }
 
     public function __invoke(Argument $args, User $viewer)
@@ -54,6 +59,10 @@ class AddCommentMutation implements MutationInterface
             $comment = new FictionChapterComment();
         } else {
             throw new \RuntimeException('Invalid related type');
+        }
+
+        if (!$this->checker->isGranted([CommentVoter::POST], $comment)) {
+            throw new UserError('errors.comment.post_forbidden');
         }
 
         $comment

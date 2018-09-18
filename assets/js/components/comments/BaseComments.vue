@@ -2,16 +2,19 @@
     <transition name="fade-up" appear>
         <div class="comments-container">
             <ApolloMutation v-if="user" :mutation="require('../../graphql/mutations/AddCommentMutation.graphql')"
+                            @done="onDone"
                             :variables="{ input: { relatedId, body: newComment } }"
                             :refetch-queries="() => queriesToRefetch ? queriesToRefetch : []">
-                <template slot-scope="{ mutate, loading, error }">
+                <template slot-scope="{ mutate, loading, gqlError }">
                     <form class="comment-form" @submit.prevent="comment(mutate)">
-                    <textarea
-                            class="form-control form-control-alternative"
-                            :disabled="loading" name="body"
-                            :placeholder="$t('form.comment.message')" v-model="newComment"></textarea>
-                        <base-button :disabled="loading" native-type="submit" icon="fa fa-comment"
-                                     type="success" @click="comment(mutate)" icon-only></base-button>
+                        <Loader v-if="loading" absolute size="large" with-background/>
+                        <base-alert v-if="gqlError" type="warning" dismissible>{{ $t(gqlError.message) }}</base-alert>
+                        <textarea
+                                class="form-control form-control-alternative"
+                                :disabled="loading" name="body"
+                                :placeholder="$t('form.comment.message')" v-model="newComment"></textarea>
+                        <base-button :disabled="loading || !canComment" native-type="submit" icon="fa fa-comment"
+                                     type="success" icon-only></base-button>
                     </form>
                 </template>
             </ApolloMutation>
@@ -46,10 +49,12 @@
     import FictionChapterComments from "../fiction/chapter/FictionChapterComments";
     import FictionComments from "../fiction/FictionComments";
     import {mapState} from 'vuex'
+    import Loader from "../ui/Loader";
+    import {COMMENT_BODY_MIN_LENGTH} from "../../constants";
 
     export default {
         name: 'BaseComments',
-        components: {FictionComments, FictionChapterComments},
+        components: {Loader, FictionComments, FictionChapterComments},
         props: {
             fictionId: {type: String, required: false},
             chapterId: {type: String, required: false},
@@ -62,14 +67,19 @@
             }
         },
         methods: {
+            onDone() {
+                this.newComment = '';
+            },
             comment(mutate) {
                 if (this.newComment === '') return;
                 mutate()
-                this.newComment = '';
             }
         },
         computed: {
             ...mapState('app', ['user']),
+            canComment() {
+                return this.newComment.length > COMMENT_BODY_MIN_LENGTH
+            },
             relatedId() {
                 switch (this.type) {
                     case 'fiction':
@@ -89,6 +99,7 @@
         & textarea {
             width: 100%;
             min-height: 58px;
+            overflow-y: hidden;
         }
         & button {
             position: absolute;
@@ -97,6 +108,7 @@
         }
         margin-bottom: 1rem;
     }
+
     .root-comments {
         position: relative;
         padding: 0;

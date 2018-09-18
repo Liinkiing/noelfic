@@ -13,7 +13,7 @@
                     <li>
                         {% set authors = favorite.fiction.authors %}
                         {% set fiction = favorite.fiction %}
-                        {{ fiction.title }} (<small>{{ fiction.averageRating ?
+                        <a href="{{ path('fiction.show', {'slug': fiction.slug}) }}">{{ fiction.title }}</a> (<small>{{ fiction.averageRating ?
                             'fiction.ratings.average'|trans({"{averageRating}": fiction.averageRating})|raw :
                             'fiction.ratings.empty'|trans|raw }}</small>)
                         ({% for author in authors %}{{ author.username }}{{ not loop.last ? ', ' }}{% endfor %})<br/>
@@ -22,7 +22,9 @@
                         <ul>
                             {% for chapter in fiction.chapters %}
                                 <li>
-                                    {{ chapter.title }}
+                                    <a href="{{ path('fiction.show', {'slug': fiction.slug, 'page': chapter.position}) }}">
+                                        {{ chapter.title }}
+                                    </a>
                                     ({% for author in chapter.authors %}{{ author.username }}{{ not loop.last ? ', ' }}{% endfor %})
                                 </li>
                             {% endfor %}
