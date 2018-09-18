@@ -1,4 +1,5 @@
 of: de
+or: ou
 
 Invalid credentials.: Identifiants invalide.
 
@@ -29,6 +30,12 @@ global:
   chapters: '{0} Aucun chapitre|{1} 1 chapitre|]1,Inf[ %count% chapitres'
 
 modal:
+  fiction:
+    chapter:
+      shortcut:
+        title: Pro tip!
+        change_chapter: pour changer de chapitre
+        undersood: J'ai compris !
   comment:
     delete:
       header: Êtes vous sûr de vouloir supprimer votre commentaire ?

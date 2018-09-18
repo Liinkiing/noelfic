@@ -3,7 +3,7 @@
 {% block title %}{{ parent() }} - {{ fiction.title }} - {{ chapter.title }}{% endblock %}
 
 {% block body %}
-    <h1>{{ fiction.title }}</h1>
+    <h1>{{ fiction.title }}<fiction-chapter-shortcuts></fiction-chapter-shortcuts></h1>
     <h2>{{ chapter.title }}</h2>
     <div class="body">
         {{ chapter.body|raw }}

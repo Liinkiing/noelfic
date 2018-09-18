@@ -3,6 +3,8 @@ import Vuex from 'vuex'
 import Argon from 'vue-argon-design-system/src/plugins/argon-kit'
 import i18n from './i18n'
 import {
+    FictionChapterShortcuts,
+    IconBase,
     AppHeader,
     Comment,
     Comments,
@@ -25,10 +27,12 @@ Vue.config.debug = process.env.NODE_ENV === "development"
 Vue.config.silent = process.env.NODE_ENV !== "development"
 
 Vue.component('Comments', Comments)
+Vue.component('IconBase', IconBase)
 Vue.component('CommentForm', CommentForm)
 
 const components = {
     AppHeader,
+    FictionChapterShortcuts,
     Comment,
     UserFavorites,
     FictionSearch,

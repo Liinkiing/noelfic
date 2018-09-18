@@ -1,4 +1,6 @@
 export {default as AppHeader} from './ui/AppHeader'
+export {default as IconBase} from './ui/icon/IconBase'
+export {default as FictionChapterShortcuts} from './fiction/chapter/FictionChapterShortcuts'
 export {default as Comment} from './comments/Comment'
 export {default as CommentForm} from './comments/CommentForm'
 export {default as Comments} from './comments/Comments'

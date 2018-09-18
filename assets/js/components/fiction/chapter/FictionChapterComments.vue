@@ -27,9 +27,6 @@
             queriesToRefetch: {type: Array, required: false, default: null},
             level: {type: Number, required: true, default: 0},
         },
-        mounted() {
-            console.log('mounted')
-        },
         apollo: {
             chapter: {
                 query: require('../../../graphql/queries/FictionChapterCommentsQuery.graphql'),
