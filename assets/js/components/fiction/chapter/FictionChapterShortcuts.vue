@@ -11,9 +11,9 @@
                     </icon-base>
                 </div>
                 <p class="text-center">
-                    <key-code class="mr-4" code="37"/>
+                    <key-code :disabled="!canGoPrev" @click="prev" class="mr-4" code="37"/>
                     {{ $t('or') }}
-                    <key-code class="ml-4" code="39"/>
+                    <key-code :disabled="!canGoNext" @click="next" class="ml-4" code="39"/>
                     <span class="ml-4">
                     {{ $t('modal.fiction.chapter.shortcut.change_chapter') }}
                 </span>
@@ -45,6 +45,14 @@
                 showModal: false,
             }
         },
+        computed: {
+            canGoNext() {
+                return !this._$next.classList.contains('disabled')
+            },
+            canGoPrev() {
+                return !this._$prev.classList.contains('disabled')
+            }
+        },
         methods: {
             handleKey(e) {
                 if (e.keyCode === 37) {
@@ -61,12 +69,12 @@
                 localStorage.setItem(LS_TUTORIAL_SHORTCUT, 'read')
             },
             next() {
-                if (this._$next.classList.contains('disabled')) return
+                if (!this.canGoNext) return
                 this.closeTutorialModal()
                 this._$next.querySelector('a').click()
             },
             prev() {
-                if (this._$prev.classList.contains('disabled')) return
+                if (!this.canGoPrev) return
                 this.closeTutorialModal()
                 this._$prev.querySelector('a').click()
             }

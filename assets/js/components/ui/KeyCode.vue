@@ -1,5 +1,5 @@
 <template>
-    <span class="key-code">
+    <span v-on="$listeners" :disabled="disabled" class="key-code">
         <ArrowIcon v-if="['left', 'right', 'top', 'bottom'].includes(codeString)" :direction="codeString" class="text key-icon"/>
         <span v-else class="text">{{ codeString }}</span>
     </span>
@@ -13,6 +13,7 @@
         name: 'KeyCode',
         components: {ArrowIcon},
         props: {
+            disabled: {type: Boolean, required: false, default: false},
             code: {type: [String, Number], required: true}
         },
         computed: {
@@ -48,8 +49,11 @@
         &:hover {
             background: darken(whitesmoke, 2%);
             box-shadow: inset 0 -5px 0 transparentize(black, 0.86), $keyCodeBoxShadow;
+            &:disabled {
+                cursor: not-allowed;
+            }
         }
-        &:active {
+        &:not([disabled="disabled"]):active {
             border: 1px solid transparentize(black, 0.4);
             padding-top: .25rem;
             box-shadow: inset 0 -2px 0 transparentize(black, 0.66), $activeKeyCodeBoxShadow;
@@ -59,6 +63,12 @@
                 &.key-icon {
                     top: 0;
                 }
+            }
+        }
+        &[disabled="disabled"] {
+            opacity: 0.5;
+            &:hover {
+                cursor: not-allowed;
             }
         }
 

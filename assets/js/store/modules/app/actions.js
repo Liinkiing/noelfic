@@ -6,6 +6,7 @@ export const CHANGE_LOCALE = 'CHANGE_LOCALE'
 export default {
     [LOGIN_USER]({commit}, user) {
         commit(SET_USER, user)
+        delete window.__USER
         document.querySelector('script#user').remove()
     },
     [CHANGE_LOCALE]({commit}, locale) {
