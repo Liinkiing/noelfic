@@ -83,16 +83,6 @@ nav.navbar.main-navigation {
   text-align: justify;
 }
 
-@include breakpoint(mobile) {
-  .modal-content {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-  }
-}
-
 .page-item.active .page-link {
   z-index: 0;
 }

@@ -1,5 +1,5 @@
 <template>
-    <div class="login-modal" v-if="show">
+    <portal to="root" class="login-modal" v-if="show">
         <modal modal-classes="modal-info" :show="show" @close="$emit('close')" gradient="primary">
             <Loader v-if="loading" absolute size="large" with-background/>
             <div class="text-center">
@@ -19,8 +19,7 @@
                 </form>
             </div>
         </modal>
-    </div>
-    
+    </portal>
 </template>
 
 <script>

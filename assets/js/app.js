@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import Argon from 'vue-argon-design-system/src/plugins/argon-kit'
 import VueTouch from 'vue-touch'
+import PortalVue from 'portal-vue'
 import i18n from './i18n'
 import {
     FictionChapterTouchPaginator,
@@ -47,6 +48,7 @@ const components = {
 }
 
 Vue.use(VueTouch)
+Vue.use(PortalVue)
 Vue.use(Argon)
 Vue.use(Vuex)
 

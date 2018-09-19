@@ -19,6 +19,7 @@
     {% include 'partials/_navigation.html.twig' %}
     <main class="container">
         {% include 'partials/_flashbags.html.twig' %}
+        <portal-target name="root"></portal-target>
         {% block body %}{% endblock %}
     </main>
     {% include 'partials/_footer.html.twig' %}

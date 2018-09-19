@@ -1,12 +1,12 @@
 <template>
     <base-nav class="main-navigation" :title="sitename" type="primary" expand>
+        <LoginModal :csrf-token="csrfToken" :show="showLoginModal" @close="hideLogin"/>
         <template slot="brand">
             <i v-if="!isHomepage" class="fa fa-angle-left fa-2x back-icon" @click="prev"></i>
             <a class="navbar-brand" :href="homepage">
                 {{ sitename }}
             </a>
         </template>
-        <LoginModal :csrf-token="csrfToken" :show="showLoginModal" @close="hideLogin"/>
         <ul class="navbar-nav ml-lg-auto">
             <li class="nav-item" v-for="link in links">
                 <a :href="link.href" class="nav-link" v-if="link.id !== 'login'">
