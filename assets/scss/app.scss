@@ -1,5 +1,4 @@
 @import "bootstrap";
-
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700|Open+Sans');
 
 body {
@@ -33,14 +32,42 @@ main.container {
   flex: 1;
 }
 
+body.frozen {
+  overflow: hidden !important;
+}
+
+strong {
+  font-weight: 700;
+}
+
+@include breakpoint(mobile) {
+  .alert .alert-inner--icon {
+    display: none;
+  }
+}
+
 nav.navbar.main-navigation {
-  background: $primary-light;
+  background: $primary-light !important;
   box-shadow: $commentBoxShadow;
   position: sticky;
   top: 0;
   width: 100%;
-  height: $navbarHeight;
+  height: $mobileNavbarHeight;
   z-index: 1;
+  @include breakpoint(tablet) {
+    height: $navbarHeight;
+  }
+  & .back-icon {
+    color: whitesmoke;
+    transition: all $defaultTransitionDuration;
+    &:hover,:active {
+      cursor: pointer;
+      color: darken(whitesmoke, 10%);
+    }
+    @include breakpoint(tablet) {
+      display: none;
+    }
+  }
 }
 
 .modal {
@@ -50,6 +77,20 @@ nav.navbar.main-navigation {
 .modal-dialog {
   position: relative;
   z-index: 101 !important;
+}
+
+.fiction.body {
+  text-align: justify;
+}
+
+@include breakpoint(mobile) {
+  .modal-content {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+  }
 }
 
 .page-item.active .page-link {

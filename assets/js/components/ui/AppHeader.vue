@@ -1,6 +1,7 @@
 <template>
     <base-nav class="main-navigation" :title="sitename" type="primary" expand>
         <template slot="brand">
+            <i v-if="!isHomepage" class="fa fa-angle-left fa-2x back-icon" @click="prev"></i>
             <a class="navbar-brand" :href="homepage">
                 {{ sitename }}
             </a>
@@ -20,8 +21,9 @@
 </template>
 
 <script>
-    import BaseNav from "vue-argon-design-system/src/components/BaseNav";
-    import LoginModal from "./LoginModal";
+    import { mapState } from 'vuex'
+    import BaseNav from "vue-argon-design-system/src/components/BaseNav"
+    import LoginModal from "./modals/LoginModal"
     export default {
         name: 'AppHeader',
         components: {LoginModal, BaseNav},
@@ -36,18 +38,24 @@
                 showLoginModal: false
             }
         },
+        computed: {
+            ...mapState('app', ['isHomepage'])
+        },
         methods: {
             showLogin() {
                 this.showLoginModal = true
             },
             hideLogin() {
                 this.showLoginModal = false
+            },
+            prev() {
+                window.history.back()
             }
         },
         mounted() {
-            const nav = document.getElementById('renderedNav');
-            if(nav) {
-                nav.remove()
+            const renderedNav = document.getElementById('renderedNav')
+            if(renderedNav) {
+                renderedNav.remove()
             }
         }
     }

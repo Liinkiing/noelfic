@@ -1,0 +1,5 @@
+<script id="store">
+    window.__USER = {{ app.user ? app.user|props|raw : 'null' }}
+    window.__TOUCHDEVICE = {{ is_touch_device()|json_encode|raw }}
+    window.__HOMEPAGE = {{ (app.request.attributes.get('_route') == 'homepage')|json_encode|raw }}
+</script>

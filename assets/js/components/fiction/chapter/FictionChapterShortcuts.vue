@@ -1,6 +1,10 @@
 <template>
     <div>
-        <FictionChapterShortcutsModal :can-go-next="canGoNext"
+        <FictionChapterMobileShortcutsModal v-if="isTouchDevice"
+                                            @close="closeTutorialModal"
+                                            :show="showModal"/>
+        <FictionChapterDesktopShortcutsModal v-else
+                                      :can-go-next="canGoNext"
                                       :can-go-prev="canGoPrev"
                                       :show="showModal"
                                       @next="next"
@@ -13,18 +17,25 @@
 </template>
 
 <script>
+    import { mapState } from 'vuex'
     import {LS_TUTORIAL_SHORTCUT} from "../../../constants";
-    import FictionChapterShortcutsModal from "../../ui/modals/FictionChapterShortcutsModal";
+    import FictionChapterMobileShortcutsModal from "../../ui/modals/FictionChapterMobileShortcutsModal";
+    import FictionChapterDesktopShortcutsModal from "../../ui/modals/FictionChapterDesktopShortcutsModal";
 
     export default {
         name: 'FictionChapterShortcuts',
-        components: {FictionChapterShortcutsModal},
+        components: {
+            FictionChapterDesktopShortcutsModal,
+            FictionChapterMobileShortcutsModal},
         data() {
             return {
                 showModal: false,
                 canGoPrev: false,
                 canGoNext: true,
             }
+        },
+        computed: {
+            ...mapState('app', ['isTouchDevice'])
         },
         methods: {
             initElements() {
@@ -75,7 +86,9 @@
     .help-icon {
         transition: opacity $defaultTransitionDuration;
         opacity: 0.5;
-        float: right;
+        position: absolute;
+        right: 10px;
+        top: 0;
         & i {
             transform: scale(0.6);
         }

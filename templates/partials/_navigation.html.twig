@@ -1,6 +1,8 @@
 {% set links = [
     { name: 'global.navigation.fictions', href: path('fiction.index'), params: {} }
 ] %}
+{% set homepage = app.request.attributes.get('_route') == 'homepage' %}
+{% set mobile = is_touch_device() %}
 {% if app.user %}
     {% set links = links|merge([
         { name: 'global.navigation.profile', href: '#', params: {'username': app.user.username}},
@@ -14,9 +16,18 @@
 {% endif %}
 <nav id="renderedNav" class="navbar main-navigation navbar-expand-lg navbar-dark bg-primary"
      style="box-shadow: 0 15px 35px rgba(50, 50, 93, 0.01), 0 5px 15px rgba(0, 0, 0, 0.05);">
-    <div class="container"><a href="{{ path('homepage') }}" class="navbar-brand">
+    <div class="container">
+        {% if mobile and not homepage %}
+            <i class="fa fa-angle-left fa-2x back-icon"></i>
+        {% endif %}
+        <a href="{{ path('homepage') }}" class="navbar-brand">
             {{ sitename }}
         </a>
+        {% if mobile %}
+            <button type="button" class="navbar-toggler">
+                <span class="navbar-toggler-icon" ></span>
+            </button>
+        {% endif %}
         <div class="collapse navbar-collapse">
             <div class="navbar-collapse-header"></div>
             <ul class="navbar-nav ml-lg-auto">

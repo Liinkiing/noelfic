@@ -69,8 +69,8 @@
         &.absolute {
             position: absolute;
             z-index: 1000;
-            left: calc(50% - #{$smallLoaderWidth / 2});
-            top: calc(45% - #{$smallLoaderWidth / 2});
+            left: calc(47.5% - #{$smallLoaderWidth / 2});
+            top: calc(47.5% - #{$smallLoaderWidth / 2});
         }
         &.small {
             padding: 4px;

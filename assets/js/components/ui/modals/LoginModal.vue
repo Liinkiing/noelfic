@@ -26,8 +26,8 @@
 <script>
     import { mapState } from 'vuex'
     import Modal from "vue-argon-design-system/src/components/Modal"
-    import AuthManager from "../../managers/AuthManager";
-    import Loader from "./Loader";
+    import AuthManager from "../../../managers/AuthManager";
+    import Loader from "../Loader";
 
     export default {
         name: 'LoginModal',

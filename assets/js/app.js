@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Argon from 'vue-argon-design-system/src/plugins/argon-kit'
+import VueTouch from 'vue-touch'
 import i18n from './i18n'
 import {
+    FictionChapterTouchPaginator,
     FictionChapterShortcuts,
     IconBase,
     AppHeader,
@@ -31,6 +33,7 @@ Vue.component('IconBase', IconBase)
 Vue.component('CommentForm', CommentForm)
 
 const components = {
+    FictionChapterTouchPaginator,
     AppHeader,
     FictionChapterShortcuts,
     Comment,
@@ -43,6 +46,7 @@ const components = {
     FictionComments
 }
 
+Vue.use(VueTouch)
 Vue.use(Argon)
 Vue.use(Vuex)
 

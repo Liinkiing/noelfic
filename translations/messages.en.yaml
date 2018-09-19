@@ -32,10 +32,15 @@ global:
 modal:
   fiction:
     chapter:
-      shortcut:
+      mobile_shortcut:
+        title: Pro tip!
+        heading: Read your fictions like a lord
+        paragraph: If you wanna read your fic like a true lord, you can naviguate between chapters by simply <strong>swiping to left or right</strong> when using a touch device. A good khey needs to be proactive in his fiction readings!
+        understood: Got it!
+      desktop_shortcut:
         title: Pro tip!
         change_chapter: to change chapter
-        undersood: Got it!
+        understood: Got it!
   comment:
     delete:
       header: Do you really want to delete your comment?

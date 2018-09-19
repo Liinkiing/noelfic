@@ -22,11 +22,11 @@
             'fiction.table.heading.createdAt': fiction.createdAt|localizeddate
         }]) %}
     {% endfor %}
-    <sortable-table :columns="{{ columns|json_encode }}" :rows="{{ rows|json_encode }}"></sortable-table>
+    <sortable-table class="table-responsive" :columns="{{ columns|json_encode }}" :rows="{{ rows|json_encode }}"></sortable-table>
     {% if fictions.haveToPaginate %}
         <hr>
         <div class="row justify-content-center mb-4">
-            {{ pagerfanta(fictions, 'noelfic_pagination', {routeParams: app.request.query.all}) }}
+            {% include 'partials/_pagination.html.twig' with {for: fictions, classes: ['mb-0']} %}
         </div>
     {% endif %}
 {% endblock %}

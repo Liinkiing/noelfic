@@ -32,10 +32,15 @@ global:
 modal:
   fiction:
     chapter:
-      shortcut:
+      mobile_shortcut:
+        title: Pro tip!
+        heading: Lis tes fictions tel un seigneur
+        paragraph: Si tu veux être plus à l'aise en lisant tes fics tel un vrai seigneur, sur mobile, tu peux naviguer en <strong>swipant directement de gauche à droite</strong> pour changer de chapitre. Un bon khey se doit d'être proactif dans la lecture de ses fictions !
+        understood: J'ai compris !
+      desktop_shortcut:
         title: Pro tip!
         change_chapter: pour changer de chapitre
-        undersood: J'ai compris !
+        understood: J'ai compris !
   comment:
     delete:
       header: Êtes vous sûr de vouloir supprimer votre commentaire ?

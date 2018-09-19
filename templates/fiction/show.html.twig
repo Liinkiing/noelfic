@@ -3,19 +3,22 @@
 {% block title %}{{ parent() }} - {{ fiction.title }} - {{ chapter.title }}{% endblock %}
 
 {% block body %}
-    <h1>{{ fiction.title }}<fiction-chapter-shortcuts></fiction-chapter-shortcuts></h1>
+    <h1 class="position-relative">{{ fiction.title }}<fiction-chapter-shortcuts></fiction-chapter-shortcuts></h1>
     <h2>{{ chapter.title }}</h2>
-    <div class="body">
-        {{ chapter.body|raw }}
-    </div>
+    {% if is_touch_device() %}
+        <fiction-chapter-touch-paginator>
+    {% endif %}
+            <div class="fiction body">
+                {{ chapter.body|raw }}
+            </div>
+    {% if is_touch_device() %}
+        </fiction-chapter-touch-paginator>
+    {% endif %}
     <hr>
     {% if chapters.haveToPaginate %}
         <div class="row justify-content-center">
-            {{ pagerfanta(chapters, 'noelfic_pagination', {routeParams: app.request.query.all, class: 'mb-0'}) }}
+            {% include 'partials/_pagination.html.twig' with {for: chapters, classes: ['mb-0']} %}
         </div>
-        {% if is_touch_device() %}
-
-        {% endif %}
     {% endif %}
     <hr>
     <base-comments

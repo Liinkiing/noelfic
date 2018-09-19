@@ -1,0 +1,4 @@
+{% set classes = classes|default([]) %}
+{% set proximity = is_touch_device() ? 1 : 4 %}
+
+{{ pagerfanta(for, 'noelfic_pagination', {proximity: proximity, routeParams: app.request.query.all, class: classes|join(' ')}) }}
