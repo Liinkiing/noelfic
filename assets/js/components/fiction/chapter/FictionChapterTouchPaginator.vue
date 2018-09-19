@@ -37,19 +37,21 @@
                 this._$next = this._$pagination.querySelector('li.page-item.next')
             },
             afterEnter() {
-                console.log('af')
+                if (this.swipeDirection === 'left') {
+                    this._$prev.querySelector('a').click()
+                } else if(this.swipeDirection === 'right') {
+                    this._$next.querySelector('a').click()
+                }
             },
             prev() {
                 if (!this.canGoPrev) return;
                 this.hasSwiped = true
                 this.swipeDirection = 'left'
-                this._$prev.querySelector('a').click()
             },
             next() {
                 if (!this.canGoNext) return;
                 this.hasSwiped = true
                 this.swipeDirection = 'right'
-                this._$next.querySelector('a').click()
             }
         }
     }
