@@ -10,6 +10,7 @@
         "dpolac/twig-lambda": "^1.0",
         "erusev/parsedown": "^1.7",
         "fabpot/goutte": "^3.2",
+        "friendsofsymfony/jsrouting-bundle": "^2.2",
         "hautelook/alice-bundle": "^2.0",
         "lexik/jwt-authentication-bundle": "^2.5",
         "mobiledetect/mobiledetectlib": "^2.8",

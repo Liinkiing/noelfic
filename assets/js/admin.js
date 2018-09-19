@@ -4,6 +4,7 @@ import './admin/material-dashboard/main.js'
 import Chartist from 'chartist'
 import PortalVue from 'portal-vue'
 import i18n from './i18n'
+import './routing'
 import {
     AdminSidebar,
     DashboardPage

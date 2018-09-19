@@ -5,6 +5,9 @@ Invalid credentials.: Invalid credentials.
 
 admin:
   dashboard:
+    bestFictions:
+      name: Most popular fictions
+      subtitle: The 5 most popular fictions based on their ratings (if any)
     stats:
       fictions: Fictions
       users: Users
@@ -23,6 +26,7 @@ global:
   navigation:
     fictions: Fictions
     homepage: Homepage
+    admin: Admin
     login: Login
     logout: Logout
     register: Register
@@ -76,10 +80,14 @@ form:
 fiction:
   table:
     heading:
+      id: ID
+      slug: Slug
       name: Name
+      averageRating: Average note
       authors: Authors
       categories: Categories
       createdAt: Created at
+      updatedAt: Updated at
   index: Fictions
   filters:
     category: Categories

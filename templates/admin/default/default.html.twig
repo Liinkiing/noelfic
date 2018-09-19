@@ -3,5 +3,8 @@
 {% block title %} {{ parent() }} - {{ 'admin.navigation.dashboard'|trans }}{% endblock %}
 
 {% block body %}
-    <dashboard-page :stats="{{ stats|props }}"></dashboard-page>
+    <dashboard-page
+            :stats="{{ stats|props }}"
+            :best-fictions="{{ bestFictions|props }}">
+    </dashboard-page>
 {% endblock %}

@@ -47,6 +47,12 @@ class DefaultController extends BaseController
                     'color' => 'blue',
                     'count' => $commentRepository->count([])
                 ]
+            ],
+            'bestFictions' => [
+                'color' => 'green',
+                'name' => 'admin.dashboard.bestFictions.name',
+                'subtitle' => 'admin.dashboard.bestFictions.subtitle',
+                'items' => $fictionRepository->getLastBestFictions()
             ]
         ];
     }

@@ -9,6 +9,9 @@ admin:
       fictions: Fictions
       users: Utilisateurs
       comments: Commentaires
+    bestFictions:
+      name: Fictions les plus populaires
+      subtitle: Liste des 5 fictions les plus populaires basées sur la note (si présente)
   navigation:
     back_site: Retourner au site
     dashboard: Tableau de bord
@@ -23,6 +26,7 @@ global:
   navigation:
     fictions: Fictions
     homepage: Accueil
+    admin: Administration
     login: Se connecter
     logout: Se déconnecter
     register: S'inscrire
@@ -76,10 +80,14 @@ form:
 fiction:
   table:
     heading:
+      id: ID
+      slug: Slug
       name: Nom
+      averageRating: Note moyenne
       authors: Auteurs
       categories: Catégories
       createdAt: Création
+      updatedAt: Mis à jour
   index: Fictions
   filters:
     category: Catégories

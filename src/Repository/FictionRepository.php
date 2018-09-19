@@ -23,6 +23,37 @@ class FictionRepository extends ServiceEntityRepository
         parent::__construct($registry, Fiction::class);
     }
 
+    /**
+     * @return array|Fiction[]
+     */
+    public function getLastBestFictions(int $max = 5): array
+    {
+        $qb = $this->createQueryBuilder('f');
+
+        $avg = $qb->expr()->avg('ratings.rating');
+        return $qb
+            ->leftJoin('f.ratings', 'ratings')
+            ->select(
+                'f.title',
+                'f.createdAt',
+                'f.updatedAt',
+                'f.id',
+                'f.slug',
+                "$avg AS average"
+            )
+            ->orderBy(
+                'average',
+                'DESC'
+            )
+            ->andHaving(
+                $qb->expr()->isNotNull('average')
+            )
+            ->addGroupBy('f')
+            ->setMaxResults($max)
+            ->getQuery()
+            ->getResult();
+    }
+
     public function searchLatest(array $parameters, int $page = 1, string $order = 'DESC'): Pagerfanta
     {
         [$q, $c] = [

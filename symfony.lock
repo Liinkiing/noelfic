@@ -95,6 +95,15 @@
     "fabpot/goutte": {
         "version": "v3.2.3"
     },
+    "friendsofsymfony/jsrouting-bundle": {
+        "version": "2.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "2.0",
+            "ref": "370bcf99b04c0dfd0b545745aad622d757af5e1b"
+        }
+    },
     "fzaninotto/faker": {
         "version": "v1.8.0"
     },
@@ -529,6 +538,9 @@
             "version": "2.0",
             "ref": "02b720a49f6d36b44d557e0b18e48bf09e0a8e07"
         }
+    },
+    "willdurand/jsonp-callback-validator": {
+        "version": "v1.1.0"
     },
     "zendframework/zend-code": {
         "version": "3.3.1"
