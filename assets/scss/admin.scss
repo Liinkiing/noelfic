@@ -1,4 +1,12 @@
 @import "bootstrap";
 @import "material-dashboard/material-dashboard";
+@import "~flexboxgrid-sass/flexboxgrid";
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700|Open+Sans');
 
+.admin-sidebar a p {
+  text-transform: initial;
+}
+
+.wrapper {
+  max-width: unset;
+}

@@ -2,6 +2,6 @@
                 {% set route_params = app.request.attributes.get('_route_params') %}
                 {% set params = route_params|merge(app.request.query.all) %}
 <a href="{{ path(route, params|merge({_locale: 'fr'}))|regex_replace('/%5B\\d+/', '%5B') }}"
-   class="badge {{ app.request.locale == 'fr' ? 'badge-secondary' : 'badge-primary' }} language-picker">fr</a>
+   class="badge {{ app.request.locale == 'fr' ? 'badge-secondary active' : 'badge-primary' }} language-picker">fr</a>
 <a href="{{ path(route, params|merge({_locale: 'en'}))|regex_replace('/%5B\\d+/', '%5B') }}"
-   class="badge {{ app.request.locale == 'en' ? 'badge-secondary' : 'badge-primary' }} language-picker">en</a>
+   class="badge {{ app.request.locale == 'en' ? 'badge-secondary active' : 'badge-primary' }} language-picker">en</a>

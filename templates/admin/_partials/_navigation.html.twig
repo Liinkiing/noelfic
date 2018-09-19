@@ -1,10 +1,13 @@
 {% set current = app.request.attributes.get('_route') %}
 
 {% set links = [
-    { name: 'global.navigation.homepage', path: path('homepage'), active: current == 'admin.index' },
-    { name: 'global.navigation.fictions', path: path('fiction.index'), active: false},
-    { name: 'global.navigation.logout', path: path('logout'), active: false}
+    { name: 'admin.navigation.dashboard', path: path('admin.index'), active: current == 'admin.index' },
 ] %}
-<admin-sidebar tile="{{ sitename }}" :links="{{  links|json_encode }}">
+
+{% set rendered %}
+    {% include 'partials/_language_selector.html.twig' %}
+{% endset %}
+
+<admin-sidebar tile="{{ sitename }}" :links="{{  links|json_encode }}" :footer-content="{{ rendered|json_encode }}">
 
 </admin-sidebar>

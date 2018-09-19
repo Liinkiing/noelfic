@@ -19,9 +19,7 @@
     {% include 'partials/_flashbags.html.twig' %}
     <portal-target name="modals"></portal-target>
     {% include 'admin/_partials/_navigation.html.twig' %}
-    <div class="main-panel">
-        {% block body %}{% endblock %}
-    </div>
+    {% block body %}{% endblock %}
 </div>
 {% block javascripts %}{% endblock %}
 </body>

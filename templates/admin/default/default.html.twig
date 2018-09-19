@@ -1,7 +1,7 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block title %} {{ parent() }} - Admin{% endblock %}
+{% block title %} {{ parent() }} - {{ 'admin.navigation.dashboard'|trans }}{% endblock %}
 
 {% block body %}
-    <admin-page></admin-page>
+    <dashboard-page :stats="{{ stats|props }}"></dashboard-page>
 {% endblock %}

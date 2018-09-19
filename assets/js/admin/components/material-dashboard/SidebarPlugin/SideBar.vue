@@ -23,6 +23,9 @@
           </sidebar-link>
         </slot>
       </md-list>
+      <footer v-if="$slots.footer" class="navigation-footer text-center">
+        <slot name="footer"></slot>
+      </footer>
     </div>
   </div>
 </template>
@@ -34,6 +37,10 @@ export default{
     SidebarLink,
   },
   props: {
+    footerContent: {
+        type: String,
+        default: ''
+    },
     title: {
       type: String,
       default: 'Vue MD'
@@ -78,6 +85,12 @@ export default{
 }
 </script>
 <style lang="scss">
+  .navigation-footer {
+    position: absolute;
+    width: 100%;
+    bottom: 10px;
+    color: whitesmoke;
+  }
   @include breakpoint(mobile){
     .nav-mobile-menu{
       display: none;

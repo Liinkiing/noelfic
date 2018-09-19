@@ -3,6 +3,16 @@ or: or
 
 Invalid credentials.: Invalid credentials.
 
+admin:
+  dashboard:
+    stats:
+      fictions: Fictions
+      users: Users
+      comments: Comments
+  navigation:
+    back_site: Back to website
+    dashboard: Dashboard
+
 errors:
   comment:
     post_forbidden: Your account needs to be confirmed to post a comment

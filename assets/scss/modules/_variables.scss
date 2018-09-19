@@ -1,23 +1,25 @@
-$mobileNavbarHeight: 60px;
-$navbarHeight: 80px;
+@import "~sass-rem/rem";
 
-$mainContainerMarginTop: 20px;
+$mobileNavbarHeight: rem(60px);
+$navbarHeight: rem(80px);
+
+$mainContainerMarginTop: rem(20px);
 
 $defaultTransitionDuration: .3s;
 
-$borderRadius: 4px;
+$borderRadius: rem(4px);
 
 $primaryGradient: linear-gradient(to right, $primary-light, $primary);
 
-$imageBoxShadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
-$commentBoxShadow: 0 15px 35px rgba(50, 50, 93, 0.01), 0 5px 15px rgba(0, 0, 0, 0.05);
-$commentBoxShadowActive: 0 15px 35px rgba(50, 50, 93, 0.08), 0 5px 15px rgba(0, 0, 0, 0.15);
-$keyCodeBoxShadow: 0 10px 35px rgba(50, 50, 93, 0.12), 0 5px 15px rgba(0, 0, 0, 0.24);
-$activeKeyCodeBoxShadow: 0 -2px 30px rgba(50, 50, 93, 0.15), 0 5px 15px rgba(0, 0, 0, 0.28);
-$imageBoxShadowRaised: 0 1rem 3rem rgba(0,0,0,.175);
+$imageBoxShadow: rem(0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07));
+$commentBoxShadow: rem(0 15px 35px rgba(50, 50, 93, 0.01), 0 5px 15px rgba(0, 0, 0, 0.05));
+$commentBoxShadowActive: rem(0 15px 35px rgba(50, 50, 93, 0.08), 0 5px 15px rgba(0, 0, 0, 0.15));
+$keyCodeBoxShadow: rem(0 10px 35px rgba(50, 50, 93, 0.12), 0 5px 15px rgba(0, 0, 0, 0.24));
+$activeKeyCodeBoxShadow: rem(0 -2px 30px rgba(50, 50, 93, 0.15), 0 5px 15px rgba(0, 0, 0, 0.28));
+$imageBoxShadowRaised: rem(0 1rem 3rem rgba(0,0,0,.175));
 
 $backgroundColor: whitesmoke;
 
-$smallLoaderWidth: 30px;
-$mediumLoaderWidth: 40px;
-$largeLoaderWidth: 60px;
+$smallLoaderWidth: rem(30px);
+$mediumLoaderWidth: rem(40px);
+$largeLoaderWidth: rem(60px);
