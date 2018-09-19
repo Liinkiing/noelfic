@@ -34,9 +34,10 @@ main.container {
 }
 
 nav.navbar.main-navigation {
-  background: $primaryGradient !important;
+  background: $primary-light;
   box-shadow: $commentBoxShadow;
-  position: fixed;
+  position: sticky;
+  top: 0;
   width: 100%;
   height: $navbarHeight;
   z-index: 1;

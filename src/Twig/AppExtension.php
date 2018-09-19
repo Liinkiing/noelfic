@@ -2,9 +2,11 @@
 
 namespace App\Twig;
 
+use Detection\MobileDetect;
 use Symfony\Component\Serializer\SerializerInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
+use Twig\TwigFunction;
 
 class AppExtension extends AbstractExtension
 {
@@ -25,7 +27,16 @@ class AppExtension extends AbstractExtension
 
     public function getFunctions(): array
     {
-        return [];
+        return [
+            new TwigFunction('is_touch_device', [$this, 'isTouchDevice'])
+        ];
+    }
+
+    public function isTouchDevice(): bool
+    {
+        $mb = new MobileDetect();
+
+        return $mb->isMobile() || $mb->isTablet();
     }
 
     public function regexReplace($value, $pattern, $replacement): string

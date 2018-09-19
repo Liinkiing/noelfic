@@ -134,6 +134,9 @@
             "ref": "509b1542f3180a1cfe248ade8b7bf5092c2d4127"
         }
     },
+    "mobiledetect/mobiledetectlib": {
+        "version": "2.8.33"
+    },
     "monolog/monolog": {
         "version": "1.23.0"
     },

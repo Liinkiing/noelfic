@@ -3,7 +3,8 @@ import mutations from "./mutations";
 
 const state = {
     user: null,
-    locale: 'en'
+    locale: 'en',
+    isTouchDevice: false,
 }
 
 const getters = {

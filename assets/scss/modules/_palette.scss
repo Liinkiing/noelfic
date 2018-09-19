@@ -55,6 +55,7 @@ $colors: map-merge((
 
 $default:       #172b4d !default;
 $primary:       #5e72e4 !default;
+$primary-light:       lighten($primary, 10%) !default;
 $secondary:     #f4f5f7 !default;
 $success:       $green !default;
 $info:          $teal !default;

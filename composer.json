@@ -12,6 +12,7 @@
         "fabpot/goutte": "^3.2",
         "hautelook/alice-bundle": "^2.0",
         "lexik/jwt-authentication-bundle": "^2.5",
+        "mobiledetect/mobiledetectlib": "^2.8",
         "nikic/iter": "^1.6",
         "overblog/graphql-bundle": "^0.11.5",
         "ramsey/uuid-doctrine": "^1.5",
