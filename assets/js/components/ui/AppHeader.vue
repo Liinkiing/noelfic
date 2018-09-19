@@ -9,7 +9,7 @@
         </template>
         <ul class="navbar-nav ml-lg-auto">
             <li class="nav-item" v-for="link in links">
-                <a :href="link.href" class="nav-link" v-if="link.id !== 'login'">
+                <a :href="link.path" class="nav-link" v-if="link.id !== 'login'">
                     {{ $t(link.name, link.params) }}
                 </a>
                 <a v-else href="#" class="nav-link" @click="showLogin">
@@ -30,9 +30,9 @@
         props: {
             csrfToken: {type: String},
             backPath: {type: String, default: null},
-            homepage: {type: String, required: true, default: '/'},
-            sitename: {type: String, required: true, default: 'Noelfic'},
-            links: {type: Array, required: true, default: []},
+            homepage: {type: String, default: '/'},
+            sitename: {type: String, default: 'Noelfic'},
+            links: {type: Array, default: []},
         },
         data() {
             return {

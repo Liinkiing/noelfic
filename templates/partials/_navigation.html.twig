@@ -1,5 +1,5 @@
 {% set links = [
-    { name: 'global.navigation.fictions', href: path('fiction.index'), params: {} }
+    { name: 'global.navigation.fictions', path: path('fiction.index'), params: {} }
 ] %}
 {% set backPathMap = {
     'fiction.index': path('homepage'),
@@ -13,13 +13,13 @@
 {% set mobile = is_touch_device() %}
 {% if app.user %}
     {% set links = links|merge([
-        { name: 'global.navigation.profile', href: '#', params: {'username': app.user.username}},
-        { name: 'global.navigation.logout', href: path('logout'), params: {}}
+        { name: 'global.navigation.profile', path: '#', params: {'username': app.user.username}},
+        { name: 'global.navigation.logout', path: path('logout'), params: {}}
     ]) %}
 {% else %}
     {% set links = links|merge([
-        { name: 'global.navigation.login', id: 'login', href: '#', params: {}},
-        { name: 'global.navigation.register', href: path('registration'), params: {}}
+        { name: 'global.navigation.login', id: 'login', path: '#', params: {}},
+        { name: 'global.navigation.register', path: path('registration'), params: {}}
     ]) %}
 {% endif %}
 <nav id="renderedNav" class="navbar main-navigation navbar-expand-lg navbar-dark bg-primary"
@@ -41,7 +41,7 @@
             <ul class="navbar-nav ml-lg-auto">
                 {% for link in links %}
                     <li class="nav-item">
-                        <a href="{{ link.href }}" class="nav-link">
+                        <a href="{{ link.path }}" class="nav-link">
                             {{ link.name|trans(link.params)|regex_replace('({|})', '') }}
                         </a>
                     </li>

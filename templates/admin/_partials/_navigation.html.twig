@@ -1,0 +1,10 @@
+{% set current = app.request.attributes.get('_route') %}
+
+{% set links = [
+    { name: 'global.navigation.homepage', path: path('homepage'), active: current == 'admin.index' },
+    { name: 'global.navigation.fictions', path: path('fiction.index'), active: false},
+    { name: 'global.navigation.logout', path: path('logout'), active: false}
+] %}
+<admin-sidebar tile="{{ sitename }}" :links="{{  links|json_encode }}">
+
+</admin-sidebar>
