@@ -37,7 +37,7 @@
         width: 100%;
         height: 100%;
         z-index: 1000;
-        background: transparentize(white, 0.15);
+        background: transparentize(white, 0.05);
         backdrop-filter: blur(10px)
     }
 </style>
