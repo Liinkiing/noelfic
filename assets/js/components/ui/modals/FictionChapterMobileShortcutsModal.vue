@@ -1,5 +1,5 @@
 <template>
-    <portal to="root">
+    <portal to="modals">
         <transition name="fade-up">
             <modal body-classes="d-flex align-items-center" modal-classes="modal-info" v-if="show" :show="show" gradient="primary" @close="$emit('close')">
                 <template slot="header">

@@ -1,6 +1,14 @@
 {% set links = [
     { name: 'global.navigation.fictions', href: path('fiction.index'), params: {} }
 ] %}
+{% set backPathMap = {
+    'fiction.index': path('homepage'),
+    'fiction.show': path('fiction.index'),
+} %}
+{% set backPath = backPathMap[app.request.attributes.get('_route')] is defined ?
+    backPathMap[app.request.attributes.get('_route')] :
+    null
+%}
 {% set homepage = app.request.attributes.get('_route') == 'homepage' %}
 {% set mobile = is_touch_device() %}
 {% if app.user %}
@@ -42,4 +50,9 @@
         </div>
     </div>
 </nav>
-<app-header csrf-token="{{ csrf_token('authenticate') }}" sitename="{{ sitename }}" homepage="{{ path('homepage') }}" :links="{{ links|json_encode }}"></app-header>
+<app-header
+        :back-path="{{ backPath|json_encode }}"
+        csrf-token="{{ csrf_token('authenticate') }}"
+        sitename="{{ sitename }}"
+        homepage="{{ path('homepage') }}"
+        :links="{{ links|json_encode }}"></app-header>

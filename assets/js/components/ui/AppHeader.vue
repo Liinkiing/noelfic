@@ -29,6 +29,7 @@
         components: {LoginModal, BaseNav},
         props: {
             csrfToken: {type: String},
+            backPath: {type: String, default: null},
             homepage: {type: String, required: true, default: '/'},
             sitename: {type: String, required: true, default: 'Noelfic'},
             links: {type: Array, required: true, default: []},
@@ -49,7 +50,7 @@
                 this.showLoginModal = false
             },
             prev() {
-                window.history.back()
+                this.backPath ? window.location.href = this.backPath : window.history.back()
             }
         },
         mounted() {
