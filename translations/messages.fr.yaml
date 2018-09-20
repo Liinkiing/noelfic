@@ -2,11 +2,19 @@ of: de
 or: ou
 
 Invalid credentials.: Identifiants invalide.
+Not allowed!: Non autorisé
+Internal server Error: Erreur interne du serveur
 
 admin:
   fiction:
     edit:
       title: Éditer la fiction "{title}"
+    new:
+      title: Ajouter une fiction
+    form:
+      title: Titre
+      chapters: Chapitres
+      categories: Catégories
   dashboard:
     stats:
       fictions: Fictions
@@ -18,6 +26,7 @@ admin:
   navigation:
     back_site: Retourner au site
     dashboard: Tableau de bord
+    fictions: Fictions
 
 errors:
   comment:
@@ -26,6 +35,7 @@ errors:
     delete_forbidden: Vous ne pouvez pas supprimer le commentaire de quelqu'un d'autre
 
 global:
+  actions: Actions
   navigation:
     fictions: Fictions
     homepage: Accueil
@@ -39,7 +49,7 @@ global:
     show: Afficher les filtres
     hide: Masquer les filtres
   about: A propos
-  submit: Soumettre
+  submit: Envoyer
   delete: Supprimer
   close: Fermer
   favorites: Favoris

@@ -20,9 +20,10 @@
 <div id="app">
     {% include 'partials/_navigation.html.twig' %}
     <main class="container">
+        <portal-target name="root"></portal-target>
         {% include 'partials/_flashbags.html.twig' %}
-        <portal-target name="modals"></portal-target>
         {% block body %}{% endblock %}
+        <portal-target name="modals"></portal-target>
     </main>
     {% include 'partials/_footer.html.twig' %}
 </div>

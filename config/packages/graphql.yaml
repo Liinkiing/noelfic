@@ -6,6 +6,7 @@ overblog_graphql:
             types:
               - User
               - Fiction
+              - FictionCategory
               - FictionComment
               - FictionChapter
               - FictionChapterComment

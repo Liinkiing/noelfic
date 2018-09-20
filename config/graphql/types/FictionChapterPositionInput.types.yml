@@ -1,0 +1,11 @@
+FictionChapterPositionInput:
+  type: input-object
+  config:
+    description: A representation of a chapter position in a fiction
+    fields:
+      fictionChapterId:
+        type: ID!
+        description: The fiction chapter ID
+      position:
+        type: Int!
+        description: The fiction chapter position

@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Serializer\Annotation\Groups;
 use function iter\reduce;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FictionRepository")
@@ -30,6 +31,8 @@ class Fiction
 
     /**
      * @Groups({"props"})
+     * @Assert\NotBlank()
+     * @Assert\Length(min="5", max="100")
      * @ORM\Column(type="string", length=191)
      */
     private $title;
@@ -62,6 +65,7 @@ class Fiction
 
     /**
      * @Groups({"props"})
+     * @Assert\Count(min="1")
      * @ORM\ManyToMany(targetEntity="App\Entity\FictionCategory", mappedBy="fictions")
      */
     private $categories;
@@ -261,6 +265,22 @@ class Fiction
     public function getCategories(): Collection
     {
         return $this->categories;
+    }
+
+    /**
+     * @param array|FictionCategory[] $categories
+     * @return Fiction
+     */
+    public function replaceCategories(array $categories): self
+    {
+        foreach ($this->categories as $category) {
+            $this->removeCategory($category);
+        }
+        foreach ($categories as $category) {
+            $this->addCategory($category);
+        }
+
+        return $this;
     }
 
     public function addCategory(FictionCategory $category): self

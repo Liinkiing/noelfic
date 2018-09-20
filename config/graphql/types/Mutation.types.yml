@@ -23,3 +23,17 @@ Mutation:
           inputType: DeleteCommentInput
           payloadType: DeleteCommentPayload
           mutateAndGetPayload: '@=mutation("App\\GraphQL\\Mutation\\Comment\\DeleteCommentMutation", [value])'
+      editFiction:
+        access: '@=hasRole("ROLE_USER")'
+        builder: 'Relay::Mutation'
+        builderConfig:
+          inputType: EditFictionInput
+          payloadType: EditFictionPayload
+          mutateAndGetPayload: '@=mutation("App\\GraphQL\\Mutation\\Fiction\\EditFictionMutation", [value, getUser()])'
+      addFiction:
+        access: '@=hasRole("ROLE_USER")'
+        builder: 'Relay::Mutation'
+        builderConfig:
+          inputType: AddFictionInput
+          payloadType: AddFictionPayload
+          mutateAndGetPayload: '@=mutation("App\\GraphQL\\Mutation\\Fiction\\AddFictionMutation", [value, getUser()])'

@@ -1,4 +1,6 @@
 @import "bootstrap";
+@import "~vue-material/dist/vue-material.min.css";
+@import "~vue-material/dist/theme/default.css";
 @import "material-dashboard/material-dashboard";
 @import "~flexboxgrid-sass/flexboxgrid";
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700|Open+Sans');
@@ -13,6 +15,17 @@
 
 .list-move {
   transition: transform $defaultTransitionDuration;
+}
+
+.sortable-ghost {
+  z-index: 10;
+  box-shadow: $commentBoxShadowActive;
+}
+
+.main-panel {
+  float: unset;
+  width: auto;
+  margin-left: 300px;
 }
 
 .list-items-container {

@@ -1,0 +1,6 @@
+query FictionCategoriesQuery {
+    items: fictionCategories {
+        id
+        title
+    }
+}

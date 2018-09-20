@@ -14,6 +14,9 @@ Fiction:
       slug:
         type: String!
         description: The fiction slug
+      categories:
+        type: '[FictionCategory]'
+        description: The associated categories of the fiction
       chapters:
         description: The chapters of the fiction
         type: FictionChapterConnection!

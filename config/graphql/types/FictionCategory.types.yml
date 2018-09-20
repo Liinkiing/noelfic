@@ -1,0 +1,13 @@
+FictionCategory:
+  type: object
+  inherits: [Node, Timestampable]
+  config:
+    interfaces: [Node]
+    description: A fiction category
+    fields:
+      title:
+        description: The fiction category title
+        type: String!
+      slug:
+        description: The fiction category slug
+        type: String!

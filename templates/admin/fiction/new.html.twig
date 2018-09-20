@@ -1,0 +1,9 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - {{ 'admin.fiction.new.title'|trans }}
+{% endblock %}
+
+{% block body %}
+    <fiction-add-page></fiction-add-page>
+{% endblock %}

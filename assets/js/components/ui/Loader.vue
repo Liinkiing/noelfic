@@ -48,7 +48,7 @@
         props: {
             inline: {type: Boolean, required: false, default: false},
             absolute: {type: Boolean, required: false, default: false},
-            size: {type: String, required: false, default: 'medium'},
+            size: {type: String, required: false, default: 'medium', validator: input => ['small', 'medium', 'large'].includes(input)},
             withBackground: {type: Boolean, required: false, default: false},
         }
     };
@@ -77,8 +77,8 @@
             width: $smallLoaderWidth;
             height: $smallLoaderWidth;
             & svg {
-                width: 100%;
-                height: 100%;
+                width: 80%;
+                height: 80%;
             }
         }
         &.medium {

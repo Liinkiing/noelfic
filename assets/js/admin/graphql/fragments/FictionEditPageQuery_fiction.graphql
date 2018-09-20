@@ -1,9 +1,13 @@
 #import './FictionEditPageQuery_fiction_chapters.graphql'
+#import './FictionEditPageQuery_fiction_categories.graphql'
 
 fragment FictionEditPageQuery_fiction on Fiction {
     id
     title
     slug
+    categories {
+        ...FictionEditPageQuery_fiction_categories
+    }
     createdAt
     updatedAt
     chapters(first: 300) {

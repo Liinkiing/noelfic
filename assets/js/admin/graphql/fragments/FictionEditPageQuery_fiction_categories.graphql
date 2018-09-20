@@ -1,0 +1,4 @@
+fragment FictionEditPageQuery_fiction_categories on FictionCategory {
+    id
+    title
+}

@@ -18,4 +18,21 @@ class FictionCategoryRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, FictionCategory::class);
     }
+
+    /**
+     * @param array $ids
+     * @return array|FictionCategory[]
+     */
+    public function findByIds(array $ids): array
+    {
+        $qb = $this->createQueryBuilder('fc');
+
+        return $qb
+            ->andWhere(
+                $qb->expr()->in('fc.id', ':ids')
+            )
+            ->setParameter('ids', $ids)
+            ->getQuery()
+            ->getResult();
+    }
 }

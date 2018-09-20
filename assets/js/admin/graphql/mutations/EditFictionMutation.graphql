@@ -1,0 +1,9 @@
+#import '../fragments/FictionEditPageQuery_fiction.graphql'
+
+mutation EditFictionMutation($input: EditFictionInput!) {
+    editFiction(input: $input) {
+        fiction {
+            ...FictionEditPageQuery_fiction
+        }
+    }
+}

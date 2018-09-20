@@ -2,11 +2,19 @@ of: of
 or: or
 
 Invalid credentials.: Invalid credentials.
+Not allowed!: Not allowed!
+Internal server Error: Internal server error
 
 admin:
   fiction:
     edit:
       title: Edit fiction "{title}"
+    new:
+      title: Add a fiction
+    form:
+      title: Title
+      chapters: Chapters
+      categories: Categories
   dashboard:
     bestFictions:
       name: Most popular fictions
@@ -18,6 +26,7 @@ admin:
   navigation:
     back_site: Back to website
     dashboard: Dashboard
+    fictions: Fictions
 
 errors:
   comment:
@@ -26,6 +35,7 @@ errors:
     delete_forbidden: You cant delete another comment
 
 global:
+  actions: Actions
   navigation:
     fictions: Fictions
     homepage: Homepage

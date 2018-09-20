@@ -1,0 +1,7 @@
+EditFictionPayload:
+  type: relay-mutation-payload
+  config:
+    fields:
+      fiction:
+        type: Fiction!
+        description: The newly edited Fiction

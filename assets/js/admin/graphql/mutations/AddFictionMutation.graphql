@@ -1,0 +1,8 @@
+
+mutation AddFictionMutation($input: AddFictionInput!) {
+    addFiction(input: $input) {
+        fiction {
+            id
+        }
+    }
+}

@@ -20,6 +20,9 @@
                                 <md-table-cell :md-label="$t('fiction.table.heading.slug')">{{ item.slug }}</md-table-cell>
                                 <md-table-cell :md-label="$t('fiction.table.heading.createdAt')">{{ item.createdAt|moment }}</md-table-cell>
                                 <md-table-cell :md-label="$t('fiction.table.heading.updatedAt')">{{ item.updatedAt|moment }}</md-table-cell>
+                                <md-table-cell :md-label="$t('global.actions')">
+                                    <!--<a :href=""></a>-->
+                                </md-table-cell>
                             </md-table-row>
                         </md-table>
                     </md-card-content>

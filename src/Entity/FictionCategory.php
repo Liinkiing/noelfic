@@ -31,7 +31,7 @@ class FictionCategory
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Fiction", inversedBy="categories")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Fiction", inversedBy="categories", cascade={"persist"})
      */
     private $fictions;
 

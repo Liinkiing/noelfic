@@ -12,6 +12,10 @@ Query:
         type: User!
         description: The currently authenticated user
         resolve: '@=getUser()'
+      fictionCategories:
+        type: '[FictionCategory!]'
+        description: The available list of fiction categories
+        resolve: '@=resolver("App\\GraphQL\\Resolver\\Query\\FictionCategoriesResolver", [args])'
       fictions:
         description: Get all fictions.
         type: FictionConnection!

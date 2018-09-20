@@ -9,7 +9,8 @@ import {
     AdminSidebar,
 
     DashboardPage,
-    FictionEditPage
+    FictionEditPage,
+    FictionAddPage
 } from './admin/components/'
 import { createProvider } from "./vue-apollo";
 import store from './store'
@@ -25,7 +26,8 @@ const components = {
     AdminSidebar,
 
     DashboardPage,
-    FictionEditPage
+    FictionEditPage,
+    FictionAddPage
 }
 
 Vue.use(PortalVue)

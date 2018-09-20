@@ -16,6 +16,15 @@ class FictionController extends BaseController
 {
 
     /**
+     * @Route("/new", name="admin.fiction_new", methods={"GET"})
+     * @Template("admin/fiction/new.html.twig")
+     */
+    public function new(): array
+    {
+        return [];
+    }
+
+    /**
      * @Route("/{id}/edit", name="admin.fiction_edit", methods={"GET"})
      * @Template("admin/fiction/edit.html.twig")
      */

@@ -1,0 +1,17 @@
+AddFictionInput:
+  type: relay-mutation-input
+  config:
+    description: Input type of addFiction
+    fields:
+      fictionId:
+        description: The fiction ID which is going to be edited
+        type: ID!
+#      chaptersPosition:
+#        description: A list of the chapters to associated with their positions
+#        type: '[FictionChapterPositionInput]'
+      title:
+        description: The new title of the fiction
+        type: String!
+      categoriesId:
+        description: A list of fiction categories IDs
+        type: '[ID]'
