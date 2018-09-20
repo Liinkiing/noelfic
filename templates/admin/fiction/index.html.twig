@@ -1,0 +1,62 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ 'fiction.index'|trans }}{% endblock %}
+
+{% block body %}
+    <div class="wrapper">
+        <div class="main-panel">
+            <div class="content">
+                <h1>{{ 'fiction.index'|trans }}</h1>
+                {% set columns = [
+                    'fiction.table.heading.id',
+                    'fiction.table.heading.name',
+                    'fiction.table.heading.authors',
+                    'fiction.table.heading.categories',
+                    'fiction.table.heading.createdAt',
+                    'global.actions',
+                ] %}
+                {% set rows = [] %}
+                {% for fiction in fictions %}
+                    {% set actionCell %}
+                        <a class="md-button md-theme-default md-primary"
+                           href="{{ path('admin.fiction_edit', {id: fiction.id}) }}">{{ 'global.edit'|trans }}</a>
+                        <form action="{{ path('admin.fiction_delete', {id: fiction.id}) }}" method="post">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete_' ~ fiction.id) }}">
+                            <input type="hidden" name="_method" value="delete">
+                            <button class="md-button md-theme-default md-danger md-accent">
+                                {{ 'global.delete'|trans }}
+                            </button>
+                        </form>
+                    {% endset %}
+                    {% set rows = rows|merge([{
+                        'fiction.table.heading.id': fiction.id,
+                        'fiction.table.heading.name':
+                        '<a href="' ~ path('fiction.show', {'slug': fiction.slug}) ~ '">' ~ fiction.title ~ '</a>',
+                        'fiction.table.heading.authors': fiction.authors|map(=> _.username)|join(', '),
+                        'fiction.table.heading.categories': fiction.categories|map(=>_.title)|join(', '),
+                        'fiction.table.heading.createdAt': fiction.createdAt|localizeddate,
+                        'global.actions': actionCell,
+                    }]) %}
+                {% endfor %}
+                <div class="row actions">
+                    <a href="{{ path('admin.fiction_new') }}">
+                        <button type="button" class="md-button md-raised md-primary md-theme-demo-light" >
+                            <div class="md-ripple">
+                                <div class="md-button-content">{{ 'admin.fiction.new.title'|trans }}</div>
+                            </div>
+                        </button>
+                    </a>
+                </div>
+                <div class="row">
+                    <sortable-table class="table-responsive admin-table" :columns="{{ columns|json_encode }}"
+                                    :rows="{{ rows|json_encode }}"></sortable-table>
+                </div>
+                {% if fictions.haveToPaginate %}
+                    <div class="row justify-content-center mb-4">
+                        {% include 'partials/_pagination.html.twig' with {for: fictions, classes: ['mb-0']} %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

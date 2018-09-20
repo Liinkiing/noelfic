@@ -29,7 +29,7 @@ class FictionController extends BaseController
     {
         $latest = $fictionRepository->searchLatest($request->query->all(), $page);
 
-        return $this->render('fiction/index.html.twig', [
+        return $this->render('admin/fiction/index.html.twig', [
             'fictions' => $latest,
         ]);
     }
