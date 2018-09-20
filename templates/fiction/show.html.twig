@@ -5,6 +5,7 @@
 {% block body %}
     <h1 class="position-relative">{{ fiction.title }}<fiction-chapter-shortcuts></fiction-chapter-shortcuts></h1>
     <h2>{{ chapter.title }}</h2>
+    <fiction-user-favorite fiction-id="{{ fiction.id }}"></fiction-user-favorite>
     {% if is_touch_device() %}
         <fiction-chapter-touch-paginator>
     {% endif %}

@@ -34,6 +34,9 @@ errors:
     post_forbidden: Vous devez avoir confirmé votre compte pour poster un commentaire
     answer_forbidden: Vous devez avoir confirmé votre compte pour poster une réponse à un commentaire
     delete_forbidden: Vous ne pouvez pas supprimer le commentaire de quelqu'un d'autre
+  fictionUserFavorite:
+    add_forbidden: Vous devez avoir confirmé votre compte pour ajouter une fiction en favoris
+    delete_forbidden: Vous devez avoir confirmé votre compte pour supprimer une fiction de vos favoris
 
 global:
   actions: Actions

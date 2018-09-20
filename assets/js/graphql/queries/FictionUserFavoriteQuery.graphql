@@ -1,0 +1,9 @@
+#import '../fragments/FictionUserFavorite_fiction.graphql'
+
+query FictionUserFavoriteQuery($fictionId: ID!) {
+    fiction: node(id: $fictionId) {
+        ...on Fiction {
+            ...FictionUserFavorite_fiction
+        }
+    }
+}

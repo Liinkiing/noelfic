@@ -5,6 +5,11 @@ Fiction:
     interfaces: [Node]
     description: A fiction
     fields:
+      viewerHasFavorited:
+        access: '@=isAuthenticated()'
+        type: Boolean!
+        description: Has the current user favorited the fiction
+        resolve: '@=resolver("App\\GraphQL\\Resolver\\Fiction\\FictionViewerHasFavoritedResolver", [value, getUser()])'
       authors:
         type: '[User!]!'
         description: The fiction authors
