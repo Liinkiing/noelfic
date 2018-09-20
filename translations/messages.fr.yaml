@@ -13,6 +13,7 @@ admin:
       title: Ajouter une fiction
     form:
       title: Titre
+      add_chapter: Ajouter un chapitre
       chapters: Chapitres
       categories: Catégories
   dashboard:
@@ -51,6 +52,7 @@ global:
   about: A propos
   submit: Envoyer
   delete: Supprimer
+  edit: Éditer
   close: Fermer
   favorites: Favoris
   comments: '{0} Aucun commentaire|{1} 1 commentaire|]1,Inf[ {count} commentaires'
@@ -114,6 +116,8 @@ fiction:
     empty: Aucune notes
 
 flash:
+  fiction:
+    delete: La fiction "{fictionTitle}" a été correctement supprimée
   user:
     email:
       confirmation_sent: Un email de confirmation vient de vous être envoyé.

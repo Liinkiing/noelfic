@@ -13,6 +13,7 @@ admin:
       title: Add a fiction
     form:
       title: Title
+      add_chapter: Add a chapter
       chapters: Chapters
       categories: Categories
   dashboard:
@@ -51,6 +52,7 @@ global:
   about: About
   submit: Submit
   delete: Delete
+  edit: Edit
   close: Close
   favorites: Favorites
   comments: '{0} No comment|{1} 1 comment|]1,Inf[ {count} comments'
@@ -114,6 +116,8 @@ fiction:
     empty: No ratings
 
 flash:
+  fiction:
+    delete: The fiction "{fictionTitle}" has been successfully deleted
   user:
     email:
       confirmation_sent: A confirmation mail has been successfully sent.

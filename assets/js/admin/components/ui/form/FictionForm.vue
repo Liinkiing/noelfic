@@ -19,6 +19,7 @@
                        name="title"
                        v-model="input.title"
                        validation-rules="required|min:5,max:100"/>
+            <h2 v-text="$t('admin.fiction.form.chapters')"></h2>
             <ul class="list-items-container" v-if="fiction">
                 <draggable v-model="chapters" :options="{animation: 150}">
                     <transition-group name="list">
@@ -28,6 +29,9 @@
                     </transition-group>
                 </draggable>
             </ul>
+            <!--<md-button class="md-primary">-->
+                <!--{{ $t('admin.fiction.form.add_chapter') }}-->
+            <!--</md-button>-->
             <MultiSelect :query="require('../../../graphql/queries/FictionCategoriesQuery.graphql')"
                          :inital-values="fiction !== null ? fiction.categories.map(category => category.id) : []"
                          @md-selected="onCategoryChange"

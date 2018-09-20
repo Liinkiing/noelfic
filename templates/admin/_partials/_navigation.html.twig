@@ -2,7 +2,7 @@
 
 {% set links = [
     { name: 'admin.navigation.dashboard', path: path('admin.index'), active: current == 'admin.index' },
-    { name: 'admin.navigation.fictions', path: path('admin.fiction_new'), active: 'fiction' in current }
+    { name: 'admin.navigation.fictions', path: path('admin.fiction_index'), active: 'fiction' in current }
 ] %}
 
 {% set rendered %}

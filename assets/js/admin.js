@@ -7,11 +7,15 @@ import i18n from './i18n'
 import './routing'
 import {
     AdminSidebar,
+    Notification,
 
     DashboardPage,
     FictionEditPage,
     FictionAddPage
 } from './admin/components/'
+import {
+    SortableTable
+} from './components'
 import { createProvider } from "./vue-apollo";
 import store from './store'
 import '../scss/admin.scss'
@@ -21,9 +25,10 @@ Vue.config.devtools = process.env.NODE_ENV === "development"
 Vue.config.debug = process.env.NODE_ENV === "development"
 Vue.config.silent = process.env.NODE_ENV !== "development"
 
-
 const components = {
     AdminSidebar,
+    SortableTable,
+    Notification,
 
     DashboardPage,
     FictionEditPage,

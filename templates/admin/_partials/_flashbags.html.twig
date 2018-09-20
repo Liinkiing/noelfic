@@ -1,0 +1,13 @@
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        {% if message is iterable %}
+            {% set icon = message.icon|default(null) %}
+            {% set translated = message.id|trans(message.parameters|default({}))|raw %}
+        {% else %}
+            {% set icon = null %}
+            {% set translated = message|trans|raw %}
+        {% endif %}
+        {% dump label, icon, translated %}
+        <notification type="{{ label }}" icon="{{ icon|default(null)}}" :message="{{ translated|json_encode }}"></notification>
+    {% endfor %}
+{% endfor %}
