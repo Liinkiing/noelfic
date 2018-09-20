@@ -1,0 +1,4 @@
+fragment FictionEditPageQuery_fiction_chapters on FictionChapter {
+    id
+    title
+}

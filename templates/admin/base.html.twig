@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta name="theme-color" content="#7485e8">
-    <title>{% block title %}{{ sitename }}{% endblock %}</title>
+    <title>{% block title %}{{ sitename }} - {{ 'global.navigation.admin'|trans }}{% endblock %}</title>
     {% block stylesheets %}{% endblock %}
     <link rel="stylesheet" href="{{ asset('build/admin.css') }}">
     {% include 'partials/_vue_data.html.twig' %}

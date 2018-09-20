@@ -1,0 +1,7 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}{{ parent() }} - {{ fiction.title }}{% endblock %}
+
+{% block body %}
+    <fiction-edit-page fiction-id="{{ fiction.id }}"></fiction-edit-page>
+{% endblock %}

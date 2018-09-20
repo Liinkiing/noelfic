@@ -49,7 +49,7 @@ class DefaultController extends BaseController
                 ]
             ],
             'bestFictions' => [
-                'color' => 'green',
+                'color' => 'orange',
                 'name' => 'admin.dashboard.bestFictions.name',
                 'subtitle' => 'admin.dashboard.bestFictions.subtitle',
                 'items' => $fictionRepository->getLastBestFictions()

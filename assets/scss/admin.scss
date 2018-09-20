@@ -10,3 +10,24 @@
 .wrapper {
   max-width: unset;
 }
+
+.list-move {
+  transition: transform $defaultTransitionDuration;
+}
+
+.list-items-container {
+  padding: 0;
+  background: whitesmoke;
+  border-radius: $borderRadius;
+  border: 1px solid transparentize(black, 0.8);
+  list-style: none;
+  & li {
+    padding: 20px;
+    display: block;
+    border-bottom: 1px solid transparentize(black, 0.8);
+    margin: 0;
+    &:last-of-type {
+      border-bottom: none;
+    }
+  }
+}

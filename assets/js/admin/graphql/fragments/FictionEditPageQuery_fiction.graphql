@@ -1,0 +1,17 @@
+#import './FictionEditPageQuery_fiction_chapters.graphql'
+
+fragment FictionEditPageQuery_fiction on Fiction {
+    id
+    title
+    slug
+    createdAt
+    updatedAt
+    chapters(first: 300) {
+        totalCount
+        edges {
+            node {
+                ...FictionEditPageQuery_fiction_chapters
+            }
+        }
+    }
+}

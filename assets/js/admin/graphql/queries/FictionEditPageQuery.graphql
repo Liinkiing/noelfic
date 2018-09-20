@@ -1,0 +1,7 @@
+#import '../fragments/FictionEditPageQuery_fiction.graphql'
+
+query FictionEditPageQuery($fictionId: ID!) {
+    node(id: $fictionId) {
+        ...FictionEditPageQuery_fiction
+    }
+}

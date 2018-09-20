@@ -4,6 +4,9 @@ or: or
 Invalid credentials.: Invalid credentials.
 
 admin:
+  fiction:
+    edit:
+      title: Edit fiction "{title}"
   dashboard:
     bestFictions:
       name: Most popular fictions

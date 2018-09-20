@@ -7,7 +7,9 @@ import i18n from './i18n'
 import './routing'
 import {
     AdminSidebar,
-    DashboardPage
+
+    DashboardPage,
+    FictionEditPage
 } from './admin/components/'
 import { createProvider } from "./vue-apollo";
 import store from './store'
@@ -21,7 +23,9 @@ Vue.config.silent = process.env.NODE_ENV !== "development"
 
 const components = {
     AdminSidebar,
-    DashboardPage
+
+    DashboardPage,
+    FictionEditPage
 }
 
 Vue.use(PortalVue)
