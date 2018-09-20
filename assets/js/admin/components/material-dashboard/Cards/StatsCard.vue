@@ -8,7 +8,7 @@
       <slot name="content"></slot>
     </md-card-content>
 
-    <md-card-actions md-alignment="left">
+    <md-card-actions md-alignment="left" v-if="$slots.footer">
       <slot name="footer"></slot>
     </md-card-actions>
   </md-card>

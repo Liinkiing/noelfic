@@ -16,6 +16,11 @@ class FictionCategory
 {
     use Timestampable;
 
+    public function __toString()
+    {
+        return $this->title;
+    }
+
     /**
      * @ORM\Id()
      * @Groups({"props"})

@@ -12,6 +12,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
  */
 class UserRole
 {
+    
+    public function __toString()
+    {
+        return $this->name;
+    }
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="CUSTOM")
