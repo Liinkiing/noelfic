@@ -7,19 +7,6 @@
             <div class="content">
                 <slot></slot>
             </div>
-            <slot name="footer">
-                <footer class="footer">
-                    <div class="container">
-                        <nav>
-                            <ul>
-                                <li><a href="/" class="nav-item active router-link-active">
-                                    {{ $t('admin.navigation.back_site') }}
-                                </a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </footer>
-            </slot>
         </div>
     </div>
 </template>

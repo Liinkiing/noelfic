@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import './admin/material-dashboard/main.js'
+import Argon from 'vue-argon-design-system/src/plugins/argon-kit'
+
 import Chartist from 'chartist'
 import PortalVue from 'portal-vue'
 import i18n from './i18n'
@@ -35,6 +37,7 @@ const components = {
     FictionAddPage
 }
 
+Vue.use(Argon)
 Vue.use(PortalVue)
 Vue.use(Vuex)
 

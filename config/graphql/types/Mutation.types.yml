@@ -51,3 +51,10 @@ Mutation:
           inputType: DeleteFictionUserFavoriteInput
           payloadType: DeleteFictionUserFavoritePayload
           mutateAndGetPayload: '@=mutation("App\\GraphQL\\Mutation\\FictionUserFavorite\\DeleteFictionUserFavoriteMutation", [value, getUser()])'
+      addFictionChapter:
+        access: '@=hasRole("ROLE_USER")'
+        builder: 'Relay::Mutation'
+        builderConfig:
+          inputType: AddFictionChapterInput
+          payloadType: AddFictionChapterPayload
+          mutateAndGetPayload: '@=mutation("App\\GraphQL\\Mutation\\Fiction\\Chapter\\AddFictionChapterMutation", [value, getUser()])'
