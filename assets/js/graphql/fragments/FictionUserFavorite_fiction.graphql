@@ -1,0 +1,4 @@
+fragment FictionUserFavorite_fiction on Fiction {
+    id
+    viewerHasFavorited
+}

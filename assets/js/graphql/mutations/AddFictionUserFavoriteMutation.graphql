@@ -1,0 +1,9 @@
+#import '../fragments/FictionUserFavorite_fiction.graphql'
+
+mutation AddFictionUserFavoriteMutation($input: AddFictionUserFavoriteInput!) {
+    addFictionUserFavorite(input: $input) {
+        fiction {
+            ...FictionUserFavorite_fiction
+        }
+    }
+}

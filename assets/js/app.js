@@ -19,6 +19,7 @@ import {
     FictionChapterComments,
     BaseComments,
     CommentForm,
+    FictionUserFavorite,
     FictionComments
 } from './components'
 import { createProvider } from "./vue-apollo";
@@ -45,6 +46,7 @@ const components = {
     SortableTable,
     FictionChapterComments,
     BaseComments,
+    FictionUserFavorite,
     FictionComments
 }
 

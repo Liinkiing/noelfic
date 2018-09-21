@@ -1,0 +1,8 @@
+AddFictionUserFavoriteInput:
+  type: relay-mutation-input
+  config:
+    description: Input type of addFictionUserFavorite
+    fields:
+      fictionId:
+        description: The fiction ID which is going to be added to favorites
+        type: ID!

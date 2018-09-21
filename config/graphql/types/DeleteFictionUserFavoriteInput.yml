@@ -1,0 +1,8 @@
+DeleteFictionUserFavoriteInput:
+  type: relay-mutation-input
+  config:
+    description: Input type of deleteFictionUserFavorite
+    fields:
+      fictionId:
+        description: The fiction ID which is going to be deleted from favorites
+        type: ID!

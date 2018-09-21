@@ -1,0 +1,8 @@
+DeleteFictionUserFavoritePayload:
+  type: relay-mutation-payload
+  config:
+    description: Payload type of deleteFictionUserFavorite
+    fields:
+      fiction:
+        description: The fiction which the fictionUserFavorite has been deleted
+        type: Fiction!

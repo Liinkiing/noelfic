@@ -1,0 +1,7 @@
+AddFictionUserFavoritePayload:
+  type: relay-mutation-payload
+  config:
+    fields:
+      fiction:
+        type: Fiction!
+        description: The fiction added to favorites

@@ -34,6 +34,9 @@ errors:
     post_forbidden: Your account needs to be confirmed to post a comment
     answer_forbidden: Your account needs to be confirmed to answer to another comment
     delete_forbidden: You cant delete another comment
+  fictionUserFavorite:
+    add_forbidden: Your account needs to be confirmed to add a fiction to your favorites
+    delete_forbidden: Your account needs to be confirmed to delete a fiction from your favorites
 
 global:
   actions: Actions

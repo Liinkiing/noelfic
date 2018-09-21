@@ -1,0 +1,9 @@
+#import '../fragments/FictionUserFavorite_fiction.graphql'
+
+mutation DeleteFictionUserFavoriteMutation($input: DeleteFictionUserFavoriteInput!) {
+    deleteFictionUserFavorite(input: $input) {
+        fiction {
+            ...FictionUserFavorite_fiction
+        }
+    }
+}
