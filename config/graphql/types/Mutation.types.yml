@@ -37,3 +37,10 @@ Mutation:
           inputType: AddFictionInput
           payloadType: AddFictionPayload
           mutateAndGetPayload: '@=mutation("App\\GraphQL\\Mutation\\Fiction\\AddFictionMutation", [value, getUser()])'
+      addFictionChapter:
+        access: '@=hasRole("ROLE_USER")'
+        builder: 'Relay::Mutation'
+        builderConfig:
+          inputType: AddFictionChapterInput
+          payloadType: AddFictionChapterPayload
+          mutateAndGetPayload: '@=mutation("App\\GraphQL\\Mutation\\Fiction\\Chapter\\AddFictionChapterMutation", [value, getUser()])'

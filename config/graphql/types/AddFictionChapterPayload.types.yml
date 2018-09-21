@@ -1,0 +1,7 @@
+AddFictionChapterPayload:
+  type: relay-mutation-payload
+  config:
+    fields:
+      fiction:
+        type: Fiction!
+        description: The fiction that the new chapter belongs to

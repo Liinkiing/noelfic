@@ -1,7 +1,7 @@
 <template>
     <AdminLayout>
         <h1 v-if="fiction" v-text="$t('admin.fiction.edit.title', {title: fiction.title})"></h1>
-        <FictionForm v-if="fiction" :fiction="fiction"/>
+        <FictionForm v-if="fiction" :fiction="fiction" :chapters="fiction.chapters.edges.map(edge => edge.node)"/>
     </AdminLayout>
 </template>
 

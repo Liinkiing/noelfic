@@ -6,7 +6,7 @@
             <img :src="imgLogo" alt="">
         </div>
       </a>
-      <a href="#" target="_blank" class="simple-text logo-normal">
+      <a :href="$routing.generate('homepage')" class="simple-text logo-normal">
         {{title}}
       </a>
     </div>

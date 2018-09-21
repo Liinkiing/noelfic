@@ -1,0 +1,14 @@
+AddFictionChapterInput:
+  type: relay-mutation-input
+  config:
+    description: Input type of addFiction
+    fields:
+      fictionId:
+        description: The fiction ID associated to this chapter
+        type: ID!
+      title:
+        description: The new title of the fiction chapter
+        type: String!
+      body:
+        description: The body of the fiction chapter
+        type: String!
