@@ -37,13 +37,13 @@
 
 <style lang="scss" scoped>
     .add-favorite {
-        color: #ffe533;
+        color: grey;
         border: none;
         background-color: whitesmoke;
         transition: $defaultTransitionDuration;
     }
     .delete-favorite {
-        color: grey;
+        color: #ffe533;
         border: none;
         background-color: whitesmoke;
         transition: $defaultTransitionDuration;
