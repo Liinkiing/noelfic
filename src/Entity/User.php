@@ -103,6 +103,7 @@ class User implements UserInterface, \Serializable
         $this->fictionChapters = new ArrayCollection();
         $this->roles = new ArrayCollection();
         $this->fictionRatings = new ArrayCollection();
+        $this->fictionFavorites = new ArrayCollection();
         $this->comments = new ArrayCollection();
     }
 
