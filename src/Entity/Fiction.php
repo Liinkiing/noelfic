@@ -70,6 +70,11 @@ class Fiction
      */
     private $categories;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\FictionUserFavorite", mappedBy="fiction", cascade={"remove"})
+     */
+    private $favorites;
+
 
     public function __construct()
     {

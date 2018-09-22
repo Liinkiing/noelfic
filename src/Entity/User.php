@@ -84,7 +84,7 @@ class User implements UserInterface, \Serializable
     private $fictionRatings;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\FictionUserFavorite", mappedBy="user", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\FictionUserFavorite", mappedBy="user", cascade={"remove"})
      */
     private $fictionFavorites;
 
