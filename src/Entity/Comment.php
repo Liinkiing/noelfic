@@ -10,7 +10,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\InheritanceType("SINGLE_TABLE")
- * @ORM\DiscriminatorColumn(name="comment_type", type="string")
+ * @ORM\DiscriminatorColumn(name="comment_type", type="string", length=191)
  * @ORM\DiscriminatorMap({
  *      "fiction" = "FictionComment",
  *      "fictionChapter" = "FictionChapterComment"
