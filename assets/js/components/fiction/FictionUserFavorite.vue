@@ -5,6 +5,17 @@
                     v-if="result && result.data && result.data.fiction.viewerHasFavorited"
                     :mutation="require('../../graphql/mutations/DeleteFictionUserFavoriteMutation.graphql')"
                     :variables="{input: {fictionId}}"
+                    :optimistic-response="{
+                    __typename: 'Mutation',
+                    deleteFictionUserFavorite: {
+                            __typename: 'DeleteFictionUserFavoritePayload',
+                            fiction: {
+                                __typename: 'Fiction',
+                                id: fictionId,
+                                viewerHasFavorited: false
+                            }
+                        }
+                    }"
                     tag="span"
             >
                 <template slot-scope="{mutate, loading, gqlError}">
@@ -15,6 +26,17 @@
                     v-else-if="result && result.data && !result.data.fiction.viewerHasFavorited"
                     :mutation="require('../../graphql/mutations/AddFictionUserFavoriteMutation.graphql')"
                     :variables="{input: {fictionId}}"
+                    :optimistic-response="{
+                    __typename: 'Mutation',
+                    addFictionUserFavorite: {
+                            __typename: 'AddFictionUserFavoritePayload',
+                            fiction: {
+                                __typename: 'Fiction',
+                                id: fictionId,
+                                viewerHasFavorited: true
+                            }
+                        }
+                    }"
                     tag="span"
             >
                 <template slot-scope="{mutate, loading, gqlError}">
