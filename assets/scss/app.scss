@@ -53,7 +53,7 @@ nav.navbar.main-navigation {
   top: 0;
   width: 100%;
   height: $mobileNavbarHeight;
-  z-index: 1;
+  z-index: 4;
   @include breakpoint(tablet) {
     height: $navbarHeight;
   }

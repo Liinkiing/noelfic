@@ -6,7 +6,7 @@
                     <base-input :placeholder="$t('fiction.search.placeholder')"
                                 alternative addon-left-icon="fa fa-search"
                                 name="q" v-model="query"></base-input>
-                    <base-button native-type="submit" icon="fa fa-search" type="success" icon-only></base-button>
+                    <base-button native-type="submit" icon="fa fa-search" class="btn-search" type="success" icon-only></base-button>
                 </div>
                 <slide-y-up-transition>
                     <div v-show="showCategoriesFilters" class="row justify-content-center filters" :class="{'collapsed': showCategoriesFilters}">
@@ -102,6 +102,9 @@
         & .btn-filter {
             position: relative;
             top: 2px;
+        }
+        & .btn-search {
+            z-index: 3;
         }
         & .btn-icon i {
             transition: transform .3s;
