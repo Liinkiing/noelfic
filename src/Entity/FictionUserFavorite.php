@@ -15,8 +15,8 @@ class FictionUserFavorite
     /**
      * @Groups({"props"})
      * @ORM\Id()
-     * @ORM\ManyToOne(targetEntity="App\Entity\Fiction")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Fiction", inversedBy="favorites")
+     * @ORM\JoinColumn(name="fiction_id", referencedColumnName="id", nullable=false)
      */
     private $fiction;
 
@@ -24,7 +24,7 @@ class FictionUserFavorite
      * @Groups({"props"})
      * @ORM\Id()
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="fictionFavorites")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      */
     private $user;
 
