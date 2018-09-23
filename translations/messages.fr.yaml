@@ -111,6 +111,7 @@ fiction:
     category: Catégories
   search:
     title: Fictions comprenant le terme « {query} »
+    no_result: Aucune fictions ne correspondent à vos critères de recherche.
     placeholder: Entrez un titre
   favorites:
     added: Ajouté aux favoris le

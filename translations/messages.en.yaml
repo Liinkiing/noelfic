@@ -112,6 +112,7 @@ fiction:
   search:
     title: Fictions containing "{query}"
     placeholder: Type a title
+    no_result: No fictions match your search criteria.
   favorites:
     added: Added to favorites the
   ratings:
