@@ -4,6 +4,7 @@
 
 {% block body %}
     <dashboard-page
+            :charts="{{ charts|props }}"
             :stats="{{ stats|props }}"
             :best-fictions="{{ bestFictions|props }}">
     </dashboard-page>

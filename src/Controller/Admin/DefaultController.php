@@ -48,6 +48,13 @@ class DefaultController extends BaseController
                     'count' => $commentRepository->count([])
                 ]
             ],
+            'charts' => [
+                'users' => [
+                    'color' => 'blue',
+                    'labels' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+                    'series' => $userRepository->countRegistrationPerDaysOfWeek()
+                ]
+            ],
             'bestFictions' => [
                 'color' => 'orange',
                 'name' => 'admin.dashboard.bestFictions.name',

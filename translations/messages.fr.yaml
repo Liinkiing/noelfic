@@ -5,6 +5,14 @@ Invalid credentials.: Identifiants invalide.
 Not allowed!: Non autorisé
 Internal server Error: Erreur interne du serveur
 
+Monday: Lundi
+Tuesday: Mardi
+Wednesday: Mercredi
+Thursday: Jeudi
+Friday: Vendredi
+Saturday: Samedi
+Sunday: Dimanche
+
 admin:
   fiction:
     edit:

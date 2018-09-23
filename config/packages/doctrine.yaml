@@ -20,6 +20,15 @@ doctrine:
         auto_generate_proxy_classes: '%kernel.debug%'
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
+        dql:
+            datetime_functions:
+                DAY: DoctrineExtensions\Query\Mysql\Day
+                DAYOFWEEK: DoctrineExtensions\Query\Mysql\DayOfWeek
+                DAYNAME: DoctrineExtensions\Query\Mysql\DayName
+                WEEKDAY: DoctrineExtensions\Query\Mysql\WeekDay
+                WEEK: DoctrineExtensions\Query\Mysql\Week
+                DATEADD: DoctrineExtensions\Query\Mysql\DateAdd
+                NOW: DoctrineExtensions\Query\Mysql\Now
         mappings:
             App:
                 is_bundle: false

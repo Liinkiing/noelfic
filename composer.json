@@ -6,6 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-intl": "*",
+        "beberlei/DoctrineExtensions": "^1.1",
         "doctrine/data-fixtures": "^1.3",
         "dpolac/twig-lambda": "^1.0",
         "erusev/parsedown": "^1.7",
