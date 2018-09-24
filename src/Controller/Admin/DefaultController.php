@@ -27,6 +27,10 @@ class DefaultController extends BaseController
                           FictionRepository $fictionRepository,
                           CommentRepository $commentRepository): array
     {
+        $userChartData = $userRepository->countRegistrationPerDaysOfWeek();
+        $fictionChartData = $fictionRepository->countFictionPerDaysOfWeek();
+        $commentChartData = $commentRepository->countCommentPerDaysOfWeek();
+
         return [
             'stats' => [
                 'users' => [
@@ -50,9 +54,49 @@ class DefaultController extends BaseController
             ],
             'charts' => [
                 'users' => [
+                    'title' => 'User Registration',
+                    'color' => 'green',
+                    'data' => $userChartData,
+                    'options' => [
+                        'axisY' => ['onlyInteger' => true],
+                        'high' =>  max($userChartData['series'][0]) + 1,
+                        'chartPadding' => [
+                            'top' => 0,
+                            'right' => 0,
+                            'bottom' => 0,
+                            'left' => 0
+                        ]
+                    ]
+                ],
+                'fictions' => [
+                    'title' => 'Fictions Creation',
+                    'color' => 'red',
+                    'data' => $fictionChartData,
+                    'options' => [
+                        'axisY' => ['onlyInteger' => true],
+                        'high' => max($fictionChartData['series'][0]) + 1,
+                        'chartPadding' => [
+                            'top' => 0,
+                            'right' => 0,
+                            'bottom' => 0,
+                            'left' => 0
+                        ]
+                    ],
+                ],
+                'comments' => [
+                    'title' => 'Comments Creation',
                     'color' => 'blue',
-                    'labels' => ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-                    'series' => $userRepository->countRegistrationPerDaysOfWeek()
+                    'data' => $commentChartData,
+                    'options' => [
+                        'axisY' => ['onlyInteger' => true],
+                        'high' => max($commentChartData['series'][0]) + 1,
+                        'chartPadding' => [
+                            'top' => 0,
+                            'right' => 0,
+                            'bottom' => 0,
+                            'left' => 0
+                        ]
+                    ],
                 ]
             ],
             'bestFictions' => [

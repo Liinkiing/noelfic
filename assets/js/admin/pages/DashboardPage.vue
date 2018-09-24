@@ -1,5 +1,6 @@
 <template>
     <AdminLayout>
+        <h1>Dashboard</h1>
         <DashboardPageCharts v-if="charts" :charts="charts"/>
         <DashboardPageStats v-if="stats" :stats="stats"/>
         <DashboardPageBestFictions :best-fictions="bestFictions"/>

@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Fiction;
 use App\Traits\PaginatedRepository;
+use App\Utils\Date;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Pagerfanta\Pagerfanta;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -110,4 +111,27 @@ class FictionRepository extends ServiceEntityRepository
             $precision);
     }
 
+    public function countFictionPerDaysOfWeek(): array
+    {
+        $qb = $this->createQueryBuilder('f');
+
+        $result = $qb
+            ->select('WEEKDAY(f.createdAt) as dayOfWeek, DAYNAME(f.createdAt) AS dayName ,COUNT(f) as fictionCount')
+            ->andWhere(
+                $qb
+                    ->expr()->between(
+                        'DAY(f.createdAt)',
+                        ':firstDayOfWeek',
+                        ':lastDayOfWeek'
+                    )
+            )
+            ->setParameter(':firstDayOfWeek', (new \DateTime('this week monday'))->format('d'))
+            ->setParameter(':lastDayOfWeek', (new \DateTime('this week sunday'))->format('d'))
+            ->groupBy('dayOfWeek', 'dayName')
+            ->orderBy('dayOfWeek')
+            ->getQuery()
+            ->getArrayResult();
+
+        return Date::getOrderedChartData($result, 'fictionCount');
+    }
 }

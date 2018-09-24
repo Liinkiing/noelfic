@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\User;
 use App\Entity\UserRole;
+use App\Utils\Date;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use function iter\rewindable\keys;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -58,6 +59,6 @@ class UserRepository extends ServiceEntityRepository
             ->getQuery()
             ->getArrayResult();
 
-        return $result;
+        return Date::getOrderedChartData($result, 'userCount');
     }
 }
