@@ -1,0 +1,15 @@
+#import '../fragments/UserFictionFavorites_fictionFavorites.graphql'
+
+query UserFictionFavoritesQuery {
+    viewer {
+        id
+        fictionFavorites {
+            totalCount
+            edges {
+                node {
+                    ...UserFictionFavorites_fictionFavorites
+                }
+            }
+        }
+    }
+}

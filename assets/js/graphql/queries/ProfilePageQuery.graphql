@@ -1,0 +1,7 @@
+#import '../fragments/ProfilePage_viewer.graphql'
+
+query ProfilePageQuery {
+    viewer {
+        ...ProfilePage_viewer
+    }
+}

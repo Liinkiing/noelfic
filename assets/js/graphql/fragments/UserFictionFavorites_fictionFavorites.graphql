@@ -1,0 +1,9 @@
+fragment UserFictionFavorites_fictionFavorites on FictionUserFavorite {
+    id
+    favoritedAt
+    fiction {
+        id
+        title
+        slug
+    }
+}

@@ -13,7 +13,7 @@
 {% set mobile = is_touch_device() %}
 {% if app.user %}
     {% set links = links|merge([
-        { name: 'global.navigation.profile', path: '#', params: {'username': app.user.username}}
+        { name: 'global.navigation.profile', path: path('profile.me'), params: {'username': app.user.username}}
     ]) %}
     {% if is_granted('ROLE_ADMIN') %}
         {% set links = links|merge([

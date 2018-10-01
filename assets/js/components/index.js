@@ -13,3 +13,5 @@ export {default as UserFavorites} from './UserFavorites'
 export {default as SortableTable} from './SortableTable'
 export {default as BaseNav} from 'vue-argon-design-system/src/components/BaseNav'
 export {default as FictionUserFavorite} from './fiction/FictionUserFavorite'
+
+export {default as ProfilePage} from '../pages/profile/ProfilePage'

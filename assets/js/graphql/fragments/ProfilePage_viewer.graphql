@@ -1,0 +1,5 @@
+fragment ProfilePage_viewer on User {
+    id
+    username
+    email
+}

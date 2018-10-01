@@ -20,7 +20,9 @@ import {
     BaseComments,
     CommentForm,
     FictionUserFavorite,
-    FictionComments
+    FictionComments,
+
+    ProfilePage
 } from './components'
 import { createProvider } from "./vue-apollo";
 import store from './store'
@@ -47,7 +49,9 @@ const components = {
     FictionChapterComments,
     BaseComments,
     FictionUserFavorite,
-    FictionComments
+    FictionComments,
+
+    ProfilePage
 }
 
 Vue.use(VueTouch)

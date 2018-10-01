@@ -1,0 +1,7 @@
+fragment ProfilePage_viewer_fictionRatings on FictionUserRating {
+    id
+    ratedAt
+    fiction {
+        title
+    }
+}

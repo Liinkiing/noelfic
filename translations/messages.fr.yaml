@@ -63,6 +63,7 @@ global:
   close: Fermer
   favorites: Favoris
   comments: '{0} Aucun commentaire|{1} 1 commentaire|]1,Inf[ {count} commentaires'
+  fictionFavoritesCount: '{0} Aucun favoris|[1,Inf[ {count} favoris'
   chapters: '{0} Aucun chapitre|{1} 1 chapitre|]1,Inf[ %count% chapitres'
 
 modal:
