@@ -5,14 +5,6 @@ Invalid credentials.: Invalid credentials.
 Not allowed!: Not allowed!
 Internal server Error: Internal server error
 
-Monday: Monday
-Tuesday: Tuesday
-Wednesday: Wednesday
-Thursday: Thursday
-Friday: Friday
-Saturday: Saturday
-Sunday: Sunday
-
 admin:
   fiction:
     edit:
@@ -32,6 +24,10 @@ admin:
       fictions: Fictions
       users: Users
       comments: Comments
+    charts:
+      new_fictions: Created fictions
+      new_comments: New comments
+      new_users: Registered users
   navigation:
     back_site: Back to website
     dashboard: Dashboard

@@ -38,7 +38,7 @@ class UserRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
     }
 
-    public function countRegistrationPerDaysOfWeek(): array
+    public function countRegistrationPerDaysOfWeek(string $locale): array
     {
         $qb = $this->createQueryBuilder('u');
 
@@ -59,6 +59,6 @@ class UserRepository extends ServiceEntityRepository
             ->getQuery()
             ->getArrayResult();
 
-        return Date::getOrderedChartData($result, 'userCount');
+        return Date::getOrderedChartData($result, 'userCount', $locale);
     }
 }

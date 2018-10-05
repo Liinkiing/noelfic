@@ -20,7 +20,7 @@ class CommentRepository extends ServiceEntityRepository
         parent::__construct($registry, Comment::class);
     }
 
-    public function countCommentPerDaysOfWeek(): array
+    public function countCommentPerDaysOfWeek(string $locale): array
     {
         $qb = $this->createQueryBuilder('c');
 
@@ -41,6 +41,6 @@ class CommentRepository extends ServiceEntityRepository
             ->getQuery()
             ->getArrayResult();
 
-        return Date::getOrderedChartData($result, 'commentCount');
+        return Date::getOrderedChartData($result, 'commentCount', $locale);
     }
 }

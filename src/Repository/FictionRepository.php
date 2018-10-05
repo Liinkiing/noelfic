@@ -111,7 +111,7 @@ class FictionRepository extends ServiceEntityRepository
             $precision);
     }
 
-    public function countFictionPerDaysOfWeek(): array
+    public function countFictionPerDaysOfWeek(string $locale): array
     {
         $qb = $this->createQueryBuilder('f');
 
@@ -132,6 +132,6 @@ class FictionRepository extends ServiceEntityRepository
             ->getQuery()
             ->getArrayResult();
 
-        return Date::getOrderedChartData($result, 'fictionCount');
+        return Date::getOrderedChartData($result, 'fictionCount', $locale);
     }
 }

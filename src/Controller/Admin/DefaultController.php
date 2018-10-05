@@ -11,6 +11,8 @@ use App\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * @Route("/admin")
@@ -23,13 +25,15 @@ class DefaultController extends BaseController
      * @Route("/", name="admin.index")
      * @Template("admin/default/default.html.twig")
      */
-    public function index(UserRepository $userRepository,
+    public function index(Request $request,
+                          UserRepository $userRepository,
                           FictionRepository $fictionRepository,
-                          CommentRepository $commentRepository): array
+                          CommentRepository $commentRepository,
+                          TranslatorInterface $translator): array
     {
-        $userChartData = $userRepository->countRegistrationPerDaysOfWeek();
-        $fictionChartData = $fictionRepository->countFictionPerDaysOfWeek();
-        $commentChartData = $commentRepository->countCommentPerDaysOfWeek();
+        $userChartData = $userRepository->countRegistrationPerDaysOfWeek($request->getLocale());
+        $fictionChartData = $fictionRepository->countFictionPerDaysOfWeek($request->getLocale());
+        $commentChartData = $commentRepository->countCommentPerDaysOfWeek($request->getLocale());
 
         return [
             'stats' => [
@@ -54,7 +58,7 @@ class DefaultController extends BaseController
             ],
             'charts' => [
                 'users' => [
-                    'title' => 'User Registration',
+                    'title' => $translator->trans("admin.dashboard.charts.new_users"),
                     'color' => 'green',
                     'data' => $userChartData,
                     'options' => [
@@ -69,7 +73,7 @@ class DefaultController extends BaseController
                     ]
                 ],
                 'fictions' => [
-                    'title' => 'Fictions Creation',
+                    'title' => $translator->trans("admin.dashboard.charts.new_fictions"),
                     'color' => 'red',
                     'data' => $fictionChartData,
                     'options' => [
@@ -84,7 +88,7 @@ class DefaultController extends BaseController
                     ],
                 ],
                 'comments' => [
-                    'title' => 'Comments Creation',
+                    'title' => $translator->trans("admin.dashboard.charts.new_comments"),
                     'color' => 'blue',
                     'data' => $commentChartData,
                     'options' => [
