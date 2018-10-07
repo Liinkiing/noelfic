@@ -24,6 +24,10 @@ admin:
       fictions: Fictions
       users: Users
       comments: Comments
+    charts:
+      new_fictions: Created fictions
+      new_comments: New comments
+      new_users: Registered users
   navigation:
     back_site: Back to website
     dashboard: Dashboard

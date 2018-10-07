@@ -21,6 +21,10 @@ admin:
       fictions: Fictions
       users: Utilisateurs
       comments: Commentaires
+    charts:
+      new_fictions: Fictions créées
+      new_comments: Nouveaux commentaires
+      new_users: Utilisateurs inscrits
     bestFictions:
       name: Fictions les plus populaires
       subtitle: Liste des 5 fictions les plus populaires basées sur la note (si présente)

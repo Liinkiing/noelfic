@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Comment;
+use App\Utils\Date;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -19,4 +20,27 @@ class CommentRepository extends ServiceEntityRepository
         parent::__construct($registry, Comment::class);
     }
 
+    public function countCommentPerDaysOfWeek(string $locale): array
+    {
+        $qb = $this->createQueryBuilder('c');
+
+        $result = $qb
+            ->select('WEEKDAY(c.createdAt) as dayOfWeek, DAYNAME(c.createdAt) AS dayName ,COUNT(c) as commentCount')
+            ->andWhere(
+                $qb
+                    ->expr()->between(
+                        'DAY(c.createdAt)',
+                        ':firstDayOfWeek',
+                        ':lastDayOfWeek'
+                    )
+            )
+            ->setParameter(':firstDayOfWeek', (new \DateTime('this week monday'))->format('d'))
+            ->setParameter(':lastDayOfWeek', (new \DateTime('this week sunday'))->format('d'))
+            ->groupBy('dayOfWeek', 'dayName')
+            ->orderBy('dayOfWeek')
+            ->getQuery()
+            ->getArrayResult();
+
+        return Date::getOrderedChartData($result, 'commentCount', $locale);
+    }
 }
