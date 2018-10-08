@@ -2,8 +2,6 @@
 
 namespace App\Utils;
 
-use Symfony\Component\Intl\DateFormatter\IntlDateFormatter;
-
 class Date
 {
     public static function getOrderedChartData(array $result, string $countAlias, string $locale): array
@@ -43,9 +41,9 @@ class Date
      *
      * @return string
      */
-    public static function getLocalizedDate(\DateTime $date, ?string $locale = null, ?string $format = null, int $dateFormat = IntlDateFormatter::MEDIUM, int $timeFormat = IntlDateFormatter::MEDIUM, int $calendar = IntlDateFormatter::GREGORIAN): string
+    public static function getLocalizedDate(\DateTime $date, ?string $locale = null, ?string $format = null, int $dateFormat = \IntlDateFormatter::MEDIUM, int $timeFormat = \IntlDateFormatter::MEDIUM, int $calendar = \IntlDateFormatter::GREGORIAN): string
     {
-        $formatter = IntlDateFormatter::create($locale, $dateFormat, $timeFormat, $date->getTimezone()->getName(), $calendar, $format);
+        $formatter = \IntlDateFormatter::create($locale, $dateFormat, $timeFormat, $date->getTimezone()->getName(), $calendar, $format);
         return $formatter->format($date->getTimestamp());
     }
 }
